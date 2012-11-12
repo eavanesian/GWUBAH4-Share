@@ -21,7 +21,7 @@
         <% 
         NewClass m = new NewClass();
         
-        m.setFName("first name");
+        m.setFName("Updated FName");
         
         out.println(m.getName());
 
