@@ -7,7 +7,7 @@
 <%@page import="org.eclipse.jdt.internal.compiler.ast.AssertStatement"%>
 <%@page import="java.sql.*" %> 
 <%@page import="java.io.*" %> 
-<%@page import="newpackage.NewClass"%>
+<%@page import="newpackage.NewClass" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
