@@ -4,6 +4,7 @@
     Author     : test
 --%>
 
+<%@page import="org.eclipse.jdt.internal.compiler.ast.AssertStatement"%>
 <%@page import="java.sql.*" %> 
 <%@page import="java.io.*" %> 
 <%@page import="newpackage.NewClass"%>
@@ -21,10 +22,15 @@
         <% 
         NewClass m = new NewClass();
         
-        m.setFName("Updated FName");
+        m.setFName("F");
+        m.setLName("L");
         
-        out.println(m.getName());
-
+        out.println("<br><br>");
+        out.println(m.getFName());
+        out.println("<br>");
+        out.println(m.getLName());
+        out.println("<br>");
+        out.println(m.getFullName());
         %>
         <br>
         
