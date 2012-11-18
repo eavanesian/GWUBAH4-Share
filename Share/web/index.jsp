@@ -11,7 +11,6 @@
 <%@page import="java.sql.*" %> 
 <%@page import="java.io.*" %> 
 <%@page import="org.bahcohortproj.wdywts.UserDetail" %>
-<%@page import="org.bahcohortproj.wdywts.SessionFactoryHelper" %>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,13 +33,19 @@
         
         //SessionFactory sf = new Configuration().configure().buildSessionFactory();
         Session hSession = sf.openSession();
-        
         hSession.beginTransaction();
+        
         hSession.save(m);
         hSession.getTransaction().commit();
         
         hSession.close();
         
+        m = null;
+        
+        hSession = sf.openSession();
+        hSession.beginTransaction();
+        
+        m = (UserDetail) hSession.get(UserDetail.class, 1);
         
         out.println("<br><br>");
         out.println(m.getfName());
