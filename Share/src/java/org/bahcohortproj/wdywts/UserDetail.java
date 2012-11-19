@@ -6,45 +6,42 @@
 package org.bahcohortproj.wdywts;
 
 import java.io.Serializable;
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
+import javax.persistence.NamedQuery;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
  *
  * @author ed
  */
 @Entity
+@Cacheable
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
+@NamedQuery(name="userDetail.byUserName", query="FROM UserDetail where userName = :userName ")
+@org.hibernate.annotations.Entity(selectBeforeUpdate=true)
 public class UserDetail implements Serializable {
     
     @Id
     @GeneratedValue
-    private int userID;
+    private int userId;
     
+    @Column (name="First_Name")
     private String fName;
     private String lName;
+    private String userName;
     
     
-   
+    
     //public String fullName = getFullName();
     public String getFullName() {
         return this.getfName() + " " + this.getlName();
     }
 
-    /**
-     * @return the userID
-     */
-    public int getUserID() {
-        return userID;
-    }
-
-    /**
-     * @param userID the userID to set
-     */
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
+    
     /**
      * @return the fName
      */
@@ -72,4 +69,33 @@ public class UserDetail implements Serializable {
     public void setlName(String lName) {
         this.lName = lName;
     }
+
+    /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * @return the userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
 }

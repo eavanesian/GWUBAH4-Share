@@ -1,0 +1,21 @@
+/* 
+    Document   : main
+    Created on : Nov 18, 2012, 11:16:00 PM
+    Author     : ed
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+
+.logOut{
+    color: darkred;
+    text-decoration: none;
+}
+
+.logOut:hover{
+    text-decoration: underline;
+}

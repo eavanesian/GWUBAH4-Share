@@ -3,7 +3,14 @@
     Created on : Oct 2, 2012, 10:42:48 PM
     Author     : test
 --%>
-
+<%@page import="org.hibernate.criterion.Order"%>
+<%@page import="org.hibernate.criterion.Projections"%>
+<%@page import="org.hibernate.criterion.Restrictions"%>
+<%@page import="org.hibernate.Criteria"%>
+<%@page import="org.hibernate.HibernateException"%>
+<%@page import="java.util.List"%>
+<%@page import="org.hibernate.transform.Transformers"%>
+<%@page import="org.hibernate.Query"%>
 <%@page import="org.hibernate.Session"%>
 <%@page import="org.hibernate.cfg.Configuration"%>
 <%@page import="org.hibernate.SessionFactory"%>
@@ -13,6 +20,12 @@
 <%@page import="org.bahcohortproj.wdywts.UserDetail" %>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% 
+if (request.getParameter("logout") != null) {
+    session.removeAttribute("sUsrName");
+    response.sendRedirect("./");
+    return;
+}%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,77 +33,58 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        Testing update
-        Matt's Test
-        <%
+        <jsp:include page="includes.jsp"></jsp:include>
+        
+<%
+    UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
+
+    if ((loggedInUser != null) && (loggedInUser.getUserId() != 0)) {
+        out.println("Welcome " + loggedInUser.getFullName() + "<br>");
+        out.println("<a href='index.jsp?logout' class='logOut'>Log out</a><br><br>");
+    }
+%>
+        <%--= getServletConfig().getInitParameter("defaultUser") --%>
+        
+        <form name="userLogin" action="login" method="post">
+            <input type="text" name="userName">
+            <input type="submit" value="submit" >
+        </form>
+        
+<%
+        String _userName = "ea";
+        
+        UserDetail ed = new UserDetail();
+        
+        ed.setfName("Ed");
+        ed.setlName("A");
+        ed.setUserName("ea");
+        
+        UserDetail j = new UserDetail();
+        
+        j.setfName("Jay");
+        j.setlName("S");
+        j.setUserName("js");
+        
         UserDetail m = new UserDetail();
         
-        m.setfName("F");
-        m.setlName("L");
+        m.setfName("Matt");
+        m.setlName("S");
+        m.setUserName("ms");
         
-        SessionFactory sf = new HibernateUtil().getSessionFactory();
-        
-        //SessionFactory sf = new Configuration().configure().buildSessionFactory();
+        SessionFactory sf = new HibernateUtil().getSessionFactory();        
         Session hSession = sf.openSession();
+        
         hSession.beginTransaction();
         
-        hSession.save(m);
-        hSession.getTransaction().commit();
+        //hSession.saveOrUpdate(ed);
+        //hSession.saveOrUpdate(j);
+        //hSession.saveOrUpdate(m);
         
+        
+        hSession.getTransaction().commit();
         hSession.close();
         
-        m = null;
-        
-        hSession = sf.openSession();
-        hSession.beginTransaction();
-        
-        m = (UserDetail) hSession.get(UserDetail.class, 1);
-        
-        out.println("<br><br>");
-        out.println(m.getfName());
-        out.println("<br>");
-        out.println(m.getlName());
-        out.println("<br>");
-        out.println(m.getFullName());
+       
         %>
-        <br>
-        
-        <% 
-/*try {
-/* Create string of connection url within specified format with machine name, 
-port number and database name. Here machine name id localhost and 
-database name is usermaster. * / 
-String connectionURL = "jdbc:mysql://localhost:3306/test"; 
-
-// declare a connection by using Connection interface 
-Connection connection = null; 
-
-// Load JBBC driver "com.mysql.jdbc.Driver" 
-Class.forName("com.mysql.jdbc.Driver").newInstance(); 
-
-/* Create a connection by using getConnection() method that takes parameters of 
-string type connection url, user name and password to connect to database. * / 
-connection = DriverManager.getConnection(connectionURL, "root", "test");
-
-// check weather connection is established or not by isClosed() method 
-if(!connection.isClosed()) 
-% >
-<font size="+3" color="green"></b>
-<% 
-out.println("Successfully connected to " + "MySQL server using TCP/IP...");
-connection.close();
-}
-catch(Exception ex){
-% >
-</font>
-<font size="+3" color="red"></b>
-<%
-out.println("Unable to connect to database.<br>");
-out.println(ex.getMessage());
-}
-% >
-</font>
-  */ %>      
     </body>
 </html>
