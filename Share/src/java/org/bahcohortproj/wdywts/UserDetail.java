@@ -29,10 +29,17 @@ public class UserDetail implements Serializable {
     @GeneratedValue
     private int userId;
     
-    @Column (name="First_Name")
+    @Column (name="FirstName")
     private String fName;
+    
+    @Column (name="LastName")
     private String lName;
+    
+    @Column (name="Username")
     private String userName;
+    
+    @Column (name="Admin")
+    private boolean admin;
     
     
     
@@ -97,5 +104,21 @@ public class UserDetail implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    /**
+     * @return the admin
+     */
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    /**
+     * @param admin the admin to set
+     */
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+
 
 }

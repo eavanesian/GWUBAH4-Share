@@ -27,10 +27,12 @@ public class LoginService {
     
     public boolean validEntry (String userName){
         
-        if (userName == null || userName.trim() == ""){
+        if ("username".equals(userName.trim()) ){
             return false;
+        } else if (userName == null || "".equals(userName.trim())) {
+            return false;        
         } else {
-        return true;
+            return true;
         }
     }
     

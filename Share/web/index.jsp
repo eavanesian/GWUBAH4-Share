@@ -30,26 +30,33 @@ if (request.getParameter("logout") != null) {
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>What do you want to share?</title>
     </head>
     <body>
         <jsp:include page="includes.jsp"></jsp:include>
         
+        <%--= getServletConfig().getInitParameter("defaultUser") --%>
+        
 <%
     UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-    if ((loggedInUser != null) && (loggedInUser.getUserId() != 0)) {
-        out.println("Welcome " + loggedInUser.getFullName() + "<br>");
-        out.println("<a href='index.jsp?logout' class='logOut'>Log out</a><br><br>");
-    }
-%>
-        <%--= getServletConfig().getInitParameter("defaultUser") --%>
-        
-        <form name="userLogin" action="login" method="post">
-            <input type="text" name="userName">
-            <input type="submit" value="submit" >
-        </form>
-        
+    if ((loggedInUser != null) && (loggedInUser.getUserId() != 0)) { %>
+        Welcome <%=loggedInUser.getFullName()%>
+        <% if (loggedInUser.isAdmin()) { %>
+            [Admin]
+        <% } %><br>
+        <a href="index.jsp?logout" class="logOut">Log out</a><br><br>
+    <% } else { %>
+        <div class="loginForm">What Do You Want To Share?<br><br>
+            <form name="userLogin" action="login" method="post">
+                <input type="text" id="username" name="userName" value="username" class="username" onblur="usernameInputCheck(this,'username');" onclick="checkFocus(this,'username');" onkeypress="checkFocus(this,'username');" tabindex="1">
+                <input type="submit" id="submitButton" class="submitButton" value="sign in">
+            </form>
+        </div>
+    <% } %>
+    
+   
+    
 <%
         String _userName = "ea";
         
@@ -58,18 +65,21 @@ if (request.getParameter("logout") != null) {
         ed.setfName("Ed");
         ed.setlName("A");
         ed.setUserName("ea");
+        ed.setAdmin(true);
         
         UserDetail j = new UserDetail();
         
         j.setfName("Jay");
         j.setlName("S");
         j.setUserName("js");
+        j.setAdmin(false);
         
         UserDetail m = new UserDetail();
         
         m.setfName("Matt");
         m.setlName("S");
         m.setUserName("ms");
+        m.setAdmin(false);
         
         SessionFactory sf = new HibernateUtil().getSessionFactory();        
         Session hSession = sf.openSession();
