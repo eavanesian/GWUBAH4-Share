@@ -19,6 +19,7 @@
 <%@page import="java.io.*" %> 
 <%@page import="org.bahcohortproj.wdywts.UserDetail" %>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil" %>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
 if (request.getParameter("logout") != null) {
@@ -47,11 +48,11 @@ if (request.getParameter("logout") != null) {
         <% } %><br>
         <a href="index.jsp?logout" class="logOut">Log out</a><br><br>
     <% } else { %>
-        <div class="loginForm">What Do You Want To Share?<br><br>
+    <div class="loginForm"><div class="loginBox">What Do You Want To Share?<br><br>
             <form name="userLogin" action="login" method="post">
                 <input type="text" id="username" name="userName" value="username" class="username" onblur="usernameInputCheck(this,'username');" onclick="checkFocus(this,'username');" onkeypress="checkFocus(this,'username');" tabindex="1">
                 <input type="submit" id="submitButton" class="submitButton" value="sign in">
-            </form>
+            </form></div>
         </div>
     <% } %>
     
@@ -96,5 +97,7 @@ if (request.getParameter("logout") != null) {
         
        
         %>
+        
+        <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>
