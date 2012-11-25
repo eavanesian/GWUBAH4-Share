@@ -41,11 +41,23 @@ if (request.getParameter("logout") != null) {
     UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
     if ((loggedInUser != null) && (loggedInUser.getUserId() != 0)) { %>
-        Welcome <%=loggedInUser.getFullName()%>
-        <% if (loggedInUser.isAdmin()) { %>
-            [Admin]
-        <% } %><br><br>
-        <a href="index.jsp?logout" class="submitButton">log out</a><br><br>
+    
+        <div class="mainContainer">
+            <jsp:include page="topNav.jsp"></jsp:include>
+            
+            <div class="content">
+                <h1>What do you want to do?</h1><br><br>
+                <div class="descriptionContainer"><a id="navButton" href="./search.jsp" onmouseover="showDescription('search');" onmouseout="showDescription('');">search</a>
+                    <a id="navButton" href="./borrow.jsp" onmouseover="showDescription('borrow');" onmouseout="showDescription('');">borrow</a>
+                    <a id="navButton" href="./lend.jsp" onmouseover="showDescription('lend');" onmouseout="showDescription('');">lend</a>
+                    
+                </div>
+                <div id="description" class="fade"></div>
+            </div>
+        </div>
+        
+        
+        
     <% } else { %>
     <div class="loginForm"><div class="loginBox">What Do You Want To Share?<br><br>
             <form name="userLogin" action="login" method="post">
@@ -61,7 +73,7 @@ if (request.getParameter("logout") != null) {
    
     
 <%
-        String _userName = "ea";
+        /*String _userName = "ea";
         
         UserDetail ed = new UserDetail();
         
@@ -96,7 +108,7 @@ if (request.getParameter("logout") != null) {
         
         hSession.getTransaction().commit();
         hSession.close();
-        
+        */
        
         %>
         

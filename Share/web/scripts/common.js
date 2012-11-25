@@ -32,3 +32,32 @@ function usernameInputCheck(inputBox, value){
     }
 
 }
+
+
+
+// Show description of menu button
+function showDescription(section){
+    var _desc = new Array();
+    _desc['search'] = "search the inventory of available items";
+    _desc['borrow'] = "looking for something particular?<br>head over to this section to browse around the categories.";
+    _desc['lend'] = "got something to lend? head here to put it up for others to find.";
+    _desc[''] = "";
+    
+    document.getElementById('description').innerHTML = _desc[section];
+    
+}
+
+
+// Sets the class of the current page to 'active' for css to show correctly
+function activateMenu(){    
+    var sPath = window.location.pathname;
+    var sPage = sPath.substring(sPath.lastIndexOf('/') + 1, sPath.lastIndexOf('.'));
+    //alert (sPage);
+    
+    // workaround to set the home navigation id correctly
+    if (sPage == '/Share/'){
+        sPage = 'home';
+    }
+    document.getElementById('menu_'+sPage).className = 'active';    
+    
+}
