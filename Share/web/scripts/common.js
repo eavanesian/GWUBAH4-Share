@@ -43,8 +43,7 @@ function showDescription(section){
     _desc['lend'] = "got something to lend? head here to put it up for others to find.";
     _desc[''] = "";
     
-    document.getElementById('description').innerHTML = _desc[section];
-    
+    document.getElementById('description').innerHTML = _desc[section];    
 }
 
 
@@ -59,5 +58,4 @@ function activateMenu(){
         sPage = 'home';
     }
     document.getElementById('menu_'+sPage).className = 'active';    
-    
 }

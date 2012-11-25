@@ -304,18 +304,20 @@ input.username {
   background: -o-linear-gradient(top, #26262c 0%, #070707 100%);
   background: -ms-linear-gradient(top, #26262c 0%, #070707 100%);
   background: linear-gradient(to bottom, #26262c 0%, #070707 100%);
-  filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#26262c', EndColorStr='#070707', GradientType=0);
+/*  filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#26262c', EndColorStr='#070707', GradientType=0);*/
+  filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#336699', EndColorStr='#336699', GradientType=0);
   background: #336699;
 }
 #cssmenu > ul > li:hover > a {
-  background: #070707;
+/*  background: #070707;*/
   background: -moz-linear-gradient(top, #26262c 0%, #070707 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #26262c), color-stop(100%, #070707));
   background: -webkit-linear-gradient(top, #26262c 0%, #070707 100%);
   background: -o-linear-gradient(top, #26262c 0%, #070707 100%);
   background: -ms-linear-gradient(top, #26262c 0%, #070707 100%);
   background: linear-gradient(to bottom, #26262c 0%, #070707 100%);
-  filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#26262c', EndColorStr='#070707', GradientType=0);
+/*  filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#26262c', EndColorStr='#070707', GradientType=0);*/
+  filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#336699', EndColorStr='#336699', GradientType=0);
   box-shadow: inset 0 0 3px #000000;
   -moz-box-shadow: inset 0 0 3px #000000;
   -webkit-box-shadow: inset 0 0 3px #000000;
