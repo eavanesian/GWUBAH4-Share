@@ -128,6 +128,26 @@ input{
     padding: 30px;   
 }
 
+.itemForm{
+    width:98%;
+    text-align: center;
+    position:absolute;
+    top:35%; 
+    height:10em;
+    margin-top:-5em;
+    font-size: 20px;
+}
+
+.itemBox{
+    border: #bbb solid thin;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 450px;
+    padding: 30px;   
+}
 
 input.username {
     border: gray thin solid;
