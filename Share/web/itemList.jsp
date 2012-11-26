@@ -1,8 +1,9 @@
 <%-- 
-    Document   : lend
-    Created on : Nov 24, 2012, 7:29:52 PM
-    Author     : ed, jay
+    Document   : itemList
+    Created on : Nov 25, 2012, 10:07:25 PM
+    Author     : jay
 --%>
+
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
@@ -19,6 +20,7 @@
 <%@page import="java.io.*" %> 
 <%@page import="org.bahcohortproj.wdywts.UserDetail" %>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil" %>
+<%@page import="org.bahcohortproj.wdywts.ItemDetail" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
@@ -32,29 +34,34 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lend</title>
+        <title>Items</title>
     </head>
     <body>
         <jsp:include page="includes.jsp"></jsp:include>
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
-        
-        <div class="itemForm"><div class="itemBox"><h2>Create an item to lend</h2>
-                <span class="normal">Please fill in the form below to create an item to lend.</span><br><br>
-        
-                <form name="newItemListing" action="lend" method="post" class="normal">
-            Item Name: <input type="text" name="itemName"><br>
-            Description: <input type="text" name="itemDescription"><br>
-            Category: 
-                <select>
-                <option value="1">Purse</option>
-                <option value="2">Tool</option>
-                </select><br><br>
-                <input type="hidden" name ="user" value="<%=loggedInUser.getUserName()%>"> 
-            <input type="submit" value="list item" class="submitButton">
-            <input type="button" value="cancel" class="submitButton" onclick="window.location.href='./';">
-        </form></div></div></div>
-            
+            <div class="itemList">
+                <H3>Items you have listed:</H3>
+                <% //Read items from the db and list
+                    ItemDetail item = new ItemDetail();
+                    SessionFactory sf = new HibernateUtil().getSessionFactory();        
+                    Session hSession = sf.openSession();
+
+                    hSession.beginTransaction();
+
+                    Criteria c = hSession.createCriteria(ItemDetail.class);
+                    c.add(Restrictions.eq("userName", loggedInUser.getUserName()));
+                    
+                    List<ItemDetail> items = (List<ItemDetail>) c.list();
+                    // TODO: = format the following output as a table
+                    for (ItemDetail u : items) {
+                        item = u; %>
+                        <%=u.getItemName()%><BR>
+                    <%
+                                       }
+                    hSession.close();
+                %>
+            </div>
         <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

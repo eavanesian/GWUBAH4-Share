@@ -43,8 +43,8 @@ public class LoginService {
         Session hSession = sf.openSession();
         
         hSession.beginTransaction();
-        hSession = sf.openSession();
-        hSession.beginTransaction();
+        //hSession = sf.openSession();
+        //hSession.beginTransaction();
 
         
         //Query q = hSession.getNamedQuery("userDetail.byUserName");
@@ -63,6 +63,7 @@ public class LoginService {
         //List<String> users = (List<String>) q.list();
         List<UserDetail> users = (List<UserDetail>) c.list();
         
+        hSession.close();
         
         //for (String u : users) {
         for (UserDetail u : users) {        

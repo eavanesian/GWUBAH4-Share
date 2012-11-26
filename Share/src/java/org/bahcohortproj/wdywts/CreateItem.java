@@ -80,14 +80,16 @@ public class CreateItem extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         
-        String _itemName, _itemDescription;
+        String _itemName, _itemDescription, _itemCreator;
         _itemName = request.getParameter("itemName");
         _itemDescription = request.getParameter("itemDescription");
+        _itemCreator = request.getParameter("user");
         
         ItemDetail _item = new ItemDetail();
         _item.setItemName(_itemName);
         _item.setItemDescription(_itemDescription);
         _item.setCategoryId(1);
+        _item.setUserName(_itemCreator);
         
         
         CreateItemService itemService = new CreateItemService();
@@ -97,7 +99,7 @@ public class CreateItem extends HttpServlet {
             //item was created, auto dispatch to landing page
             //RequestDispatcher dispatcher = request.getRequestDispatcher("success"); //Need to add landing page
             //dispatcher.forward(request, response);
-            response.sendRedirect(""); //remove this once landing page built.
+            response.sendRedirect("./itemList.jsp"); //remove this once landing page built.
             
         } else {
             response.sendRedirect("");

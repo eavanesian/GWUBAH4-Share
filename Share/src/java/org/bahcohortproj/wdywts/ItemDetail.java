@@ -38,6 +38,9 @@ public class ItemDetail implements Serializable {
     @Column (name ="categoryId")
     private int categoryId;
     
+    @Column (name ="userName")
+    private String userName;
+    
     public Long getItemId() {
         return itemId;
     }
@@ -86,6 +89,20 @@ public class ItemDetail implements Serializable {
      */
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    /**
+     * @return the userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     
     
