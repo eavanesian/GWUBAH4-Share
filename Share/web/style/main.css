@@ -233,6 +233,14 @@ input.username {
 
 
 
+.regularText{
+    text-align: left;
+    font-size: 16px;
+    margin: 0 50px 0 50px;
+    line-height: 25px;
+}
+
+
 
 /* TOP MENU */
 #cssmenu ul,

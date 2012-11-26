@@ -42,7 +42,10 @@ UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
             
             <div class="content">
                 <H1>ABOUT</h1>
-                
+                <div class="regularText">Our project will establish a community of users to facilitate the sharing and borrowing of items 
+                with others in a local area. The concept is similar to CraigsList, without the monetary transactions. 
+                We will implement a dynamic web based application utilizing a database backend and incorporate 
+                social aspects into the system.</div>
             </div>
         </div>
     
