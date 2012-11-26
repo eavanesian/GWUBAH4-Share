@@ -5,24 +5,39 @@
 package org.bahcohortproj.wdywts;
 
 import java.io.Serializable;
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  *
  * @author jay
  */
 @Entity
+@Cacheable
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
+@NamedQuery(name="itemDetail.byItemName", query="FROM ItemDetail where itemName = :itemName ")
+@org.hibernate.annotations.Entity(selectBeforeUpdate=true)
 public class ItemDetail implements Serializable {
+    
     @Id
     @GeneratedValue
     private Long itemId;
+    
+    @Column (name ="itemName")
     private String itemName;
+    
+    @Column (name ="itemDescription")
     private String itemDescription;
+    
+    @Column (name ="categoryId")
     private int categoryId;
     
-
     public Long getItemId() {
         return itemId;
     }
