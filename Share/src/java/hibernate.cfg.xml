@@ -32,6 +32,7 @@
         <!-- Names the annotated entity class -->
         <!--mapping class="org.hibernate.tutorial.annotations.Event"/-->
         <mapping class="org.bahcohortproj.wdywts.UserDetail"/>
+        <mapping class="org.bahcohortproj.wdywts.ItemDetail"/>
     
   </session-factory>
 </hibernate-configuration>
