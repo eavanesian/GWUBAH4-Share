@@ -36,7 +36,7 @@ public class LoginService {
         }
     }
     
-    public UserDetail getUserinfo (String userName){
+    public UserDetail getUserInfo (String userName){
         UserDetail user = new UserDetail();
         
         SessionFactory sf = new HibernateUtil().getSessionFactory();
