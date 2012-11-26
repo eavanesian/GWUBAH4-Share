@@ -149,6 +149,17 @@ input{
     padding: 30px;   
 }
 
+.itemList{
+    border: #bbb solid thin;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 450px;
+    padding: 30px;   
+}
+
 input.username {
     border: gray thin solid;
     padding: 5px;
