@@ -23,11 +23,11 @@
 <% 
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+/*if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
     session.removeAttribute("sUsrName");
     response.sendRedirect("./");
     return;
-} %>
+}*/ %>
 <!DOCTYPE html>
 <html>
     <head>
