@@ -79,19 +79,31 @@ public class CreateItem extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        String _itemName, _itemDescription, _itemCreator;
+        String _itemName, _itemDescription, _itemCreator, _newCategory;
         int _itemCategory;
         _itemName = request.getParameter("itemName");
         _itemDescription = request.getParameter("itemDescription");
         _itemCreator = request.getParameter("user");
         _itemCategory = Integer.parseInt(request.getParameter("itemCategory"));
+        _newCategory = request.getParameter("newCategory");
         
         ItemDetail _item = new ItemDetail();
         _item.setItemName(_itemName);
         _item.setItemDescription(_itemDescription);
-        _item.setCategoryId(_itemCategory);
         _item.setUserName(_itemCreator);
-        
+        //check for new category.  If there is something there, create it as a new category if it doesn't already exist
+        if (_newCategory != null){
+            //check if the category already exists (search for category, regardless of case)
+            
+            //if it already exists, let user know and set pulldown to that category
+            
+            //if it doesn't already exist, create the category in the database and set to the new category
+            _item.setCategoryId(_itemCategory); //Change this when above is implemented
+        }
+        //New category is blank, set to category in pulldown.
+        else {
+            _item.setCategoryId(_itemCategory);
+        }
         
         CreateItemService itemService = new CreateItemService();
         boolean itemCreated = itemService.createItem(_item);
