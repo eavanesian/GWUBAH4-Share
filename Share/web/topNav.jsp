@@ -16,7 +16,7 @@ UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
             </div>
             <div class="userGreeting">Welcome <%=loggedInUser.getFullName()%>
                 <% if (loggedInUser.isAdmin()) { %>
-                    [Admin]
+                [<a href="./admin.jsp">Admin</a>]
                 <% } %> 
             </div> <% } %>
             <br>
