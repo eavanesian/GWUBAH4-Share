@@ -3,6 +3,7 @@
     Created on : Oct 2, 2012, 10:42:48 PM
     Author     : test
 --%>
+<%@page import="org.bahcohortproj.wdywts.Category"%>
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
@@ -110,6 +111,54 @@ if (request.getParameter("logout") != null) {
         hSession.close();
         */
        
+
+       /* Category c1 = new Category();
+        c1.setName("Tools");
+        
+        Category c2 = new Category();
+        c2.setName("Purses");
+        
+        Category c3 = new Category();
+        c3.setName("Electronics");
+        
+        Category sc1 = new Category();
+        sc1.setName("Hammer");
+        
+        Category sc2 = new Category();
+        sc2.setName("Snow blower");
+        
+        Category sc3 = new Category();
+        sc3.setName("Shovel");
+        
+        Category sc4 = new Category();
+        sc4.setName("Stereo");
+        
+        
+        SessionFactory sf = new HibernateUtil().getSessionFactory();        
+        Session hSession = sf.openSession();
+        
+        hSession.beginTransaction();
+        
+        hSession.save(c1);
+        hSession.saveOrUpdate(c2);
+        hSession.saveOrUpdate(c3);
+        
+        
+        hSession.getTransaction().commit();
+        
+        
+        sc1.setParentCategoryId(c1.getCategoryID());
+        sc2.setParentCategoryId(c1.getCategoryID());
+        sc3.setParentCategoryId(c1.getCategoryID());
+        sc4.setParentCategoryId(c3.getCategoryID());
+
+        
+        hSession.saveOrUpdate(sc1);
+        hSession.saveOrUpdate(sc2);
+        hSession.saveOrUpdate(sc3);
+        hSession.saveOrUpdate(sc4);
+        
+        hSession.close();*/
         %>
         
         <jsp:include page="footer.jsp"></jsp:include>

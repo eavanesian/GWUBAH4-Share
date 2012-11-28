@@ -3,6 +3,7 @@
     Created on : Nov 24, 2012, 7:29:52 PM
     Author     : ed
 --%>
+<%@page import="org.bahcohortproj.wdywts.Category"%>
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
@@ -42,7 +43,53 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
             
             <div class="content">
                 <H1>BORROW</h1>
+                <%
                 
+                SessionFactory sf = new HibernateUtil().getSessionFactory();
+                Session hSession = sf.openSession();
+
+                hSession.beginTransaction();
+                //hSession = sf.openSession();
+                //hSession.beginTransaction();
+
+
+                //Query q = hSession.getNamedQuery("userDetail.byUserName");
+                //q.setParameter("userName", _userName);
+
+               /* Query q = hSession.createQuery("FROM UserDetail where userName = :userName ");
+                //Query q = hSession.createQuery("SELECT lName FROM UserDetail where userName = :userName ");
+
+                q.setParameter("userName", _userName);
+                */
+
+                Criteria c = hSession.createCriteria(Category.class);
+                c.add(Restrictions.eq("parentCategoryId", new Integer(0)));
+                c.addOrder(Order.asc("name"));
+
+                List<Category> categories = (List<Category>) c.list();
+
+                
+
+                //for (String u : users) {
+                for (Category cat : categories) {        
+                    out.println("[" + cat.getName() +"]<br>");
+                    
+                    Criteria sc = hSession.createCriteria(Category.class);
+                    sc.add(Restrictions.eq("parentCategoryId", new Integer(cat.getCategoryId())));
+                    sc.addOrder(Order.asc("name"));
+                    
+                    List<Category> subcategories = (List<Category>) sc.list();
+                    
+                    for (Category subcat : subcategories) {
+                        out.println("&nbsp;&nbsp{" + subcat.getName() +"}<br>");
+                    }
+                    out.println("<br>");
+                    
+                }
+        
+                hSession.close();
+                
+                %>
             </div>
         </div>
     

@@ -27,7 +27,7 @@ public class Category implements Serializable {
 
     @Id
     @GeneratedValue
-    private int categoryID;
+    private int categoryId;
     
     @Column (name="Name")
     private String name;
@@ -42,20 +42,19 @@ public class Category implements Serializable {
      */
     @Column (name="ParentCategoryId")
     private int parentCategoryId;
-    
-    
+
     /**
-     * @return the categoryID
+     * @return the categoryId
      */
-    public int getCategoryID() {
-        return categoryID;
+    public int getCategoryId() {
+        return categoryId;
     }
 
     /**
-     * @param categoryID the categoryID to set
+     * @param categoryId the categoryId to set
      */
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     /**
@@ -100,8 +99,7 @@ public class Category implements Serializable {
         this.parentCategoryId = parentCategoryId;
     }
     
-    
-
+ 
 
 
 }

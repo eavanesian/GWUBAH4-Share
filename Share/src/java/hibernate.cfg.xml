@@ -33,6 +33,7 @@
         <!--mapping class="org.hibernate.tutorial.annotations.Event"/-->
         <mapping class="org.bahcohortproj.wdywts.UserDetail"/>
         <mapping class="org.bahcohortproj.wdywts.ItemDetail"/>
+        <mapping class="org.bahcohortproj.wdywts.Category"/>
     
   </session-factory>
 </hibernate-configuration>
