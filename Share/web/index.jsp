@@ -111,8 +111,8 @@ if (request.getParameter("logout") != null) {
         hSession.close();
         */
        
-
-       /* Category c1 = new Category();
+/*
+        Category c1 = new Category();
         c1.setName("Tools");
         
         Category c2 = new Category();
@@ -147,10 +147,10 @@ if (request.getParameter("logout") != null) {
         hSession.getTransaction().commit();
         
         
-        sc1.setParentCategoryId(c1.getCategoryID());
-        sc2.setParentCategoryId(c1.getCategoryID());
-        sc3.setParentCategoryId(c1.getCategoryID());
-        sc4.setParentCategoryId(c3.getCategoryID());
+        sc1.setParentCategoryId(c1.getCategoryId());
+        sc2.setParentCategoryId(c1.getCategoryId());
+        sc3.setParentCategoryId(c1.getCategoryId());
+        sc4.setParentCategoryId(c3.getCategoryId());
 
         
         hSession.saveOrUpdate(sc1);

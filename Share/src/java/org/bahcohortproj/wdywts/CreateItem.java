@@ -79,16 +79,17 @@ public class CreateItem extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        
         String _itemName, _itemDescription, _itemCreator;
+        int _itemCategory;
         _itemName = request.getParameter("itemName");
         _itemDescription = request.getParameter("itemDescription");
         _itemCreator = request.getParameter("user");
+        _itemCategory = Integer.parseInt(request.getParameter("itemCategory"));
         
         ItemDetail _item = new ItemDetail();
         _item.setItemName(_itemName);
         _item.setItemDescription(_itemDescription);
-        _item.setCategoryId(1);
+        _item.setCategoryId(_itemCategory);
         _item.setUserName(_itemCreator);
         
         

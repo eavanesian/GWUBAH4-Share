@@ -3,6 +3,7 @@
     Created on : Nov 24, 2012, 7:29:52 PM
     Author     : ed, jay
 --%>
+<%@page import="org.bahcohortproj.wdywts.Category"%>
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
@@ -39,16 +40,37 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
         
-        <div class="itemForm"><div class="itemBox"><h2>Create an item to lend</h2>
+        <div class="itemForm"><div class="itemBox"><B>Create an item to lend</B><BR>
                 <span class="normal">Please fill in the form below to create an item to lend.</span><br><br>
         
                 <form name="newItemListing" action="lend" method="post" class="normal">
             Item Name: <input type="text" name="itemName"><br>
             Description: <input type="text" name="itemDescription"><br>
             Category: 
-                <select>
-                <option value="1">Purse</option>
-                <option value="2">Tool</option>
+                <select name="itemCategory">
+                <% //setup session to pull categories
+                    SessionFactory sf = new HibernateUtil().getSessionFactory();
+                    Session hSession = sf.openSession();
+                    hSession.beginTransaction();
+                    
+                    Criteria c = hSession.createCriteria(Category.class);
+                    c.add(Restrictions.eq("parentCategoryId", new Integer(0)));
+                    c.addOrder(Order.asc("name"));
+                    List<Category> categories = (List<Category>) c.list();
+                    
+                    for (Category cat : categories) { 
+                        %>
+                        <option value="<%=cat.getCategoryId()%>"><%=cat.getName()%></option>
+                        <%
+                        Criteria sc = hSession.createCriteria(Category.class);
+                        sc.add(Restrictions.eq("parentCategoryId", new Integer(cat.getCategoryId())));
+                        sc.addOrder(Order.asc("name"));
+                        List<Category> subcategories = (List<Category>) sc.list();
+                        for (Category subcat : subcategories) {
+                        %>
+                        <option value="<%=subcat.getCategoryId()%>">--<%=subcat.getName()%></option>
+                        <% } %>
+                    <% } %>
                 </select><br><br>
                 <input type="hidden" name ="user" value="<%=loggedInUser.getUserName()%>"> 
             <input type="submit" value="list item" class="submitButton">
