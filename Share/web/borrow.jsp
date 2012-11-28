@@ -43,8 +43,9 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
             
             <div class="content">
                 <H1>BORROW</h1>
-                <%
-                
+                <script type="text/javascript">
+                    catSubcat = new Array();
+                    catSubcat = {<%
                 SessionFactory sf = new HibernateUtil().getSessionFactory();
                 Session hSession = sf.openSession();
 
@@ -68,11 +69,14 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
 
                 List<Category> categories = (List<Category>) c.list();
 
-                
+                // fake a running for-loop counter since for loop is itterating through an array list of objects
+                int runningCounter = 0;
 
                 //for (String u : users) {
-                for (Category cat : categories) {        
-                    out.println("[" + cat.getName() +"]<br>");
+                for (Category cat : categories) { %>
+                    
+                    <%=cat.getName()%>: [<%
+                    //out.println("[" + cat.getName() +"]<br>");
                     
                     Criteria sc = hSession.createCriteria(Category.class);
                     sc.add(Restrictions.eq("parentCategoryId", new Integer(cat.getCategoryId())));
@@ -80,16 +84,39 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                     
                     List<Category> subcategories = (List<Category>) sc.list();
                     
+                    // fake a running for-loop counter since for loop is itterating through an array list of objects
+                    int runningSubCounter = 0;
+                    
                     for (Category subcat : subcategories) {
-                        out.println("&nbsp;&nbsp{" + subcat.getName() +"}<br>");
+                        out.print("'" + subcat.getName() +"'");
+                        if (runningSubCounter < subcategories.size()-1){
+                            out.print(",");
+                            runningSubCounter++;
+                        }
                     }
-                    out.println("<br>");
+                    
+                    out.print("]");
+                    if (runningCounter < categories.size()-1){
+                        out.print(",");
+                        runningCounter++;
+                    }
                     
                 }
         
                 hSession.close();
                 
                 %>
+                    };
+                    
+                        for (cat in catSubcat){
+                            document.write (cat+"<br>");
+                            for (subcat in catSubcat[cat]){
+                                document.write(cat + "-" + catSubcat[cat][subcat]+"<br>");
+                            }
+                            document.write("<br>");
+                        }
+                        
+                </script>
             </div>
         </div>
     
