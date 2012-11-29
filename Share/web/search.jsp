@@ -42,7 +42,10 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
             
             <div class="content">
                 <H1>SEARCH</h1>
-                
+                <form name="userSearch" action="search" method="post">
+                    <input type="text" name="userSearch">
+                <input type="submit" id="submitButton" class="submitButton" value="item search">
+                </form>
             </div>
         </div>
     
