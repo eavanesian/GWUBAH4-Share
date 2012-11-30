@@ -18,6 +18,7 @@
 <%@page import="java.sql.*" %> 
 <%@page import="java.io.*" %> 
 <%@page import="org.bahcohortproj.wdywts.UserDetail" %>
+<%@page import="org.bahcohortproj.wdywts.ItemDetail" %>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
@@ -46,6 +47,21 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                     <input type="text" name="userSearch">
                 <input type="submit" id="submitButton" class="submitButton" value="item search">
                 </form>
+                <div>
+                    
+                <%
+                ItemDetail searchItem = new ItemDetail();
+                SessionFactory sf = new HibernateUtil().getSessionFactory();
+                Session hSession = sf.openSession();
+                hSession.beginTransaction();
+                
+                //test to print item from database
+                long testId = 1;                           
+                searchItem = (ItemDetail) hSession.get(ItemDetail.class, testId);
+                out.println(searchItem.getItemName());
+                %>
+                </div>
+                
             </div>
         </div>
     
