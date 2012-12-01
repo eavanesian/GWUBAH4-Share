@@ -55,7 +55,6 @@ if (request.getParameter("logout") != null) {
                 </div>
                 <div id="description" class="fade"></div>
             </div>
-        </div>
         
         
         
@@ -162,5 +161,6 @@ if (request.getParameter("logout") != null) {
         %>
         
         <jsp:include page="footer.jsp"></jsp:include>
+    </div>
     </body>
 </html>

@@ -59,3 +59,6 @@ function activateMenu(){
     }
     document.getElementById('menu_'+sPage).className = 'active';    
 }
+
+
+

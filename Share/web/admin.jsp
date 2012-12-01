@@ -23,18 +23,19 @@ if (request.getParameter("logout") != null) {
         
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
+            
+            <div class="content">
+            
             <% 
                 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
                 if ((loggedInUser != null) && (loggedInUser.isAdmin())) { %>    
  
                 <h1>Administrator Functions</h1>
-        </div>
-            
-            
-            
+        
             
     <% } %>
-   
+            </div>
         <jsp:include page="footer.jsp"></jsp:include>
+        </div>
     </body>
 </html>

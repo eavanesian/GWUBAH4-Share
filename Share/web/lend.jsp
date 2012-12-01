@@ -39,6 +39,8 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
         <jsp:include page="includes.jsp"></jsp:include>
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
+            
+            <div class="content">
         
         <div class="itemForm"><div class="itemBox"><B>Create an item to lend</B><BR>
                 <span class="normal">Please fill in the form below to create an item to lend.</span><br><br>
@@ -80,5 +82,6 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
         </form></div></div></div>
             
         <jsp:include page="footer.jsp"></jsp:include>
+        </div>
     </body>
 </html>

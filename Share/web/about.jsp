@@ -47,8 +47,8 @@ UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
                 We will implement a dynamic web based application utilizing a database backend and incorporate 
                 social aspects into the system.</div>
             </div>
-        </div>
-    
+        
         <jsp:include page="footer.jsp"></jsp:include>
+        </div>
     </body>
 </html>

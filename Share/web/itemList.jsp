@@ -40,28 +40,31 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
         <jsp:include page="includes.jsp"></jsp:include>
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
-            <div class="itemList">
-                <H3>Items you have listed:</H3>
-                <% //Read items from the db and list
-                    ItemDetail item = new ItemDetail();
-                    SessionFactory sf = new HibernateUtil().getSessionFactory();        
-                    Session hSession = sf.openSession();
+            
+            <div class="content">
+                <div class="itemList">
+                    <H3>Items you have listed:</H3>
+                    <% //Read items from the db and list
+                        ItemDetail item = new ItemDetail();
+                        SessionFactory sf = new HibernateUtil().getSessionFactory();        
+                        Session hSession = sf.openSession();
 
-                    hSession.beginTransaction();
+                        hSession.beginTransaction();
 
-                    Criteria c = hSession.createCriteria(ItemDetail.class);
-                    c.add(Restrictions.eq("userName", loggedInUser.getUserName()));
-                    
-                    List<ItemDetail> items = (List<ItemDetail>) c.list();
-                    // TODO: = format the following output as a table
-                    for (ItemDetail u : items) {
-                        item = u; %>
-                        <%=u.getItemName()%><BR>
-                    <%
-                                       }
-                    hSession.close();
-                %>
+                        Criteria c = hSession.createCriteria(ItemDetail.class);
+                        c.add(Restrictions.eq("userName", loggedInUser.getUserName()));
+
+                        List<ItemDetail> items = (List<ItemDetail>) c.list();
+                        // TODO: = format the following output as a table
+                        for (ItemDetail u : items) {
+                            item = u; %>
+                            <%=u.getItemName()%><BR>
+                        <%
+                                           }
+                        hSession.close();
+                    %>
+                </div></div>
+            <jsp:include page="footer.jsp"></jsp:include>
             </div>
-        <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

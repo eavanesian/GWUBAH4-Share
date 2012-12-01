@@ -3,6 +3,7 @@
 <%    
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName"); 
 %>
+<div class="header">
 <div id='cssmenu'>
                 <ul>
                    <li id="menu_home"><a href='./'><span>home</span></a></li>
@@ -19,4 +20,4 @@ UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
                 [<a href="./admin.jsp">Admin</a>]
                 <% } %> 
             </div> <% } %>
-            <br>
+            <br></div>

@@ -37,12 +37,24 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
     </head>
     <body>
         <jsp:include page="includes.jsp"></jsp:include>
+        <link rel="stylesheet" href="style/jquery-ui.css" type="text/css" />
+        <script src="scripts/jquery-1.8.3.js"></script>
+        <script src="scripts/jquery-ui.js"></script>
+        <script type="text/javascript">
+             $(function() {
+                $( "#accordion" ).accordion({
+                    active: false,
+                    collapsible: true,
+                    heightStyle: "content"
+                });
+            });
+        </script>
         
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
             
             <div class="content">
-                <H1>BORROW</h1>
+                <H1>BORROW</h1><div style="font-size:16px;">Pick a category:</div><br>
                 <script type="text/javascript">
                     catSubcat = new Array();
                     catSubcat = {<%
@@ -94,7 +106,6 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                             runningSubCounter++;
                         }
                     }
-                    
                     out.print("]");
                     if (runningCounter < categories.size()-1){
                         out.print(",");
@@ -102,24 +113,23 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                     }
                     
                 }
-        
                 hSession.close();
-                
-                %>
-                    };
+                %>};
+                        
+                        document.write("<div id='accordion' style='width:300px;margin-left:auto;margin-right:auto;text-align:left;'>");
                     
                         for (cat in catSubcat){
-                            document.write (cat+"<br>");
+                            document.write ("<h3 style='padding:.5em 0 .5em .5em;font-size:18px;font-weight:bold;'>"+cat+"</h3><div style='padding:.5em 0 .5em .5em;font-size:14px;text-align:left;'>");
                             for (subcat in catSubcat[cat]){
-                                document.write(cat + "-" + catSubcat[cat][subcat]+"<br>");
+                                document.write("-<a href='search.jsp?cat="+cat+"&subcat="+catSubcat[cat][subcat]+"'>" + catSubcat[cat][subcat]+"</a><br>");
                             }
-                            document.write("<br>");
+                            document.write("</div>");
                         }
                         
                 </script>
             </div>
-        </div>
-    
+        
         <jsp:include page="footer.jsp"></jsp:include>
+        </div>
     </body>
 </html>
