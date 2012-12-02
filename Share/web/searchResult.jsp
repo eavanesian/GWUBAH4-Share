@@ -52,13 +52,19 @@
                         hSession.beginTransaction();
 
                         Query query = hSession.createQuery("from ItemDetail where itemName = :code ");
+                        //Query query = hSession.createQuery("from ItemDetail");
                         query.setParameter("code", searchValue);
-                        List list = query.list();
+                        List<ItemDetail> list = (List<ItemDetail>) query.list();
+                        hSession.getTransaction().commit();
+                        hSession.close();
+                        out.println(list.size() + " result(s):<br><br>");
                         
                         //need to modify the following to print search results:
-                        for (int i = 0; i < list.size(); i++) {
-                            out.println(list.get(i));
-                        }
+                        //for (int i = 0; i < list.size(); i++) {
+                        //    out.println(list.get(i));
+                        //}
+                        for (ItemDetail id : list)
+                            out.println(id.getUserName() + " has listed a(n) " + id.getItemName());
 
                     %>
 
