@@ -57,7 +57,7 @@
                         
                         //need to modify the following to print search results:
                         for (int i = 0; i < list.size(); i++) {
-                            System.out.println(list.get(i));
+                            out.println(list.get(i));
                         }
 
                     %>
