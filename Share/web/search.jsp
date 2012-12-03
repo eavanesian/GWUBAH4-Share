@@ -56,9 +56,11 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                 hSession.beginTransaction();
                 
                 //test to print item from database
+                /*
                 long testId = 1;                           
                 searchItem = (ItemDetail) hSession.get(ItemDetail.class, testId);
-                out.println(searchItem.getItemName());
+                out.println(searchItem.getItemName()); 
+                */
                 %>
                 </div>
                 
