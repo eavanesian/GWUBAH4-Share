@@ -2,16 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.bahcohortproj.wdywts;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 /**
@@ -25,8 +30,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @org.hibernate.annotations.Entity(selectBeforeUpdate=true)
 public class UserDetail implements Serializable {
     
-    @Id
-    @GeneratedValue
+    
     private int userId;
     
     @Column (name="FirstName")
@@ -42,10 +46,46 @@ public class UserDetail implements Serializable {
     private boolean admin;
     
     
+    private Collection<UserItems> userItems = new ArrayList<UserItems>();
     
-    //public String fullName = getFullName();
-    public String getFullName() {
-        return this.getfName() + " " + this.getlName();
+    
+    public UserDetail(){
+        
+    }
+    
+    
+    public UserDetail(String fName, String lName, String userName, boolean admin){
+        this.fName = fName;
+        this.lName = lName;
+        this.userName = userName;
+        this.admin = admin;
+    }
+    
+    
+    public UserDetail(String fName, String lName, String userName, boolean admin, Collection<UserItems> userItems){
+        this.fName = fName;
+        this.lName = lName;
+        this.userName = userName;
+        this.admin = admin;
+        this.userItems = userItems;
+    }
+    
+    
+    
+     /**
+     * @return the userId
+     */
+    @Id
+    @GeneratedValue
+    public int getUserId() {
+        return this.userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     
@@ -77,20 +117,7 @@ public class UserDetail implements Serializable {
         this.lName = lName;
     }
 
-    /**
-     * @return the userId
-     */
-    public int getUserId() {
-        return userId;
-    }
-
-    /**
-     * @param userId the userId to set
-     */
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
+   
     /**
      * @return the userName
      */
@@ -119,6 +146,28 @@ public class UserDetail implements Serializable {
         this.admin = admin;
     }
 
+    /**
+     * @return the userItems
+     */
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsId.userDetail", cascade=CascadeType.ALL)
+    public Collection<UserItems> getUserItems() {
+        return this.userItems;
+    }
 
+    /**
+     * @param userItems the userItems to set
+     */    
+    public void setUserItems(Collection<UserItems> userItems) {
+        this.userItems = userItems;
+    }
+
+     
+    //public String fullName = getFullName();
+    @Transient
+    public String getFullName() {
+        return this.getfName() + " " + this.getlName();
+    }
+
+    
 
 }

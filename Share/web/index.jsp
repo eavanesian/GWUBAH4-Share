@@ -3,6 +3,8 @@
     Created on : Oct 2, 2012, 10:42:48 PM
     Author     : test
 --%>
+<%@page import="org.bahcohortproj.wdywts.UserItems"%>
+<%@page import="org.bahcohortproj.wdywts.ItemDetail"%>
 <%@page import="org.bahcohortproj.wdywts.Category"%>
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.criterion.Projections"%>
@@ -18,6 +20,7 @@
 <%@page import="org.eclipse.jdt.internal.compiler.ast.AssertStatement"%>
 <%@page import="java.sql.*" %> 
 <%@page import="java.io.*" %> 
+<%@page import="java.util.Date"%>
 <%@page import="org.bahcohortproj.wdywts.UserDetail" %>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -158,6 +161,42 @@ if (request.getParameter("logout") != null) {
         hSession.saveOrUpdate(sc4);
         
         hSession.close();*/
+
+
+
+// the following is for test only, it will create new user, item and user_item association with some test data in it
+/*
+        SessionFactory sf = new HibernateUtil().getSessionFactory();        
+        Session hSession = sf.openSession();
+        hSession.beginTransaction();
+
+         UserDetail userDetail = new UserDetail();
+         userDetail.setUserName("test1");
+         userDetail.setfName("Test m2m");
+         userDetail.setlName("lname");
+         
+         ItemDetail itemDetail = new ItemDetail("name", "desc", 10);
+         
+         //new category, need save to get the id first
+         hSession.save(itemDetail);
+
+         
+         UserItems userItems = new UserItems();
+         userItems.setLender(userDetail);
+         userItems.setItem(itemDetail);
+         
+         userItems.setListedDate(new Date());
+         userItems.setStauts(1);
+         
+         userDetail.getUserItems().add(userItems);
+         
+         
+         
+         hSession.save(userDetail);
+
+         hSession.getTransaction().commit();
+         */
+         
         %>
         
         <jsp:include page="footer.jsp"></jsp:include>
