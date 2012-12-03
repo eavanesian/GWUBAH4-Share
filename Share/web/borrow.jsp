@@ -121,7 +121,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                         for (cat in catSubcat){
                             document.write ("<h3 style='padding:.5em 0 .5em .5em;font-size:18px;font-weight:bold;'>"+cat+"</h3><div style='padding:.5em 0 .5em .5em;font-size:14px;text-align:left;'>");
                             for (subcat in catSubcat[cat]){
-                                document.write("-<a href='search.jsp?cat="+cat+"&subcat="+catSubcat[cat][subcat]+"'>" + catSubcat[cat][subcat]+"</a><br>");
+                                document.write("-<a href='searchResult.jsp?userSearch="+catSubcat[cat][subcat]+"'>" + catSubcat[cat][subcat]+"</a><br>");
                             }
                             document.write("</div>");
                         }
