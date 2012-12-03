@@ -72,7 +72,7 @@
                         //    out.println(list.get(i));
                         //}
                         for (ItemDetail id : list){
-                            out.println(id.getUserName() + " has listed a(n) " + id.getItemName() + "<br>");
+                            out.println(id.getUserName() + " has listed a(n) <a href='showItemDetails.jsp?userSearch=" + id.getItemName() + "'>" + id.getItemName() + "</a href><br>");
                         }
                     %>
 

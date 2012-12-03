@@ -1,8 +1,9 @@
 <%-- 
-    Document   : search
-    Created on : Nov 24, 2012, 7:29:52 PM
-    Author     : ed
+    Document   : showItemDetails
+    Created on : Dec 2, 2012, 10:37:44 PM
+    Author     : matt
 --%>
+
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
@@ -21,14 +22,14 @@
 <%@page import="org.bahcohortproj.wdywts.ItemDetail" %>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% 
-UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
+<%
+    UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
-    session.removeAttribute("sUsrName");
-    response.sendRedirect("./");
-    return;
-} %>
+    if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+        session.removeAttribute("sUsrName");
+        response.sendRedirect("./");
+        return;
+    }%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,36 +38,22 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
     </head>
     <body>
         <jsp:include page="includes.jsp"></jsp:include>
-        
+
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
-            
+
             <div class="content">
-                <H1>SEARCH</h1>
-                <form name="userSearch" action="searchResult.jsp" method="post">
-                    <input type="text" name="userSearch">
-                <input type="submit" id="submitButton" class="submitButton" value="item search">
-                </form>
-                <div>
-                    
+                <H1>ITEM DETAILS</h1>
                 <%
-                ItemDetail searchItem = new ItemDetail();
-                SessionFactory sf = new HibernateUtil().getSessionFactory();
-                Session hSession = sf.openSession();
-                hSession.beginTransaction();
+                String itemDetailRequest = request.getParameter("userSearch");
+                out.println(itemDetailRequest);
                 
-                //test to print item from database
-                /*
-                long testId = 1;                           
-                searchItem = (ItemDetail) hSession.get(ItemDetail.class, testId);
-                out.println(searchItem.getItemName()); 
-                */
                 %>
-                </div>
-                
+                    
+
             </div>
-        
-        <jsp:include page="footer.jsp"></jsp:include>
+
+            <jsp:include page="footer.jsp"></jsp:include>
         </div>
     </body>
 </html>
