@@ -39,17 +39,23 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
         <jsp:include page="includes.jsp"></jsp:include>
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
-            
-            <div class="content">
-        
-        <div class="itemForm"><div class="itemBox"><B>Create an item to lend</B><BR>
-                <span class="normal">Please fill in the form below to create an item to lend.</span><br><br>
+            <div class="leftMenuContainer">
+        [<a href="./lend.jsp">Create Listing</a>] <BR><BR>
+        [<a href="./itemList.jsp">View/Edit Available Items</a>] <BR><BR> 
+        [<a href="./reviewRequests.jsp">Review Requests to Borrow</a>]<BR><BR>
+            </div>
+            <div class="mainContentContainer">
+            <div class="content">        
+                <div class="itemForm"><div class="itemBox"><B>Create an item to lend</B><BR>
+                <span class="normal">Please fill in the form below to create an item to lend.
+                    <br>If your category is not listed, create a new category at the bottom of the form.</span><br><br>
         
                 <form name="newItemListing" action="lend" method="post" class="normal">
             Item Name: <input type="text" name="itemName"><br>
             Description: <input type="text" name="itemDescription"><br>
             Category: 
                 <select name="itemCategory">
+                    <option value ="">-Select sub category below-</option>
                 <% //setup session to pull categories
                     SessionFactory sf = new HibernateUtil().getSessionFactory();
                     Session hSession = sf.openSession();
@@ -62,7 +68,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                     
                     for (Category cat : categories) { 
                         %>
-                        <option value="<%=cat.getCategoryId()%>"><%=cat.getName()%></option>
+                        <option disabled="disabled" value=""><%=cat.getName()%></option>
                         <%
                         Criteria sc = hSession.createCriteria(Category.class);
                         sc.add(Restrictions.eq("parentCategoryId", new Integer(cat.getCategoryId())));
@@ -74,14 +80,20 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                         <% } %>
                     <% } %>
                 </select><br><br>
-                or - Create a new Category: 
-                    <input type="text" name="newCategory">
                 <input type="hidden" name ="user" value="<%=loggedInUser.getUserName()%>"> 
             <input type="submit" value="list item" class="submitButton">
             <input type="button" value="cancel" class="submitButton" onclick="window.location.href='./';">
-        </form></div></div></div>
-            
+        </form>
+            <hr>
+            <form name="newCategory" action="" method="post" class="normal">
+                <input type="text" name="categoryName">
+                <input type="submit" value="create category" class="submitButton"><br>
+                (still need to implement)
+            </form>
+                    </div></div></div>
+            </div>    
         <jsp:include page="footer.jsp"></jsp:include>
+ 
         </div>
     </body>
 </html>

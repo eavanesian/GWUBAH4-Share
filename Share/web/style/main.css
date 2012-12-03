@@ -35,7 +35,13 @@ body{
     min-height:100%;
     position:relative;
 }
-
+.mainContentContainer{
+    padding: 10px;
+    padding-left: 20px;
+    position: absolute;
+    top: 35%;
+    left: 20%;
+}
 .header{
     padding:1px;
 }
@@ -48,7 +54,7 @@ body{
 }
 
 .footerContainer {
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     left: 0px;
     width: 100%;
@@ -84,6 +90,17 @@ a.footerLink:hover {
     text-decoration: underline;
 }
 
+ .leftMenuContainer {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 20%;
+    padding: 5px 0px 2px 0px;
+    background: #FFFFFF;
+    font-size: 11px;
+    color: #fff; 
+    text-align: left;
+}
 
 .logOut{
     color: darkred;
@@ -153,9 +170,9 @@ input{
 .itemForm{
     width:98%;
     text-align: center;
-    position:absolute;
-    top:35%; 
-    height:10em;
+    position:absolute; 
+    top: 35%;
+    height: 10em;
     margin-top:-5em;
     font-size: 20px;
 }

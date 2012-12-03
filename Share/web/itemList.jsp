@@ -40,9 +40,14 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
         <jsp:include page="includes.jsp"></jsp:include>
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
-            
+            <div class="leftMenuContainer">
+        [<a href="./lend.jsp">Create Listing</a>] <BR><BR>
+        [<a href="./itemList.jsp">View/Edit Available Items</a>] <BR><BR> 
+        [<a href="./reviewRequests.jsp">Review Requests to Borrow</a>]<BR><BR>
+            </div>
+            <div class="mainContentContainer">            
             <div class="content">
-                <div class="itemList">
+                <div class="itemForm"><div class="itemList">
                     <H3>Items you have listed:</H3>
                     <% //Read items from the db and list
                         ItemDetail item = new ItemDetail();
@@ -63,8 +68,8 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                                            }
                         hSession.close();
                     %>
-                </div></div>
+                </div></div></div></div>
             <jsp:include page="footer.jsp"></jsp:include>
-            </div>
+        </div>
     </body>
 </html>
