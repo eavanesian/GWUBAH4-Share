@@ -87,8 +87,24 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
             <hr>
             <form name="newCategory" action="" method="post" class="normal">
                 <input type="text" name="categoryName">
-                <input type="submit" value="create category" class="submitButton"><br>
+                <input type="submit" value="create category" class="submitButton"><br>          
                 (still need to implement)
+            </form>
+            <hr>
+            <form name="newSubCategory" action="" method="post" class="normal"> 
+                Create sub category by selecting the main category in the pulldown below, typing your sub category name, and clicking "create sub category."
+                <br>
+                <select name="categoryList">
+                    <option value="">-Select category below-</option>
+                     <%                    
+                    for (Category cat : categories) { 
+                        %>
+                        <option value="<%=cat.getCategoryId()%>"><%=cat.getName()%></option>
+                    <% } %>
+                </select>
+                  <input type="text" name="subCategoryName">
+                  <input type="submit" value="create sub category" class="submitButton"><br>
+                  
             </form>
                     </div></div></div>
             </div>    
