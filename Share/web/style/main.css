@@ -38,7 +38,9 @@ body{
 .mainContentContainer{
     position: relative;
     top: 0px;
-    padding: 10px;   
+    left: 0px;
+    padding: 10px; 
+    text-align: left;
 }
 .header{
     padding:1px;
@@ -92,12 +94,13 @@ a.footerLink:hover {
     position: relative;
     top: 0px;
     left: 0px;
-    width: 20%;
+    width: 200px;
+    z-index: 2;
     padding: 5px 0px 2px 0px;
-    background: #FFFFFF;
     font-size: 11px;
     color: #fff; 
     text-align: left;
+    display:inline-block;
 }
 
 .logOut{
@@ -181,8 +184,9 @@ input{
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
     border-radius: 16px;
-    margin-left: auto;
     margin-right: auto;
+    margin-left: 210px;
+    margin-bottom: 100px;
     width: 450px;
     padding: 30px;   
 }
@@ -192,8 +196,9 @@ input{
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
     border-radius: 16px;
-    margin-left: auto;
+    margin-left: 210px;
     margin-right: auto;
+    margin-bottom: 100px;
     width: 450px;
     padding: 30px;   
 }

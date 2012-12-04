@@ -39,12 +39,13 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
         <jsp:include page="includes.jsp"></jsp:include>
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
-            <div class="leftMenuContainer">
+            
+            <div class="mainContentContainer">
+                <div class="leftMenuContainer">
         [<a href="./lend.jsp">Create Listing</a>] <BR><BR>
         [<a href="./itemList.jsp">View/Edit Available Items</a>] <BR><BR> 
         [<a href="./reviewRequests.jsp">Review Requests to Borrow</a>]<BR><BR>
             </div>
-            <div class="mainContentContainer">
             <div class="content">        
                 <div class="itemForm"><div class="itemBox"><B>Create an item to lend</B><BR>
                 <span class="normal">Please fill in the form below to create an item to lend.
@@ -87,8 +88,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
             <hr>
             <form name="newCategory" action="" method="post" class="normal">
                 <input type="text" name="categoryName">
-                <input type="submit" value="create category" class="submitButton"><br>          
-                (still need to implement)
+                <input type="submit" value="create category" class="submitButton"><br>
             </form>
             <hr>
             <form name="newSubCategory" action="" method="post" class="normal"> 
@@ -103,8 +103,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                     <% } %>
                 </select>
                   <input type="text" name="subCategoryName">
-                  <input type="submit" value="create sub category" class="submitButton"><br>
-                  
+                  <input type="submit" value="create sub category" class="submitButton"><br>                  
             </form>
                     </div></div></div>
             </div>    
