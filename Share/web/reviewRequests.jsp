@@ -23,12 +23,12 @@ if (request.getParameter("logout") != null) {
         
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
-            <div class="leftMenuContainer">
+            <div class="mainContentContainer">    
+                <div class="leftMenuContainer">
         [<a href="./lend.jsp">Create Listing</a>] <BR><BR>
         [<a href="./itemList.jsp">View/Edit Available Items</a>] <BR><BR> 
         [<a href="./reviewRequests.jsp">Review Requests to Borrow</a>]<BR><BR>
             </div>
-            <div class="mainContentContainer">    
             <div class="content">
                 <div class="itemForm"><div class="itemBox"><B>Placeholder for Request Review</B><BR>
                     </div></div>
