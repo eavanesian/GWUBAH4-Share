@@ -34,7 +34,9 @@ body{
 .mainContainer{
     min-height:100%;
     position:relative;
+    padding-bottom: 200px;
 }
+
 .mainContentContainer{
     position: relative;
     top: 0px;
