@@ -44,14 +44,41 @@
 
             <div class="content">
                 <H1>ITEM DETAILS</h1>
-                <%
-                String itemDetailRequest = request.getParameter("userSearch");
-                out.println(itemDetailRequest);
-                
-                %>
-                    
+                    <%
+
+                        SessionFactory sf = new HibernateUtil().getSessionFactory();
+                        Session hSession = sf.openSession();
+                        hSession.beginTransaction();
+                                          
+                       
+                        Query itemQuery = hSession.createQuery("from ItemDetail where itemId =" +request.getParameter("itemId"));
+                        List<ItemDetail> detailList = (List<ItemDetail>) itemQuery.list();
+                        
+                                              
+                        hSession.getTransaction().commit();
+                        hSession.close();
+                        
+                       out.println("<center>");
+                       for (ItemDetail id : detailList){
+                           out.println("<table>");
+                           out.println("<tr><td>Item ID:</td><td>"+id.getItemId()+"</td></tr>");
+                           out.println("<tr><td>User:</td><td>"+id.getUserName()+"</td></tr>");
+                           out.println("<tr><td>Item:</td><td>"+id.getItemName()+"</td></tr>");
+                           out.println("<tr><td>Description:</td><td>"+id.getItemDescription()+"</td></tr>");
+                           out.println("</table>");
+                        }  
+                     
+                                       
+                    %>
+
+                <br>
+                <form name="borrowItem" action="showItemDetails.jsp" method="post">                    
+                <input type="borrow item" id="submitButton" class="submitButton" value="borrow item">
+                </form>
 
             </div>
+                    
+        </center>
 
             <jsp:include page="footer.jsp"></jsp:include>
         </div>
