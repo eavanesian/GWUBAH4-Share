@@ -32,19 +32,10 @@ public class UserDetail implements Serializable {
     
     
     private int userId;
-    
-    @Column (name="FirstName")
     private String fName;
-    
-    @Column (name="LastName")
     private String lName;
-    
-    @Column (name="Username")
     private String userName;
-    
-    @Column (name="Admin")
     private boolean admin;
-    
     
     private Collection<UserItems> userItems = new ArrayList<UserItems>();
     
@@ -92,6 +83,7 @@ public class UserDetail implements Serializable {
     /**
      * @return the fName
      */
+    @Column (name="FirstName")
     public String getfName() {
         return fName;
     }
@@ -106,6 +98,7 @@ public class UserDetail implements Serializable {
     /**
      * @return the lName
      */
+    @Column (name="LastName")
     public String getlName() {
         return lName;
     }
@@ -121,6 +114,7 @@ public class UserDetail implements Serializable {
     /**
      * @return the userName
      */
+    @Column (name="Username")
     public String getUserName() {
         return userName;
     }
@@ -135,6 +129,7 @@ public class UserDetail implements Serializable {
     /**
      * @return the admin
      */
+    @Column (name="Admin")
     public boolean isAdmin() {
         return admin;
     }
