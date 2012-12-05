@@ -51,7 +51,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                 <span class="normal">Please fill in the form below to create an item to lend.
                     <br>If your category is not listed, create a new category at the bottom of the form.</span><br><br>
         
-                <form name="newItemListing" action="lend" method="post" class="normal">
+                <form name="newItem" action="lend" method="post" class="normal">
             Item Name: <input type="text" name="itemName"><br>
             Description: <input type="text" name="itemDescription"><br>
             Category: 
@@ -84,14 +84,16 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                 <input type="hidden" name ="user" value="<%=loggedInUser.getUserName()%>"> 
             <input type="submit" value="list item" class="submitButton">
             <input type="button" value="cancel" class="submitButton" onclick="window.location.href='./';">
+            <input type="hidden" name="lendFunction" value=1>
         </form>
             <hr>
-            <form name="newCategory" action="" method="post" class="normal">
+            <form name="newCategory" action="lend" method="post" class="normal">
                 <input type="text" name="categoryName">
                 <input type="submit" value="create category" class="submitButton"><br>
+                <input type="hidden" name="lendFunction" value=2>
             </form>
             <hr>
-            <form name="newSubCategory" action="" method="post" class="normal"> 
+            <form name="newSubCategory" action="lend" method="post" class="normal"> 
                 Create sub category by selecting the main category in the pulldown below, typing your sub category name, and clicking "create sub category."
                 <br>
                 <select name="categoryList">
@@ -103,7 +105,8 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                     <% } %>
                 </select>
                   <input type="text" name="subCategoryName">
-                  <input type="submit" value="create sub category" class="submitButton"><br>                  
+                  <input type="submit" value="create sub category" class="submitButton"><br> 
+                  <input type="hidden" name="lendFunction" value=3>
             </form>
                     </div></div></div>
             </div>    
