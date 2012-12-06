@@ -3,6 +3,8 @@
     Created on : Nov 24, 2012, 7:29:52 PM
     Author     : ed
 --%>
+<%@page import="org.bahcohortproj.wdywts.SearchService"%>
+<%@page import="org.hibernate.cfg.search.SearchConfiguration"%>
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
@@ -43,38 +45,31 @@
 
             <div class="content">
                 <H1>SEARCH RESULTS</h1>
-                    <%
-                        String searchValue = request.getParameter("userSearch");
-                        //out.println(searchValue);
-
-                        SessionFactory sf = new HibernateUtil().getSessionFactory();
-                        Session hSession = sf.openSession();
-                        hSession.beginTransaction();
-
-                        Query query = hSession.createQuery("from ItemDetail where itemName like :code ");
-                        //Query query = hSession.createQuery("from ItemDetail");
-                        query.setParameter("code", "%"+searchValue+"%");
-                        List<ItemDetail> list = (List<ItemDetail>) query.list();
-                        hSession.getTransaction().commit();
-                        hSession.close();
-                        if (list.size()==0){
-                            out.println("Sorry, no matches found for: " +searchValue);
-                        } else {
-                            out.print(list.size() + " result");
-                            if (list.size()>1){
-                                out.print("s");
+            <% //Read items from the db and list
+                        int _category;
+                        String _userSearch;
+                        ItemDetail item = new ItemDetail();
+                        SearchService search = new SearchService();
+                        if(request.getParameter("category") != null){
+                            _category = Integer.parseInt(request.getParameter("category"));
+                            List<ItemDetail> items = search.getItems(_category);
+                             // TODO: = format the following output as a table
+                            for (ItemDetail u : items) {
+                              item = u; %>
+                              <%=u.getItemName()%><BR><%
                             }
-                            out.println(":<br><br>");
-                        }
-                        
-                        //need to modify the following to print search results:
-                        //for (int i = 0; i < list.size(); i++) {
-                        //    out.println(list.get(i));
-                        //}
-                        for (ItemDetail id : list){
-                            out.println(id.getUserName() + " has listed a(n) <a href='showItemDetails.jsp?userSearch=" + id.getItemName() + "'>" + id.getItemName() + "</a href><br>");
-                        }
-                    %>
+                           
+                        } else if(request.getParameter("userSearch") != null){
+                            _userSearch = request.getParameter("userSearch");
+                            List<ItemDetail> items = search.getItems(_userSearch);
+                                 // TODO: = format the following output as a table
+                            for (ItemDetail u : items) {
+                              item = u; %>
+                              <%=u.getItemName()%><BR><%
+                            }
+                        }  %>
+
+                       
 
             </div>
 

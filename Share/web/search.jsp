@@ -41,29 +41,14 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
             
-            <div class="content">
+                <div class="content">
                 <H1>SEARCH</h1>
-                <form name="userSearch" action="searchResult.jsp" method="post">
+                <form name="userSearch" action="search" method="post">
                     <input type="text" name="userSearch">
                 <input type="submit" id="submitButton" class="submitButton" value="item search">
                 </form>
                 <div>
-                    
-                <%
-                ItemDetail searchItem = new ItemDetail();
-                SessionFactory sf = new HibernateUtil().getSessionFactory();
-                Session hSession = sf.openSession();
-                hSession.beginTransaction();
-                
-                //test to print item from database
-                /*
-                long testId = 1;                           
-                searchItem = (ItemDetail) hSession.get(ItemDetail.class, testId);
-                out.println(searchItem.getItemName()); 
-                */
-                %>
-                </div>
-                
+            
             </div>
         
         <jsp:include page="footer.jsp"></jsp:include>
