@@ -32,19 +32,10 @@ public class ItemDetail implements Serializable {
     
     
     private int itemId;
-    
-    @Column (name ="itemName")
     private String itemName;
-    
-    @Column (name ="itemDescription")
     private String itemDescription;
-    
-    @Column (name ="categoryId")
     private int categoryId;
-    
-    @Column (name ="userName")
-    private String userName;
-    
+    private String userId;
     
     private Collection<UserItems> userItems = new ArrayList<UserItems>();
     
@@ -118,20 +109,7 @@ public class ItemDetail implements Serializable {
         this.categoryId = categoryId;
     }
 
-    /**
-     * @return the userName
-     */
-    public String getUserName() {
-        return userName;
-    }
-
-    /**
-     * @param userName the userName to set
-     */
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
+    
     /**
      * @return the userItems
      */
@@ -145,6 +123,20 @@ public class ItemDetail implements Serializable {
      */
     public void setUserItems(Collection<UserItems> userItems) {
         this.userItems = userItems;
+    }
+
+    /**
+     * @return the userId
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
     
     

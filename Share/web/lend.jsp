@@ -81,7 +81,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                         <% } %>
                     <% } %>
                 </select><br><br>
-                <input type="hidden" name ="user" value="<%=loggedInUser.getUserName()%>"> 
+                <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>"> 
             <input type="submit" value="list item" class="submitButton">
             <input type="button" value="cancel" class="submitButton" onclick="window.location.href='./';">
             <input type="hidden" name="lendFunction" value=1>

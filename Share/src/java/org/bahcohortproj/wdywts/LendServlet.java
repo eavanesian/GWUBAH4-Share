@@ -113,9 +113,9 @@ public class LendServlet extends HttpServlet {
                }
 
                 _itemDescription = request.getParameter("itemDescription");
-                _itemCreator = request.getParameter("user");
+                _itemCreator = request.getParameter("userId");
                 _item.setItemDescription(_itemDescription);
-                _item.setUserName(_itemCreator);
+                _item.setUserId(_itemCreator);
                 _item.setCategoryId(_itemCategory);
 
                 boolean itemCreated = lendService.createItem(_item);
