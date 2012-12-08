@@ -56,7 +56,7 @@
                              // TODO: = format the following output as a table
                             for (ItemDetail u : items) {
                               item = u; %>
-                              <%=u.getItemName()%><BR><%
+                              <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>">[<!--%u.getUserName()%-->] - <%=u.getItemName()%></a><BR><%
                             }
                            
                         } else if(request.getParameter("userSearch") != null){
@@ -65,7 +65,7 @@
                                  // TODO: = format the following output as a table
                             for (ItemDetail u : items) {
                               item = u; %>
-                              <%=u.getItemName()%><BR><%
+                              <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>">[<!--%=u.getUserName()%-->] - <%=u.getItemName()%></a><BR><%
                             }
                         }  %>
 
