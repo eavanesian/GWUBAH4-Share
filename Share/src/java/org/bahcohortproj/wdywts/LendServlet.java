@@ -81,8 +81,8 @@ public class LendServlet extends HttpServlet {
         //processRequest(request, response);
         LendService lendService = new LendService();
         
-        String _itemName, _itemDescription, _itemCreator, newCategoryName, newSubCategoryName;
-        int _itemCategory, _itemSubCategory;
+        String _itemName, _itemDescription, newCategoryName, newSubCategoryName;
+        int _itemCategory, _itemSubCategory, _itemCreator;
         switch(Integer.parseInt(request.getParameter("lendFunction"))){
             case(1):{            
                 ItemDetail _item = new ItemDetail();
@@ -113,7 +113,7 @@ public class LendServlet extends HttpServlet {
                }
 
                 _itemDescription = request.getParameter("itemDescription");
-                _itemCreator = request.getParameter("userId");
+                _itemCreator = Integer.parseInt(request.getParameter("userId"));
                 _item.setItemDescription(_itemDescription);
                 _item.setUserId(_itemCreator);
                 _item.setCategoryId(_itemCategory);

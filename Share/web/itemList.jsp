@@ -57,7 +57,8 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                         hSession.beginTransaction();
 
                         Criteria c = hSession.createCriteria(ItemDetail.class);
-                        c.add(Restrictions.eq("userName", loggedInUser.getUserName()));
+                        //c.add(Restrictions.eq("userName", loggedInUser.getUserName()));
+                        c.add(Restrictions.eq("userId", loggedInUser.getUserId()));
 
                         List<ItemDetail> items = (List<ItemDetail>) c.list();
                         // TODO: = format the following output as a table

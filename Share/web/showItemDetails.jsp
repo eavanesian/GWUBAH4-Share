@@ -44,7 +44,8 @@
 
             <div class="content">
                 <H1>ITEM DETAILS</h1>
-                    <%
+                <form name="borrowItem" action="borrow" method="post">
+            <%
 
                         SessionFactory sf = new HibernateUtil().getSessionFactory();
                         Session hSession = sf.openSession();
@@ -58,27 +59,28 @@
                         hSession.getTransaction().commit();
                         hSession.close();
                         
-                       out.println("<center>");
+                       out.println("<div align='center'>");
                        for (ItemDetail id : detailList){
-                           out.println("<table>");
-                           out.println("<tr><td>Item ID:</td><td>"+id.getItemId()+"</td></tr>");
-                           out.println("<tr><td>User:</td><td>"+id.getUserName()+"</td></tr>");
+                           
+                           out.println("<input type='hidden' name='itemId' value='"+id.getItemId()+"'>");
+                           out.println("<table><tr><td>Item ID:</td><td>"+id.getItemId()+"</td></tr>");
+                           //out.println("<tr><td>User:</td><td>"+id.getUserName()+"</td></tr>");
+                           out.println("<tr><td>User:</td><td>"+id.getUserId()+"</td></tr>");
                            out.println("<tr><td>Item:</td><td>"+id.getItemName()+"</td></tr>");
-                           out.println("<tr><td>Description:</td><td>"+id.getItemDescription()+"</td></tr>");
-                           out.println("</table>");
+                           out.println("<tr><td>Description:</td><td>"+id.getItemDescription()+"</td></tr></table>");
+                           
                         }  
-                     
-                                       
+                       out.println("</div>");                                       
                     %>
 
                 <br>
-                <form name="borrowItem" action="showItemDetails.jsp" method="post">                    
-                <input type="borrow item" id="submitButton" class="submitButton" value="borrow item">
+                
+                <input type="submit" id="submitButton" class="submitButton" value="borrow item">
+                
                 </form>
 
             </div>
                     
-        </center>
 
             <jsp:include page="footer.jsp"></jsp:include>
         </div>

@@ -17,8 +17,11 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  *
  * @author ed
@@ -40,7 +43,7 @@ public class UserDetail implements Serializable {
     private Collection<UserItems> userItems = new ArrayList<UserItems>();
     
     
-    public UserDetail(){
+    /*public UserDetail(){
         
     }
     
@@ -59,7 +62,7 @@ public class UserDetail implements Serializable {
         this.userName = userName;
         this.admin = admin;
         this.userItems = userItems;
-    }
+    } */
     
     
     
@@ -144,7 +147,7 @@ public class UserDetail implements Serializable {
     /**
      * @return the userItems
      */
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsId.userDetail", cascade=CascadeType.ALL)
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsId.userDetail")
     public Collection<UserItems> getUserItems() {
         return this.userItems;
     }
@@ -165,4 +168,15 @@ public class UserDetail implements Serializable {
 
     
 
+    public String getUserNameFromUserId (int _userId){
+        SessionFactory sf = new HibernateUtil().getSessionFactory();        
+        Session hSession = sf.openSession();
+        hSession.beginTransaction();
+        
+        UserDetail user = new UserDetail();
+        user = (UserDetail) hSession.get(UserDetail.class, _userId);
+        return user.getUserName();
+    }
+    
+    
 }

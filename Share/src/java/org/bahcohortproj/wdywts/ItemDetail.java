@@ -35,7 +35,7 @@ public class ItemDetail implements Serializable {
     private String itemName;
     private String itemDescription;
     private int categoryId;
-    private String userId;
+    private int userId;
     
     private Collection<UserItems> userItems = new ArrayList<UserItems>();
     
@@ -113,7 +113,7 @@ public class ItemDetail implements Serializable {
     /**
      * @return the userItems
      */
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsId.itemDetail", cascade=CascadeType.ALL)
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsId.itemDetail")
     public Collection<UserItems> getUserItems() {
         return userItems;
     }
@@ -128,14 +128,14 @@ public class ItemDetail implements Serializable {
     /**
      * @return the userId
      */
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
     /**
      * @param userId the userId to set
      */
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
     

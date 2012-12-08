@@ -42,6 +42,10 @@ public class UserItems implements Serializable {
     private int borrowerRatingOfLender;
     private int stauts;
     
+    private int itemId;
+    private int lenderId;
+    private int borrowerId;
+    
     
     public UserItems(){
         
@@ -248,6 +252,56 @@ public class UserItems implements Serializable {
     public int hashCode(){
         return (getUserItemsId() != null ? getUserItemsId().hashCode() : 0);
     }
+
+    /**
+     * @return the itemId
+     */
+    public int getItemId() {
+        return itemId;
+    }
+
+    /**
+     * @param itemId the itemId to set
+     */
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    /**
+     * @return the lenderId
+     */
+    public int getLenderId() {
+        return lenderId;
+    }
+
+    /**
+     * @param lenderId the lenderId to set
+     */
+    public void setLenderId(int lenderId) {
+        this.lenderId = lenderId;
+    }
+
+    /**
+     * @return the borrowerId
+     */
+    public int getBorrowerId() {
+        return borrowerId;
+    }
+
+    /**
+     * @param borrowerId the borrowerId to set
+     */
+    public void setBorrowerId(int borrowerId) {
+        this.borrowerId = borrowerId;
+    }
+
+    
+    
+    
+    
+    
+   
+    
 
     
 }
