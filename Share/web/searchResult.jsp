@@ -68,9 +68,13 @@
                                   Query query = hSession.createQuery(hql);
                                   query.setParameter("userId", u.getUserId());
                                   List itemOwner = query.list();
-                                 %>
-                                  <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>"> <%=itemOwner%> - <%=u.getItemName()%></a><BR><%
-                                }
+                                    
+                                    if (u.isAvailable()){ %>
+                                        <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>"> <%=itemOwner%> - <%=u.getItemName()%></a>
+                                 <% } else { %>
+                                 <span style="font-size:12px;color:red;">not available</span> <%=itemOwner%> - <%=u.getItemName()%>
+                                 <% } %><br>
+                           <%   }
                             } else {
                                 out.print("No results");
                             }
@@ -87,9 +91,13 @@
                                   Query query = hSession.createQuery(hql);
                                   query.setParameter("userId", u.getUserId());
                                   List itemOwner = query.list();
-                                 %>
-                                  <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>"> <%=itemOwner%> - <%=u.getItemName()%></a><BR><%
-                                }
+                                 
+                                  if (u.isAvailable()){ %>
+                                        <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>"> <%=itemOwner%> - <%=u.getItemName()%></a>
+                                 <% } else { %>
+                                 <span style="font-size:12px;color:red;">not available</span> <%=itemOwner%> - <%=u.getItemName()%>
+                                 <% } %><br>
+                                <%}
                             } else {
                                 out.print("No results for " + _userSearch);
                             }

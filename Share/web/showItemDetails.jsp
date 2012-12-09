@@ -98,8 +98,11 @@
 
                 <br>
                 
-                <input type="submit" id="submitButton" class="submitButton" value="borrow item">
-                
+                <% if(_itemDetail.isAvailable()) { %>
+                    <input type="submit" id="submitButton" class="submitButton" value="borrow item">
+                <% } else { %>
+                <span style="font-size:12px;color:red;">This item is not available to be borrowed at this time</span>
+                <% } %>
                 </form>
 
             </div>
