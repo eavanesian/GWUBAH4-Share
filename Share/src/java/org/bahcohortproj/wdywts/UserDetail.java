@@ -30,9 +30,9 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Cacheable
-//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="userDetail.byUserName", query="FROM UserDetail where userName = :userName ")
-//@org.hibernate.annotations.Entity(selectBeforeUpdate=true)
+@org.hibernate.annotations.Entity(selectBeforeUpdate=true)
 public class UserDetail implements Serializable {
     
     

@@ -13,21 +13,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  *
  * @author ed
  */
-@Entity
+
 /*@AssociationOverrides({
     @AssociationOverride(name="userItemsId.userDetail",
                         joinColumns=@JoinColumn(name="userId")),
     @AssociationOverride(name="userItemsId.userItem",
                         joinColumns=@JoinColumn(name="itemId"))
 })*/
+@Entity
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
+@org.hibernate.annotations.Entity(selectBeforeUpdate=true)
 public class UserItems implements Serializable {
     
     //private UserItemsId userItemsId = new UserItemsId();

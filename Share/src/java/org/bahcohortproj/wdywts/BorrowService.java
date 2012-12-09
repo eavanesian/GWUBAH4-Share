@@ -45,9 +45,9 @@ public class BorrowService {
         _userItems.setBorrowerId(_userDetail.getUserId());
         _userItems.setLenderId(_lender.getUserId());
         _userItems.setItemId(_itemDetail.getItemId());
-        _userItems.setBorrowedDate(new Date());
+        _userItems.setRequestedDate(new Date());
                         
-        hSession.merge(_userDetail);
+        hSession.saveOrUpdate(_userItems);
         
         hSession.getTransaction().commit();
         

@@ -27,9 +27,9 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Cacheable
-//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
+@Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="itemDetail.byItemName", query="FROM ItemDetail where itemName = :itemName ")
-//@org.hibernate.annotations.Entity(selectBeforeUpdate=true)
+@org.hibernate.annotations.Entity(selectBeforeUpdate=true)
 public class ItemDetail implements Serializable {
     
     
@@ -154,6 +154,9 @@ public class ItemDetail implements Serializable {
      * @param available the available to set
      */
     public void setAvailable(boolean available) {
+        if ((available != true) && (available != false)){
+            available = true;
+        }
         this.available = available;
     }
     
