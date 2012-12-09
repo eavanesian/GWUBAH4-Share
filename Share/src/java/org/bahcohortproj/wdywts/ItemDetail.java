@@ -142,6 +142,20 @@ public class ItemDetail implements Serializable {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    /**
+     * @return the available
+     */
+    public boolean isAvailable() {
+        return available;
+    }
+
+    /**
+     * @param available the available to set
+     */
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
     
     
 }
