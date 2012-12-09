@@ -18,6 +18,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -25,9 +27,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Cacheable
-@Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="itemDetail.byItemName", query="FROM ItemDetail where itemName = :itemName ")
-@org.hibernate.annotations.Entity(selectBeforeUpdate=true)
+//@org.hibernate.annotations.Entity(selectBeforeUpdate=true)
 public class ItemDetail implements Serializable {
     
     
@@ -37,7 +39,7 @@ public class ItemDetail implements Serializable {
     private int categoryId;
     private int userId;
     
-    private Collection<UserItems> userItems = new ArrayList<UserItems>();
+    //private Collection<UserItems> userItems = new ArrayList<UserItems>();
     
     
     public ItemDetail(){
@@ -50,12 +52,12 @@ public class ItemDetail implements Serializable {
         this.categoryId = categoryId;
     }
     
-    public ItemDetail(String itemName, String itemDescription, int categoryId, Collection<UserItems> userItems){
+    /*public ItemDetail(String itemName, String itemDescription, int categoryId, Collection<UserItems> userItems){
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.categoryId = categoryId;
         this.userItems = userItems;
-    }
+    }*/
     
     @Id
     @GeneratedValue
@@ -112,18 +114,19 @@ public class ItemDetail implements Serializable {
     
     /**
      * @return the userItems
-     */
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsId.itemDetail")
+     * /
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsId.itemDetail", cascade=CascadeType.ALL)
+    //@Fetch(FetchMode.JOIN)
     public Collection<UserItems> getUserItems() {
         return userItems;
     }
 
     /**
      * @param userItems the userItems to set
-     */
+     * /
     public void setUserItems(Collection<UserItems> userItems) {
         this.userItems = userItems;
-    }
+    } */
 
     /**
      * @return the userId
