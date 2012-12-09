@@ -37,18 +37,19 @@ public class UserItems implements Serializable {
     //private UserDetail lender;
     //private UserDetail borrower;
     
-    private int itemId;
-    private int lenderId;
-    private int borrowerId;
+    private int itemId;//Fkey
+    private int lenderId;//Fkey
+    private int borrowerId; //Fkey
     
     private Date listedDate;
+    private Date requestedDate;
     private Date borrowedDate;
     private Date returnedDate;
     private String lenderComments;
     private int lenderRatingOfBorrower;
     private String borrowerComments;
     private int borrowerRatingOfLender;
-    private int stauts;
+    private int status;//0=borrow requested, 1=item lent, 2=item returned.
     
     
     
@@ -221,17 +222,17 @@ public class UserItems implements Serializable {
     }
 
     /**
-     * @return the stauts
+     * @return the status
      */
     public int getStauts() {
-        return stauts;
+        return status;
     }
 
     /**
-     * @param stauts the stauts to set
+     * @param status the status to set
      */
     public void setStauts(int stauts) {
-        this.stauts = stauts;
+        this.status = stauts;
     }
 
     
@@ -303,6 +304,21 @@ public class UserItems implements Serializable {
      */
     public void setBorrowerId(int borrowerId) {
         this.borrowerId = borrowerId;
+    }
+
+    /**
+     * @return the requestedDate
+     */
+    @Temporal(TemporalType.DATE)
+    public Date getRequestedDate() {
+        return requestedDate;
+    }
+
+    /**
+     * @param requestedDate the requestedDate to set
+     */
+    public void setRequestedDate(Date requestedDate) {
+        this.requestedDate = requestedDate;
     }
 
     
