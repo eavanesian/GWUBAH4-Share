@@ -52,9 +52,14 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
         
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
-            
-            <div class="content">
-                <H1>BORROW</h1><div style="font-size:16px;">Pick a category:</div><br>
+            <div class="mainContentContainer">
+                <div class="leftMenuContainer" style="float:left;">
+                    [<a href="./borrow.jsp">Find Items To Borrow</a>] <br><br>
+                    [<a href="./itemsRequested.jsp">Review Items Requested To Borrow</a>] <br><br>
+                    [<a href="./itemsBorrowed.jsp">Review Items Currently Borrowing</a>]
+                </div>
+                <div class="content">
+                    <H1>BORROW</h1><div style="font-size:16px;">Pick a category:</div><br>
                 <script type="text/javascript">
                     catSubcat = new Array();
                     catSubcat = {<%
@@ -127,7 +132,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                         }
                         
                 </script>
-            </div>
+            </div></div>
         
         <jsp:include page="footer.jsp"></jsp:include>
         </div>
