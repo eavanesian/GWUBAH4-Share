@@ -41,34 +41,33 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
             <div class="content">
                 <div class="itemForm"><div class="itemBox"><B>Current Requests to Borrow:</B><BR>
                         <% //Read items from the db and list
-                        UserItems transaction = new UserItems();
+                
    
                         SessionFactory sf = new HibernateUtil().getSessionFactory();
                         Session hSession = sf.openSession();
                         hSession.beginTransaction();
-                        
-                        UserItems userItems = new UserItems();
+               
                         ItemDetail _item = new ItemDetail();
                         UserDetail _borrower = new UserDetail();
                         
-                        String hql = "FROM UserItems WHERE lenderID = :userId AND status = 0";
+                        String hql = "FROM UserItems WHERE lenderId = :userId AND status = 0";
                         Query query = hSession.createQuery(hql);
                         query.setParameter("userId", loggedInUser.getUserId());
                         List<UserItems> requestedItems = (List<UserItems>) query.list();
                         //out.println("<div align='center'>");
                         for (UserItems u : requestedItems) {
-                            
+                                
                             _item = (ItemDetail) hSession.get(ItemDetail.class, u.getItemId());
-                            _borrower = (UserDetail) hSession.get(UserDetail.class, u.getLenderId());
-                
-                            out.println("<table><tr><td>Borrower:</td><td>"+_borrower.getUserName() +"</td></tr>");
-                            out.println("<tr><td>Item:</td><td>"+ _item.getItemName() +"</td></tr>");
+                            _borrower = (UserDetail) hSession.get(UserDetail.class, u.getBorrowerId());
+                            out.println("<table align=\"center\"><tr><td colspan=\"2\"><hr></td></tr>"); 
+                            out.println("<tr><td>Borrower:</td><td>"+_borrower.getUserName() +"</td></tr>");
+                            out.println("<tr><td>Item Name:</td><td>"+ _item.getItemName() +"</td></tr>");
                             out.println("<input type='hidden' name='itemId' value='"+u.getItemId()+"'>");
-                            out.println("<tr><td>Date Requested:</td><td>"+u.getRequestedDate()+"</td></tr>");
-                                                       
-                            //out.println("<tr><td>Description:</td><td>"+_itemDetail.getItemDescription()+"</td></tr></table>");
-                           
-                            out.println("<hr>");
+                            out.println("<tr><td>Date Requested:</td><td>"+u.getRequestedDate()+"</td></tr>");%>
+                            <tr><td><a href="">Approve</a></td><td><a href="">Decline</a></td></tr><%
+                                                        
+                        
+                            
                          }
                                  
                       
