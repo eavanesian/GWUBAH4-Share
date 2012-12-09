@@ -10,6 +10,8 @@ import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,19 +22,25 @@ import javax.persistence.Transient;
  * @author ed
  */
 @Entity
-@AssociationOverrides({
+/*@AssociationOverrides({
     @AssociationOverride(name="userItemsId.userDetail",
                         joinColumns=@JoinColumn(name="userId")),
     @AssociationOverride(name="userItemsId.userItem",
                         joinColumns=@JoinColumn(name="itemId"))
-})
+})*/
 public class UserItems implements Serializable {
     
-    private UserItemsId userItemsId = new UserItemsId();
+    //private UserItemsId userItemsId = new UserItemsId();
+    private int userItemsId;
     
-    private ItemDetail item;
-    private UserDetail lender;
-    private UserDetail borrower;
+    //private ItemDetail item;
+    //private UserDetail lender;
+    //private UserDetail borrower;
+    
+    private int itemId;
+    private int lenderId;
+    private int borrowerId;
+    
     private Date listedDate;
     private Date borrowedDate;
     private Date returnedDate;
@@ -42,9 +50,6 @@ public class UserItems implements Serializable {
     private int borrowerRatingOfLender;
     private int stauts;
     
-    private int itemId;
-    private int lenderId;
-    private int borrowerId;
     
     
     public UserItems(){
@@ -55,21 +60,23 @@ public class UserItems implements Serializable {
     /**
      * @return the userItemsId
      */
-    @EmbeddedId
-    public UserItemsId getUserItemsId() {
+    //@EmbeddedId
+    @Id
+    @GeneratedValue
+    public int getUserItemsId() {
         return userItemsId;
     }
 
     /**
      * @param userItemsId the userItemsId to set
      */
-    public void setUserItemsId(UserItemsId userItemsId) {
+    public void setUserItemsId(int userItemsId) {
         this.userItemsId = userItemsId;
     }
     
     /**
      * @return the item
-     */
+     * /
     @Transient
     public ItemDetail getItem() {
         return getUserItemsId().getItemDetail();
@@ -77,14 +84,14 @@ public class UserItems implements Serializable {
 
     /**
      * @param item the item to set
-     */
+     * /
     public void setItem(ItemDetail item) {
         getUserItemsId().setItemDetail(item);
-    }
+    }*/
     
     /**
      * @return the lender
-     */
+     * /
     @Transient
     public UserDetail getLender() {
         return getUserItemsId().getUserDetail();
@@ -92,14 +99,14 @@ public class UserItems implements Serializable {
 
     /**
      * @param lender the lenderId to set
-     */
+     * /
     public void setLender(UserDetail lender) {
         getUserItemsId().setUserDetail(lender);
-    }
+    }*/
 
     /**
      * @return the borrower
-     */
+     * /
     @Transient
     public UserDetail getBorrower() {
         return getUserItemsId().getUserDetail();
@@ -107,10 +114,10 @@ public class UserItems implements Serializable {
 
     /**
      * @param borrower the borrower to set
-     */
+     * /
     public void setBorrower(UserDetail borrower) {
         getUserItemsId().setUserDetail(borrower);
-    }
+    }*/
 
     /**
      * @return the listedDate
@@ -229,7 +236,7 @@ public class UserItems implements Serializable {
 
     
     
-    
+    /*
     @Override
     public boolean equals(Object o){
         if (this == o) {
@@ -251,7 +258,10 @@ public class UserItems implements Serializable {
     @Override
     public int hashCode(){
         return (getUserItemsId() != null ? getUserItemsId().hashCode() : 0);
-    }
+    }*/
+    
+    
+    
 
     /**
      * @return the itemId
@@ -294,14 +304,6 @@ public class UserItems implements Serializable {
     public void setBorrowerId(int borrowerId) {
         this.borrowerId = borrowerId;
     }
-
-    
-    
-    
-    
-    
-   
-    
 
     
 }

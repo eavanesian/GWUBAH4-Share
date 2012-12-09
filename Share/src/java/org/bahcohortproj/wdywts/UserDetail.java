@@ -21,6 +21,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -28,9 +30,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Cacheable
-@Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
+//@Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
 @NamedQuery(name="userDetail.byUserName", query="FROM UserDetail where userName = :userName ")
-@org.hibernate.annotations.Entity(selectBeforeUpdate=true)
+//@org.hibernate.annotations.Entity(selectBeforeUpdate=true)
 public class UserDetail implements Serializable {
     
     
@@ -40,7 +42,7 @@ public class UserDetail implements Serializable {
     private String userName;
     private boolean admin;
     
-    private Collection<UserItems> userItems = new ArrayList<UserItems>();
+    //private Collection<UserItems> userItems = new ArrayList<UserItems>();
     
     
     /*public UserDetail(){
@@ -146,18 +148,19 @@ public class UserDetail implements Serializable {
 
     /**
      * @return the userItems
-     */
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsId.userDetail")
+     * /
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsId.userDetail", cascade=CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
     public Collection<UserItems> getUserItems() {
         return this.userItems;
     }
 
     /**
      * @param userItems the userItems to set
-     */    
+     * /    
     public void setUserItems(Collection<UserItems> userItems) {
         this.userItems = userItems;
-    }
+    }*/
 
      
     //public String fullName = getFullName();

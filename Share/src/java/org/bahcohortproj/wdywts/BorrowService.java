@@ -36,18 +36,18 @@ public class BorrowService {
         //UserDetail _internalUser = new UserDetail();
         //_internalUser = (UserDetail) hSession.get(UserDetail.class, _userDetail.getUserId());
         
-        UserItems _userItems = new UserItems();
+         UserItems _userItems = new UserItems();
+                
+        //_userItems.setBorrower(_userDetail);
+        //_userItems.setLender(_lender);
+        //_userItems.setItem(_itemDetail);        
         
         _userItems.setBorrowerId(_userDetail.getUserId());
         _userItems.setLenderId(_lender.getUserId());
         _userItems.setItemId(_itemDetail.getItemId());
         _userItems.setBorrowedDate(new Date());
-        
-        //hSession.saveOrUpdate(_userItems);
-        _userItems.getStauts();
-         
-        _userDetail.getUserItems().add(_userItems);
-        hSession.saveOrUpdate(_userDetail);
+                        
+        hSession.merge(_userDetail);
         
         hSession.getTransaction().commit();
         
