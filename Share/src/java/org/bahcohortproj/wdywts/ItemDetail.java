@@ -38,6 +38,7 @@ public class ItemDetail implements Serializable {
     private String itemDescription;
     private int categoryId;
     private int userId;
+    private boolean available;
     
     //private Collection<UserItems> userItems = new ArrayList<UserItems>();
     
