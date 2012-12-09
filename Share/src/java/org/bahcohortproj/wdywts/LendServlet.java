@@ -117,6 +117,7 @@ public class LendServlet extends HttpServlet {
                 _item.setItemDescription(_itemDescription);
                 _item.setUserId(_itemCreator);
                 _item.setCategoryId(_itemCategory);
+                _item.setAvailable(true);
 
                 boolean itemCreated = lendService.createItem(_item);
 
