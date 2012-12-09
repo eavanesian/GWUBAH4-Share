@@ -63,7 +63,36 @@ public class LendServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //do Get code here, to secure the request, then sent to processRequest,
+        // TODO: secure input to prevent URL spoofing.
+        if("approve".equals(request.getParameter("action"))){
+            LendService lend = new LendService();
+            
+            int _transactionId;
+            _transactionId = Integer.parseInt(request.getParameter("transaction"));
+            if(lend.approveRequest(_transactionId)){
+                //send to confirmation page?
+                response.sendRedirect("./reviewRequests.jsp");
+                return;
+            } else {response.sendRedirect("./reviewRequests.jsp");}
+        }
+        else if("decline".equals(request.getParameter("action"))){
+            LendService lend = new LendService();
+            
+            int _transactionId;
+            _transactionId = Integer.parseInt(request.getParameter("transaction"));
+            if(lend.declineRequest(_transactionId)){
+                //send to confirmation page?
+                response.sendRedirect("./reviewRequests.jsp");
+                return;
+            } else {response.sendRedirect("./reviewRequests.jsp");}
+        }
+        
+        else {
+            response.sendRedirect("./reviewRequests.jsp");
+        }
+        //processRequest(request, response);
+        
     }
 
     /**

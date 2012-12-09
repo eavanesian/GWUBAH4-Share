@@ -64,14 +64,10 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                             out.println("<tr><td>Item Name:</td><td>"+ _item.getItemName() +"</td></tr>");
                             out.println("<input type='hidden' name='itemId' value='"+u.getItemId()+"'>");
                             out.println("<tr><td>Date Requested:</td><td>"+u.getRequestedDate()+"</td></tr>");%>
-                            <tr><td><a href="">Approve</a></td><td><a href="">Decline</a></td></tr><%
-                                                        
-                        
-                            
-                         }
-                                 
-                      
-                            %>
+                            <tr><td><a href="lend?action=approve&transaction=<%=u.getUserItemsId()%>">Approve</a>
+                            </td><td><a href="lend?action=decline&transaction=<%=u.getUserItemsId()%>">Decline</a></td></tr><%
+                        }                             
+                        %>
                             </table>
                     </div></div>
             </div></div>
