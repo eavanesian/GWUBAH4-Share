@@ -18,7 +18,7 @@ import org.hibernate.criterion.Restrictions;
 public class BorrowService {
     
     
-    public boolean borrowItem(UserDetail _userDetail, int _itemId){
+    public UserItems borrowItem(UserDetail _userDetail, int _itemId){
 
         SessionFactory sf = new HibernateUtil().getSessionFactory();
         Session hSession = sf.openSession();
@@ -54,7 +54,7 @@ public class BorrowService {
         hSession.close();
         
         //TODO: need to put in check for success vs fail in saving to return true vs false
-        return true;
+        return _userItems;
     }
     
     

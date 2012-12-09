@@ -85,11 +85,11 @@ public class BorrowServlet extends HttpServlet {
         int _itemId = Integer.parseInt(request.getParameter("itemId"));
         
         BorrowService borrowService = new BorrowService();
-        boolean successfulBorrow = borrowService.borrowItem(_userDetail, _itemId);
+        UserItems successfulBorrow = borrowService.borrowItem(_userDetail, _itemId);
                 
-        
-        if (successfulBorrow) {
-            response.sendRedirect("");
+        if (successfulBorrow != null) {
+            request.getSession().setAttribute("requestedItem", successfulBorrow);
+            response.sendRedirect("borrowConfirmation.jsp");
             return;
         } else {
                 response.sendRedirect("borrow.jsp");
