@@ -46,6 +46,11 @@
             <div class="content">
                 <H1>SEARCH RESULTS</h1>
             <% //Read items from the db and list
+            
+                        SessionFactory sf = new HibernateUtil().getSessionFactory();
+                        Session hSession = sf.openSession();
+                        hSession.beginTransaction();
+                        
                         int _category;
                         String _userSearch;
                         ItemDetail item = new ItemDetail();
@@ -54,23 +59,46 @@
                             _category = Integer.parseInt(request.getParameter("category"));
                             List<ItemDetail> items = search.getItems(_category);
                              // TODO: = format the following output as a table
-                            for (ItemDetail u : items) {
-                              item = u; %>
-                              <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>">[<!--%u.getUserName()%-->] - <%=u.getItemName()%></a><BR><%
+                            
+                            if (items.size() > 0){                            
+                                for (ItemDetail u : items) {
+                                  item = u; 
+
+                                  String hql = "SELECT userName FROM UserDetail U WHERE U.userId = :userId";
+                                  Query query = hSession.createQuery(hql);
+                                  query.setParameter("userId", u.getUserId());
+                                  List itemOwner = query.list();
+                                 %>
+                                  <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>"> <%=itemOwner%> - <%=u.getItemName()%></a><BR><%
+                                }
+                            } else {
+                                out.print("No results");
                             }
                            
                         } else if(request.getParameter("userSearch") != null){
                             _userSearch = request.getParameter("userSearch");
                             List<ItemDetail> items = search.getItems(_userSearch);
                                  // TODO: = format the following output as a table
-                            for (ItemDetail u : items) {
-                              item = u; %>
-                              <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>">[<!--%=u.getUserName()%-->] - <%=u.getItemName()%></a><BR><%
+                            if (items.size() > 0){                            
+                                for (ItemDetail u : items) {
+                                  item = u; 
+
+                                  String hql = "SELECT userName FROM UserDetail U WHERE U.userId = :userId";
+                                  Query query = hSession.createQuery(hql);
+                                  query.setParameter("userId", u.getUserId());
+                                  List itemOwner = query.list();
+                                 %>
+                                  <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>"> <%=itemOwner%> - <%=u.getItemName()%></a><BR><%
+                                }
+                            } else {
+                                out.print("No results for " + _userSearch);
                             }
-                        }  %>
 
-                       
-
+                        }  
+                        
+                        hSession.getTransaction().commit();
+                        hSession.close();
+                        %>
             </div>
 
             <jsp:include page="footer.jsp"></jsp:include>

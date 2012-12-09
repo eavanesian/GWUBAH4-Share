@@ -4,6 +4,7 @@
     Author     : matt
 --%>
 
+<%@page import="org.hibernate.annotations.Parent"%>
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
@@ -52,13 +53,9 @@
                         hSession.beginTransaction();
                                           
                        
-                        Query itemQuery = hSession.createQuery("from ItemDetail where itemId =" +request.getParameter("itemId"));
+                        /*Query itemQuery = hSession.createQuery("from ItemDetail where itemId =" +request.getParameter("itemId"));
                         List<ItemDetail> detailList = (List<ItemDetail>) itemQuery.list();
-                        
                                               
-                        hSession.getTransaction().commit();
-                        hSession.close();
-                        
                        out.println("<div align='center'>");
                        for (ItemDetail id : detailList){
                            
@@ -70,7 +67,33 @@
                            out.println("<tr><td>Description:</td><td>"+id.getItemDescription()+"</td></tr></table>");
                            
                         }  
-                       out.println("</div>");                                       
+                       out.println("</div>");
+                       */
+        
+
+                                                             
+                       //Short-hand to pull item by itemId primary key
+                        ItemDetail _itemDetail = new ItemDetail();
+                        _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, Integer.parseInt(request.getParameter("itemId")));
+                        
+                        String hql = "SELECT userName FROM UserDetail U WHERE U.userId = :userId";
+                        Query query = hSession.createQuery(hql);
+                        query.setParameter("userId", _itemDetail.getUserId());
+                        List itemOwner = query.list();
+                       
+                        out.println("<div align='center'>");
+                        out.println("<input type='hidden' name='itemId' value='"+_itemDetail.getItemId()+"'>");
+                        out.println("<table><tr><td>Item ID:</td><td>"+_itemDetail.getItemId()+"</td></tr>");
+                        //out.println("<tr><td>User:</td><td>"+id.getUserName()+"</td></tr>");
+                        out.println("<tr><td>User:</td><td>"+itemOwner+"</td></tr>");
+                        out.println("<tr><td>Item:</td><td>"+_itemDetail.getItemName()+"</td></tr>");
+                        out.println("<tr><td>Description:</td><td>"+_itemDetail.getItemDescription()+"</td></tr></table>");
+                           
+                        out.println("</div>");
+                        
+                        hSession.getTransaction().commit();
+                        hSession.close();
+                        
                     %>
 
                 <br>
