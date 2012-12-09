@@ -224,15 +224,15 @@ public class UserItems implements Serializable {
     /**
      * @return the status
      */
-    public int getStauts() {
+    public int getStatus() {
         return status;
     }
 
     /**
      * @param status the status to set
      */
-    public void setStauts(int stauts) {
-        this.status = stauts;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     
