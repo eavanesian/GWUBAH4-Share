@@ -59,7 +59,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                     [<a href="./itemsBorrowed.jsp">Review Items Currently Borrowing</a>]
                 </div>
                 <div class="content">
-                    <H1>BORROW</h1><div style="font-size:16px;">Pick a category:</div><br>
+                    <H1 style="margin-left:-180px;display:inline;">BORROW<br><span style="font-size:16px;margin-left:-180px;">Pick a category:</span></h1>
                 <script type="text/javascript">
                     catSubcat = new Array();
                     catSubcat = {<%
