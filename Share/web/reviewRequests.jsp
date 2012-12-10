@@ -37,6 +37,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
         [<a href="./lend.jsp">Create Listing</a>] <BR><BR>
         [<a href="./itemList.jsp">View/Edit Available Items</a>] <BR><BR> 
         [<a href="./reviewRequests.jsp">Review Requests to Borrow</a>]<BR><BR>
+        [<a href="./leaveFeedback.jsp">Leave Feedback on Returned Items</a>]<BR><BR>
             </div>
             <div class="content">
                 <div class="itemForm"><div class="itemBox"><B>Current Requests to Borrow:</B><BR>

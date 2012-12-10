@@ -67,18 +67,31 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                         for (UserItems u : items) {
                             
                             ItemDetail _itemDetail = new ItemDetail();
-                            _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, u.getItemId()); %>
+                            _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, u.getItemId()); 
+                            UserDetail _lender = new UserDetail();
+                            _lender = (UserDetail) hSession.get(UserDetail.class, _itemDetail.getUserId());
+                            %>
+                            
                             
                             Name: <%= _itemDetail.getItemName() %><br>
                             Description: <%= _itemDetail.getItemDescription() %><br>
                             Requested Date: <%=u.getRequestedDate() %>
+                            Lender: <%=_lender.getUserName()%>
                             <br>
                             <br>
                             <form name="returnItem" action="return" method="post" class="normal">
                                 <table>
                                     <tr><td>Comments: </td><td><input type="text" name="borrowerComments"></td></tr>
-                                    <tr><td>Rating: </td><td><input type="text" name="borrowerRatingOfLender"></td></tr>
+                                    <tr><td>Rating of Lender: </td><td><select name="borrowerRatingOfLender">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option></select>
+                                        </td></tr>
                                 </table>
+                            <input type="hidden" name="userItem" value="<%=u.getUserItemsId()%>">  
+                            <input type="hidden" name="returnItem" value="true">
                             <input type="submit" id="submitButton" class="submitButton" value="return item">
                             </form>
                             <hr>
