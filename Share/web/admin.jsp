@@ -13,7 +13,9 @@
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil"%>
 
 <%
-if(request.getParameter("userId") != null){
+UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
+if (loggedInUser.isAdmin()) {
+    if(request.getParameter("userId") != null){
             int userId = Integer.parseInt(request.getParameter("userId"));
             String userName = request.getParameter("userName");
             String admin = request.getParameter("admin");
@@ -100,3 +102,14 @@ if(request.getParameter("userId") != null){
         </div>
     </body>
 </html>
+<%}
+else {%>
+<html>
+    <head>
+        You do not have permission to access this resource.
+    </head>
+    <br>
+    <br>
+<a href="index.jsp">Click here to return to the home page.</a>
+</html>
+<% } %>
