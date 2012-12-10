@@ -72,7 +72,16 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                             Name: <%= _itemDetail.getItemName() %><br>
                             Description: <%= _itemDetail.getItemDescription() %><br>
                             Requested Date: <%=u.getRequestedDate() %>
-                            
+                            <br>
+                            <br>
+                            <form name="returnItem" action="return" method="post" class="normal">
+                                <table>
+                                    <tr><td>Comments: </td><td><input type="text" name="borrowerComments"></td></tr>
+                                    <tr><td>Rating: </td><td><input type="text" name="borrowerRatingOfLender"></td></tr>
+                                </table>
+                            <input type="submit" id="submitButton" class="submitButton" value="return item">
+                            </form>
+                            <hr>
                             <hr>
                         <% }
                         hSession.close();
