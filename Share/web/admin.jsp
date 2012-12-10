@@ -103,13 +103,6 @@ if (loggedInUser.isAdmin()) {
     </body>
 </html>
 <%}
-else {%>
-<html>
-    <head>
-        You do not have permission to access this resource.
-    </head>
-    <br>
-    <br>
-<a href="index.jsp">Click here to return to the home page.</a>
-</html>
-<% } %>
+else 
+response.sendRedirect("index.jsp");
+%>
