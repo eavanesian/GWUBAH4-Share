@@ -4,6 +4,7 @@
     Author     : jay
 --%>
 
+<%@page import="org.bahcohortproj.wdywts.EditItemsService"%>
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.criterion.Projections"%>
 <%@page import="org.hibernate.criterion.Restrictions"%>
@@ -50,25 +51,31 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                 <div class="itemForm"><div class="itemList">
                     <H3>Items you have listed:</H3>
                     <% //Read items from the db and list
-                        ItemDetail item = new ItemDetail();
-                        SessionFactory sf = new HibernateUtil().getSessionFactory();        
-                        Session hSession = sf.openSession();
-
-                        hSession.beginTransaction();
-
-                        Criteria c = hSession.createCriteria(ItemDetail.class);
-                        //c.add(Restrictions.eq("userName", loggedInUser.getUserName()));
-                        c.add(Restrictions.eq("userId", loggedInUser.getUserId()));
-
-                        List<ItemDetail> items = (List<ItemDetail>) c.list();
-                        // TODO: = format the following output as a table
-                        for (ItemDetail u : items) {
-                            item = u; %>
-                            <%=u.getItemName()%><BR>
+                        EditItemsService editItems = new EditItemsService();
+                        
+                         List<ItemDetail> items = editItems.getItemList(loggedInUser.getUserId());
+                        
+                        ItemDetail item = new ItemDetail();%>
+                        <table class="normal"><tr style="font-weight: bold"><td>Item Name</td><td>Item Description</td><td>Available?</td>
+                                <td>Edit?</td><td>Delete?</td></tr>
+                            
                         <%
-                                           }
-                        hSession.close();
-                    %>
+                        for (ItemDetail u : items) {
+                        item = u; %>
+                        <tr><td colspan="5"><hr></td></tr>
+                        <tr><td><%=u.getItemName()%></td><td><%=u.getItemDescription()%></td>
+                                <td><%
+                                if(u.isAvailable()){
+                                    %>Yes<%
+                                } else {
+                                    %>No<%
+                                }%></td>
+                                <td><a href="editItem?itemId=<%=u.getItemId()%>?action=edit">Edit</a></td>
+                                <td><a href="editItem?itemId=<%=u.getItemId()%>?action=delete">Delete</a></td></tr>
+                        <%
+                        }
+                        %>
+                            </table>
                 </div></div></div></div>
             <jsp:include page="footer.jsp"></jsp:include>
         </div>
