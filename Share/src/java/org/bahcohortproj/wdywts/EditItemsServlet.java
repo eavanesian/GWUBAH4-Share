@@ -77,14 +77,8 @@ public class EditItemsServlet extends HttpServlet {
                 }
                 
                 if("edit".equals(_action)){
-                    if(edit.editItem(_itemId)){   
-                        response.sendRedirect("./editSuccess.jsp");
-                    }
-                    else{
-                        response.sendRedirect("./");
-                    }
+                    response.sendRedirect("./editItem.jsp?itemId="+_itemId);
                 }
-                //response.sendRedirect("./searchResult.jsp?category="+categoryID);
                
             }
             
@@ -105,7 +99,34 @@ public class EditItemsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       // processRequest(request, response);
+         try {
+                String _action = request.getParameter("action");
+                int _itemId = Integer.parseInt(request.getParameter("itemId"));
+                String _itemName = request.getParameter("itemName");
+                String _itemDescription = request.getParameter("itemDescription");
+                String _available = request.getParameter("available");
+                ItemDetail _item = new ItemDetail();
+                EditItemsService edit = new EditItemsService();
+                
+                _item.setItemName(_itemName);
+                _item.setItemDescription(_itemDescription);
+                _item.setItemId(_itemId);
+                
+                if("on".equals(_available)){
+                    _item.setAvailable(true);
+                } else if(_available == null){
+                    _item.setAvailable(false);
+                }
+                                
+                if(edit.editItem(_item)){
+                    response.sendRedirect("./editSuccess.jsp");
+                }
+            
+        } catch (Exception e){
+ 
+        }
+        
     }// end
     /**
      * Returns a short description of the servlet.

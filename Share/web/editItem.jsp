@@ -1,6 +1,6 @@
 <%-- 
-    Document   : itemList
-    Created on : Nov 25, 2012, 10:07:25 PM
+    Document   : editItem
+    Created on : Dec 9, 2012, 10:21:07 PM
     Author     : jay
 --%>
 
@@ -49,35 +49,45 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
             </div>
                 <div class="content">
                 <div class="itemForm"><div class="itemList">
-                    <H3>Items you have listed:</H3>
-                    <% //Read items from the db and list
-                        EditItemsService editItems = new EditItemsService();
-                        
-                         List<ItemDetail> items = editItems.getItemList(loggedInUser.getUserId());
-                        
-                        ItemDetail item = new ItemDetail();%>
-                        <table class="normal"><tr style="font-weight: bold"><td>Item Name</td><td>Item Description</td><td>Available?</td>
-                                <td>Edit?</td><td>Delete?</td></tr>
-                            
-                        <%
-                        for (ItemDetail u : items) {
-                        item = u; %>
-                        <tr><td colspan="5"><hr></td></tr>
-                        <tr><td><%=u.getItemName()%></td><td><%=u.getItemDescription()%></td>
-                                <td><%
-                                if(u.isAvailable()){
-                                    %>Yes<%
+                    <H3>Edit Item:</H3>
+                    <% //Read item from the db and list
+                    EditItemsService edit = new EditItemsService();
+                    ItemDetail item = new ItemDetail();
+                    if(request.getParameter("itemId") != null){
+                        int _itemId = Integer.parseInt(request.getParameter("itemId"));
+                      
+                        SessionFactory sf = new HibernateUtil().getSessionFactory();        
+                        Session hSession = sf.openSession();
+                        hSession.beginTransaction();
+                        item = (ItemDetail) hSession.get(ItemDetail.class, _itemId);
+                    }
+                    %>
+                    <form name="Edit" action="editItem" method="post">
+                        <table class="normal"><tr style="font-weight: bold"><td>Item Name</td><td>Item Description</td><td>Available?</td></tr>
+                        <tr><td colspan="3"><hr></td></tr>
+                        <tr><td><input type="text" name ="itemName"value="<%=item.getItemName()%>"></td>
+                            <td><input type="text" name ="itemDescription"value="<%=item.getItemDescription()%>"></td>
+                            <td><input type="checkbox" name="available"<%
+                                if(item.isAvailable()){
+                                    %>checked<%
                                 } else {
-                                    %>No<%
-                                }%></td>
-                                <td><a href="editItem?itemId=<%=u.getItemId()%>&action=edit">Edit</a></td>
-                                <td><a href="editItem?itemId=<%=u.getItemId()%>&action=delete">Delete</a></td></tr>
-                        <%
-                        }
-                        %>
+                                    %><%
+                                }%>></td></tr>
                             </table>
+                            <input type="submit" value="edit" class="submitButton"">
+                            <input type="hidden" name="itemId" value="<%=item.getItemId()%>">
+                    </form>
                 </div></div></div></div>
             <jsp:include page="footer.jsp"></jsp:include>
         </div>
     </body>
 </html>
+<%
+         try {
+            
+            
+        } catch (Exception e){
+ 
+                   }
+                
+        %>
