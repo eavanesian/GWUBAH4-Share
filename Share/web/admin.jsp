@@ -45,7 +45,7 @@ if (loggedInUser.isAdmin()) {
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lend</title>
+        <title>Admin</title>
     </head>
     <body>
         <jsp:include page="includes.jsp"></jsp:include>
