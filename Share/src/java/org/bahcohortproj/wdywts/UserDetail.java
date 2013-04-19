@@ -88,7 +88,7 @@ public class UserDetail implements Serializable {
     /**
      * @return the fName
      */
-    @Column (name="FirstName")
+    @Column (name="firstName")
     public String getfName() {
         return fName;
     }
@@ -103,7 +103,7 @@ public class UserDetail implements Serializable {
     /**
      * @return the lName
      */
-    @Column (name="LastName")
+    @Column (name="lastName")
     public String getlName() {
         return lName;
     }
@@ -119,7 +119,7 @@ public class UserDetail implements Serializable {
     /**
      * @return the userName
      */
-    @Column (name="Username")
+    @Column (name="userName")
     public String getUserName() {
         return userName;
     }
@@ -134,7 +134,7 @@ public class UserDetail implements Serializable {
     /**
      * @return the admin
      */
-    @Column (name="Admin")
+    @Column (name="admin")
     public boolean isAdmin() {
         return admin;
     }

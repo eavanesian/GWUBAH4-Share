@@ -27,12 +27,13 @@ public class Category implements Serializable {
 
     @Id
     @GeneratedValue
+    @Column (name="categoryID")
     private int categoryId;
     
-    @Column (name="Name")
+    @Column (name="name")
     private String name;
     
-    @Column (name="Description")
+    @Column (name="description")
     private String description;
 
     
@@ -40,7 +41,7 @@ public class Category implements Serializable {
      *  if parentCategoryId = null, then it is a cat, otherwise, it is a sub-cat 
      *  and should have the categoryId of the parent cat in it.
      */
-    @Column (name="ParentCategoryId")
+    @Column (name="parentCategoryID")
     private int parentCategoryId;
 
     /**
