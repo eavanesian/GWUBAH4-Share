@@ -174,6 +174,7 @@ public class LendServlet extends HttpServlet {
                         return;
                     } else {
                             response.sendRedirect("./lend.jsp");
+                            return;
                     }
                 } else {
                     response.sendRedirect("./lend.jsp");

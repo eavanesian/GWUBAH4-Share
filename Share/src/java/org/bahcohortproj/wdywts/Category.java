@@ -30,19 +30,21 @@ public class Category implements Serializable {
     @Column (name="categoryID")
     private int categoryID;
     
-    @Column (name="name")
-    private String name;
-    
     @Column (name="description")
     private String description;
-
     
-    /** parentCategoryID should allow to make cat/sub-cat relationships
+     /** parentCategoryID should allow to make cat/sub-cat relationships
      *  if parentCategoryID = null, then it is a cat, otherwise, it is a sub-cat 
      *  and should have the categoryID of the parent cat in it.
      */
     @Column (name="parentCategoryID")
     private int parentCategoryID;
+    
+    @Column (name="name")
+    private String name;
+    
+    
+
 
     /**
      * @return the categoryID

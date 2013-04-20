@@ -90,7 +90,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
             <hr>
             <form name="newCategory" action="lend" method="post" class="normal">
                 <input type="text" name="categoryName">
-                <input type="submit" value="create category" class="submitButton"><br>
+                <input type="submit" value="create category" class="submitButton"onclick="window.location.href='./';"><br>
                 <input type="hidden" name="lendFunction" value=2>
             </form>
             <hr>
