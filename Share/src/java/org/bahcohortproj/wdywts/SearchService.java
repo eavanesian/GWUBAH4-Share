@@ -45,8 +45,8 @@ public class SearchService {
                         //for (int i = 0; i < list.size(); i++) {
                         //    out.println(list.get(i));
                         //}
-                        for (ItemDetail id : list){
-                            System.out.println(id.getUserName() + " has listed a(n) <a href='showItemDetails.jsp?userSearch=" + id.getItemName() + "'>" + id.getItemName() + "</a href><br>");
+                        for (ItemDetail ID : list){
+                            System.out.println(ID.getUserName() + " has listed a(n) <a href='showItemDetails.jsp?userSearch=" + id.getItemName() + "'>" + id.getItemName() + "</a href><br>");
                         }*/
           
             
@@ -62,7 +62,7 @@ public class SearchService {
             Session hSession = sf.openSession();
 
             hSession.beginTransaction();
-            Query query = hSession.createQuery("from ItemDetail where categoryId = :code ");
+            Query query = hSession.createQuery("from ItemDetail where categoryID = :code ");
             
             query.setParameter("code", _categoryID);
                         List<ItemDetail> list = (List<ItemDetail>) query.list();
@@ -92,7 +92,7 @@ public class SearchService {
             if (results.isEmpty()){
                 return 0;
             } else{
-                return results.get(0).getCategoryId();
+                return results.get(0).getCategoryID();
             }
                                      
         } catch (Exception e) {

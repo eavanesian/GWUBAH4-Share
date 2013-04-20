@@ -26,7 +26,7 @@
 <% 
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
     session.removeAttribute("sUsrName");
     response.sendRedirect("./");
     return;
@@ -59,7 +59,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
 
                         Criteria c = hSession.createCriteria(UserItems.class);
                         //c.add(Restrictions.eq("userName", loggedInUser.getUserName()));
-                        c.add(Restrictions.eq("borrowerId", loggedInUser.getUserId()));
+                        c.add(Restrictions.eq("borrowerID", loggedInUser.getUserID()));
                         c.add(Restrictions.eq("status", 1));
 
                         List<UserItems> items = (List<UserItems>) c.list();
@@ -67,9 +67,9 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                         for (UserItems u : items) {
                             
                             ItemDetail _itemDetail = new ItemDetail();
-                            _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, u.getItemId()); 
+                            _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, u.getItemID()); 
                             UserDetail _lender = new UserDetail();
-                            _lender = (UserDetail) hSession.get(UserDetail.class, _itemDetail.getUserId());
+                            _lender = (UserDetail) hSession.get(UserDetail.class, _itemDetail.getUserID());
                             %>
                             
                             
@@ -90,7 +90,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                                     <option value="5">5</option></select>
                                         </td></tr>
                                 </table>
-                            <input type="hidden" name="userItem" value="<%=u.getUserItemsId()%>">  
+                            <input type="hidden" name="userItem" value="<%=u.getUserItemsID()%>">  
                             <input type="hidden" name="returnItem" value="true">
                             <input type="submit" id="submitButton" class="submitButton" value="return item">
                             </form>

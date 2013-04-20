@@ -80,9 +80,9 @@ public class ReturnItemServlet extends HttpServlet {
         try {
                 if("true".equals(request.getParameter("doFeedback"))){
                     UserItems _transaction = new UserItems();
-                    int _transactionId; //ID of the transaction from UserItems table
+                    int _transactionID; //ID of the transaction from UserItems table
 
-                    _transactionId = Integer.parseInt(request.getParameter("userItem"));
+                    _transactionID = Integer.parseInt(request.getParameter("userItem"));
 
                     String _lenderComments = request.getParameter("lenderComments");
                     int _lenderRating = Integer.parseInt(request.getParameter("lenderRatingOfBorrower"));
@@ -91,7 +91,7 @@ public class ReturnItemServlet extends HttpServlet {
 
                     _transaction.setLenderComments(_lenderComments);
                     _transaction.setLenderRatingOfBorrower(_lenderRating);
-                    _transaction.setUserItemsId(_transactionId);
+                    _transaction.setUserItemsID(_transactionID);
 
                     if(edit.leaveFeedback(_transaction)){
                         response.sendRedirect("./feedbackSuccess.jsp");
@@ -99,9 +99,9 @@ public class ReturnItemServlet extends HttpServlet {
                 }
                 if("true".equals(request.getParameter("returnItem"))){
                     UserItems _transaction = new UserItems();
-                    int _transactionId; //ID of the transaction from UserItems table
+                    int _transactionID; //ID of the transaction from UserItems table
 
-                    _transactionId = Integer.parseInt(request.getParameter("userItem"));
+                    _transactionID = Integer.parseInt(request.getParameter("userItem"));
 
                     String _borrowerComments = request.getParameter("borrowerComments");
                     int _borrowerRating = Integer.parseInt(request.getParameter("borrowerRatingOfLender"));
@@ -110,7 +110,7 @@ public class ReturnItemServlet extends HttpServlet {
 
                     _transaction.setBorrowerComments(_borrowerComments);
                     _transaction.setBorrowerRatingOfLender(_borrowerRating);
-                    _transaction.setUserItemsId(_transactionId);
+                    _transaction.setUserItemsID(_transactionID);
 
                     if(edit.returnItem(_transaction)){
                         response.sendRedirect("./returnSuccess.jsp");

@@ -21,7 +21,7 @@ public class EditItemsService {
      * Takes a userID and returns the list of items owned by that user
      * @return the _itemList
      */
-    public List getItemList(int _userId) {
+    public List getItemList(int _userID) {
         ItemDetail item = new ItemDetail();
         SessionFactory sf = new HibernateUtil().getSessionFactory();        
         Session hSession = sf.openSession();
@@ -29,7 +29,7 @@ public class EditItemsService {
         hSession.beginTransaction();
 
         Criteria c = hSession.createCriteria(ItemDetail.class);
-        c.add(Restrictions.eq("userId", _userId));
+        c.add(Restrictions.eq("userID", _userID));
 
         List<ItemDetail> items = (List<ItemDetail>) c.list();
         return items;
@@ -41,7 +41,7 @@ public class EditItemsService {
             SessionFactory sf = new HibernateUtil().getSessionFactory();        
             Session hSession = sf.openSession();
             hSession.beginTransaction();
-            _item = (ItemDetail) hSession.get(ItemDetail.class, _itemChanges.getItemId());
+            _item = (ItemDetail) hSession.get(ItemDetail.class, _itemChanges.getItemID());
             
             _item.setItemName(_itemChanges.getItemName());
             _item.setItemDescription(_itemChanges.getItemDescription());
@@ -58,14 +58,14 @@ public class EditItemsService {
         return true;
     }
     
-    public boolean deleteItem(int _itemId){
+    public boolean deleteItem(int _itemID){
         try{
             ItemDetail item = new ItemDetail();
             SessionFactory sf = new HibernateUtil().getSessionFactory();        
             Session hSession = sf.openSession();
 
             hSession.beginTransaction();
-            item = (ItemDetail) hSession.get(ItemDetail.class, _itemId);
+            item = (ItemDetail) hSession.get(ItemDetail.class, _itemID);
             hSession.delete(item);
             hSession.getTransaction().commit();
             hSession.close();

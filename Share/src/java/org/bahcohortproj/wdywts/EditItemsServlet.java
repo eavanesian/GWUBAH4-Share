@@ -65,19 +65,19 @@ public class EditItemsServlet extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         try {
-            if(request.getParameter("itemId") != null){
-                int _itemId = Integer.parseInt(request.getParameter("itemId"));
+            if(request.getParameter("itemID") != null){
+                int _itemID = Integer.parseInt(request.getParameter("itemID"));
                 String _action = request.getParameter("action");
                 EditItemsService edit = new EditItemsService();
                 
                 if("delete".equals(_action)){
-                    if(edit.deleteItem(_itemId)){
+                    if(edit.deleteItem(_itemID)){
                         response.sendRedirect("./deleteSuccess.jsp");
                     }
                 }
                 
                 if("edit".equals(_action)){
-                    response.sendRedirect("./editItem.jsp?itemId="+_itemId);
+                    response.sendRedirect("./editItem.jsp?itemID="+_itemID);
                 }
                
             }
@@ -102,7 +102,7 @@ public class EditItemsServlet extends HttpServlet {
        // processRequest(request, response);
          try {
                 String _action = request.getParameter("action");
-                int _itemId = Integer.parseInt(request.getParameter("itemId"));
+                int _itemID = Integer.parseInt(request.getParameter("itemID"));
                 String _itemName = request.getParameter("itemName");
                 String _itemDescription = request.getParameter("itemDescription");
                 String _available = request.getParameter("available");
@@ -111,7 +111,7 @@ public class EditItemsServlet extends HttpServlet {
                 
                 _item.setItemName(_itemName);
                 _item.setItemDescription(_itemDescription);
-                _item.setItemId(_itemId);
+                _item.setItemID(_itemID);
                 
                 if("on".equals(_available)){
                     _item.setAvailable(true);

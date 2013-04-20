@@ -44,7 +44,7 @@ if (request.getParameter("logout") != null) {
 <%
     UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-    if ((loggedInUser != null) && (loggedInUser.getUserId() != 0)) { %>
+    if ((loggedInUser != null) && (loggedInUser.getUserID() != 0)) { %>
     
         <div class="mainContainer">
             <jsp:include page="topNav.jsp"></jsp:include>
@@ -149,10 +149,10 @@ if (request.getParameter("logout") != null) {
         hSession.getTransaction().commit();
         
         
-        sc1.setParentCategoryId(c1.getCategoryId());
-        sc2.setParentCategoryId(c1.getCategoryId());
-        sc3.setParentCategoryId(c1.getCategoryId());
-        sc4.setParentCategoryId(c3.getCategoryId());
+        sc1.setParentCategoryID(c1.getCategoryID());
+        sc2.setParentCategoryID(c1.getCategoryID());
+        sc3.setParentCategoryID(c1.getCategoryID());
+        sc4.setParentCategoryID(c3.getCategoryID());
 
         
         hSession.saveOrUpdate(sc1);
@@ -177,7 +177,7 @@ if (request.getParameter("logout") != null) {
          
          ItemDetail itemDetail = new ItemDetail("name", "desc", 10);
          
-         //new category, need save to get the id first
+         //new category, need save to get the ID first
          hSession.save(itemDetail);
 
          

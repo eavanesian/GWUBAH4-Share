@@ -24,7 +24,7 @@
 <% 
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
     session.removeAttribute("sUsrName");
     response.sendRedirect("./");
     return;

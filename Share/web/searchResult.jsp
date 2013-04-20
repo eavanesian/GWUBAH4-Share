@@ -26,7 +26,7 @@
 <%
     UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-    if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+    if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
         session.removeAttribute("sUsrName");
         response.sendRedirect("./");
         return;
@@ -64,13 +64,13 @@
                                 for (ItemDetail u : items) {
                                   item = u; 
 
-                                  String hql = "SELECT userName FROM UserDetail U WHERE U.userId = :userId";
+                                  String hql = "SELECT userName FROM UserDetail U WHERE U.userID = :userID";
                                   Query query = hSession.createQuery(hql);
-                                  query.setParameter("userId", u.getUserId());
+                                  query.setParameter("userID", u.getUserID());
                                   List itemOwner = query.list();
                                     
                                     if (u.isAvailable()){ %>
-                                        <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>"> <%=itemOwner%> - <%=u.getItemName()%></a>
+                                        <a href="showItemDetails.jsp?itemID=<%=u.getItemID()%>"> <%=itemOwner%> - <%=u.getItemName()%></a>
                                  <% } else { %>
                                  <span style="font-size:12px;color:red;">not available</span> <%=itemOwner%> - <%=u.getItemName()%>
                                  <% } %><br>
@@ -87,13 +87,13 @@
                                 for (ItemDetail u : items) {
                                   item = u; 
 
-                                  String hql = "SELECT userName FROM UserDetail U WHERE U.userId = :userId";
+                                  String hql = "SELECT userName FROM UserDetail U WHERE U.userID = :userID";
                                   Query query = hSession.createQuery(hql);
-                                  query.setParameter("userId", u.getUserId());
+                                  query.setParameter("userID", u.getUserID());
                                   List itemOwner = query.list();
                                  
                                   if (u.isAvailable()){ %>
-                                        <a href="showItemDetails.jsp?itemId=<%=u.getItemId()%>"> <%=itemOwner%> - <%=u.getItemName()%></a>
+                                        <a href="showItemDetails.jsp?itemID=<%=u.getItemID()%>"> <%=itemOwner%> - <%=u.getItemName()%></a>
                                  <% } else { %>
                                  <span style="font-size:12px;color:red;">not available</span> <%=itemOwner%> - <%=u.getItemName()%>
                                  <% } %><br>

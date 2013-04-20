@@ -26,26 +26,26 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 
 /*@AssociationOverrides({
-    @AssociationOverride(name="userItemsId.userDetail",
-                        joinColumns=@JoinColumn(name="userId")),
-    @AssociationOverride(name="userItemsId.userItem",
-                        joinColumns=@JoinColumn(name="itemId"))
+    @AssociationOverride(name="userItemsID.userDetail",
+                        joinColumns=@JoinColumn(name="userID")),
+    @AssociationOverride(name="userItemsID.userItem",
+                        joinColumns=@JoinColumn(name="itemID"))
 })*/
 @Entity
 @Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
 @org.hibernate.annotations.Entity(selectBeforeUpdate=true)
 public class UserItems implements Serializable {
     
-    //private UserItemsId userItemsId = new UserItemsId();
-    private int userItemsId;
+    //private UserItemsID userItemsID = new UserItemsID();
+    private int userItemsID;
     
     //private ItemDetail item;
     //private UserDetail lender;
     //private UserDetail borrower;
     
-    private int itemId;//Fkey
-    private int lenderId;//Fkey
-    private int borrowerId; //Fkey
+    private int itemID;//Fkey
+    private int lenderID;//Fkey
+    private int borrowerID; //Fkey
     
     private Date listedDate;
     private Date requestedDate;
@@ -65,20 +65,20 @@ public class UserItems implements Serializable {
     
 
     /**
-     * @return the userItemsId
+     * @return the userItemsID
      */
-    //@EmbeddedId
+    //@EmbeddedID
     @Id
     @GeneratedValue
-    public int getUserItemsId() {
-        return userItemsId;
+    public int getUserItemsID() {
+        return userItemsID;
     }
 
     /**
-     * @param userItemsId the userItemsId to set
+     * @param userItemsID the userItemsID to set
      */
-    public void setUserItemsId(int userItemsId) {
-        this.userItemsId = userItemsId;
+    public void setUserItemsID(int userItemsID) {
+        this.userItemsID = userItemsID;
     }
     
     /**
@@ -86,14 +86,14 @@ public class UserItems implements Serializable {
      * /
     @Transient
     public ItemDetail getItem() {
-        return getUserItemsId().getItemDetail();
+        return getUserItemsID().getItemDetail();
     }
 
     /**
      * @param item the item to set
      * /
     public void setItem(ItemDetail item) {
-        getUserItemsId().setItemDetail(item);
+        getUserItemsID().setItemDetail(item);
     }*/
     
     /**
@@ -101,14 +101,14 @@ public class UserItems implements Serializable {
      * /
     @Transient
     public UserDetail getLender() {
-        return getUserItemsId().getUserDetail();
+        return getUserItemsID().getUserDetail();
     }
 
     /**
-     * @param lender the lenderId to set
+     * @param lender the lenderID to set
      * /
     public void setLender(UserDetail lender) {
-        getUserItemsId().setUserDetail(lender);
+        getUserItemsID().setUserDetail(lender);
     }*/
 
     /**
@@ -116,14 +116,14 @@ public class UserItems implements Serializable {
      * /
     @Transient
     public UserDetail getBorrower() {
-        return getUserItemsId().getUserDetail();
+        return getUserItemsID().getUserDetail();
     }
 
     /**
      * @param borrower the borrower to set
      * /
     public void setBorrower(UserDetail borrower) {
-        getUserItemsId().setUserDetail(borrower);
+        getUserItemsID().setUserDetail(borrower);
     }*/
 
     /**
@@ -255,7 +255,7 @@ public class UserItems implements Serializable {
         
         UserItems that = (UserItems) o;
         
-        if(getUserItemsId() != null ? !getUserItemsId().equals(that.getUserItemsId()) : that.getUserItemsId() != null) {
+        if(getUserItemsID() != null ? !getUserItemsID().equals(that.getUserItemsID()) : that.getUserItemsID() != null) {
             return false;
         }
         
@@ -264,52 +264,52 @@ public class UserItems implements Serializable {
     
     @Override
     public int hashCode(){
-        return (getUserItemsId() != null ? getUserItemsId().hashCode() : 0);
+        return (getUserItemsID() != null ? getUserItemsID().hashCode() : 0);
     }*/
     
     
     
 
     /**
-     * @return the itemId
+     * @return the itemID
      */
-    public int getItemId() {
-        return itemId;
+    public int getItemID() {
+        return itemID;
     }
 
     /**
-     * @param itemId the itemId to set
+     * @param itemID the itemID to set
      */
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
     }
 
     /**
-     * @return the lenderId
+     * @return the lenderID
      */
-    public int getLenderId() {
-        return lenderId;
+    public int getLenderID() {
+        return lenderID;
     }
 
     /**
-     * @param lenderId the lenderId to set
+     * @param lenderID the lenderID to set
      */
-    public void setLenderId(int lenderId) {
-        this.lenderId = lenderId;
+    public void setLenderID(int lenderID) {
+        this.lenderID = lenderID;
     }
 
     /**
-     * @return the borrowerId
+     * @return the borrowerID
      */
-    public int getBorrowerId() {
-        return borrowerId;
+    public int getBorrowerID() {
+        return borrowerID;
     }
 
     /**
-     * @param borrowerId the borrowerId to set
+     * @param borrowerID the borrowerID to set
      */
-    public void setBorrowerId(int borrowerId) {
-        this.borrowerId = borrowerId;
+    public void setBorrowerID(int borrowerID) {
+        this.borrowerID = borrowerID;
     }
 
     /**

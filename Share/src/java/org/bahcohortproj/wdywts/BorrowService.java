@@ -18,7 +18,7 @@ import org.hibernate.criterion.Restrictions;
 public class BorrowService {
     
     
-    public UserItems borrowItem(UserDetail _userDetail, int _itemId){
+    public UserItems borrowItem(UserDetail _userDetail, int _itemID){
 
         SessionFactory sf = new HibernateUtil().getSessionFactory();
         Session hSession = sf.openSession();
@@ -27,14 +27,14 @@ public class BorrowService {
         
         
         ItemDetail _itemDetail = new ItemDetail();
-        _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, _itemId);
+        _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, _itemID);
         
         
         UserDetail _lender = new UserDetail();
-        _lender = (UserDetail) hSession.get(UserDetail.class, _itemDetail.getUserId());
+        _lender = (UserDetail) hSession.get(UserDetail.class, _itemDetail.getUserID());
         
         //UserDetail _internalUser = new UserDetail();
-        //_internalUser = (UserDetail) hSession.get(UserDetail.class, _userDetail.getUserId());
+        //_internalUser = (UserDetail) hSession.get(UserDetail.class, _userDetail.getUserID());
         
          UserItems _userItems = new UserItems();
                 
@@ -42,9 +42,9 @@ public class BorrowService {
         //_userItems.setLender(_lender);
         //_userItems.setItem(_itemDetail);        
         
-        _userItems.setBorrowerId(_userDetail.getUserId());
-        _userItems.setLenderId(_lender.getUserId());
-        _userItems.setItemId(_itemDetail.getItemId());
+        _userItems.setBorrowerID(_userDetail.getUserID());
+        _userItems.setLenderID(_lender.getUserID());
+        _userItems.setItemID(_itemDetail.getItemID());
         _userItems.setRequestedDate(new Date());
                         
         hSession.saveOrUpdate(_userItems);

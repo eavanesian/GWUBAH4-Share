@@ -26,7 +26,7 @@
 <% 
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
     session.removeAttribute("sUsrName");
     response.sendRedirect("./");
     return;
@@ -53,13 +53,13 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                     <% //Read item from the db and list
                     EditItemsService edit = new EditItemsService();
                     ItemDetail item = new ItemDetail();
-                    if(request.getParameter("itemId") != null){
-                        int _itemId = Integer.parseInt(request.getParameter("itemId"));
+                    if(request.getParameter("itemID") != null){
+                        int _itemID = Integer.parseInt(request.getParameter("itemID"));
                       
                         SessionFactory sf = new HibernateUtil().getSessionFactory();        
                         Session hSession = sf.openSession();
                         hSession.beginTransaction();
-                        item = (ItemDetail) hSession.get(ItemDetail.class, _itemId);
+                        item = (ItemDetail) hSession.get(ItemDetail.class, _itemID);
                     }
                     %>
                     <form name="Edit" action="editItem" method="post">
@@ -75,7 +75,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                                 }%>></td></tr>
                             </table>
                             <input type="submit" value="edit" class="submitButton"">
-                            <input type="hidden" name="itemId" value="<%=item.getItemId()%>">
+                            <input type="hidden" name="itemID" value="<%=item.getItemID()%>">
                     </form>
                 </div></div></div></div>
             <jsp:include page="footer.jsp"></jsp:include>

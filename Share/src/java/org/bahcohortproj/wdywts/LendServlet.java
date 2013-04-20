@@ -68,9 +68,9 @@ public class LendServlet extends HttpServlet {
         if("approve".equals(request.getParameter("action"))){
             LendService lend = new LendService();
             
-            int _transactionId;
-            _transactionId = Integer.parseInt(request.getParameter("transaction"));
-            if(lend.approveRequest(_transactionId)){
+            int _transactionID;
+            _transactionID = Integer.parseInt(request.getParameter("transaction"));
+            if(lend.approveRequest(_transactionID)){
                 //send to confirmation page?
                 response.sendRedirect("./reviewRequests.jsp");
                 return;
@@ -79,9 +79,9 @@ public class LendServlet extends HttpServlet {
         else if("decline".equals(request.getParameter("action"))){
             LendService lend = new LendService();
             
-            int _transactionId;
-            _transactionId = Integer.parseInt(request.getParameter("transaction"));
-            if(lend.declineRequest(_transactionId)){
+            int _transactionID;
+            _transactionID = Integer.parseInt(request.getParameter("transaction"));
+            if(lend.declineRequest(_transactionID)){
                 //send to confirmation page?
                 response.sendRedirect("./reviewRequests.jsp");
                 return;
@@ -142,10 +142,10 @@ public class LendServlet extends HttpServlet {
                }
 
                 _itemDescription = request.getParameter("itemDescription");
-                _itemCreator = Integer.parseInt(request.getParameter("userId"));
+                _itemCreator = Integer.parseInt(request.getParameter("userID"));
                 _item.setItemDescription(_itemDescription);
-                _item.setUserId(_itemCreator);
-                _item.setCategoryId(_itemCategory);
+                _item.setUserID(_itemCreator);
+                _item.setCategoryID(_itemCategory);
                 _item.setAvailable(true);
 
                 boolean itemCreated = lendService.createItem(_item);
@@ -198,7 +198,7 @@ public class LendServlet extends HttpServlet {
                     if(validSubCategoryEntry){
                         newSubCategoryName = request.getParameter("subCategoryName");
                         _subCategory.setName(newSubCategoryName);
-                        _subCategory.setParentCategoryId(_itemSubCategory);                        
+                        _subCategory.setParentCategoryID(_itemSubCategory);                        
                         
                         boolean subCategoryCreated = lendService.createCategory(_subCategory);
 

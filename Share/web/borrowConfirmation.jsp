@@ -27,7 +27,7 @@
 <% 
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
     session.removeAttribute("sUsrName");
     response.sendRedirect("./");
     return;
@@ -56,10 +56,10 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                 hSession.beginTransaction();
         
                 ItemDetail _itemDetail = new ItemDetail();
-                _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, userItems.getItemId());
+                _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, userItems.getItemID());
                 
                 UserDetail _lender = new UserDetail();
-                _lender = (UserDetail) hSession.get(UserDetail.class, _itemDetail.getUserId());
+                _lender = (UserDetail) hSession.get(UserDetail.class, _itemDetail.getUserID());
                 
                 hSession.getTransaction().commit();
                 hSession.close();

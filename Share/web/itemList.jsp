@@ -26,7 +26,7 @@
 <% 
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
     session.removeAttribute("sUsrName");
     response.sendRedirect("./");
     return;
@@ -54,7 +54,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                     <% //Read items from the db and list
                         EditItemsService editItems = new EditItemsService();
                         
-                         List<ItemDetail> items = editItems.getItemList(loggedInUser.getUserId());
+                         List<ItemDetail> items = editItems.getItemList(loggedInUser.getUserID());
                         
                         ItemDetail item = new ItemDetail();%>
                         <table class="normal"><tr style="font-weight: bold"><td>Item Name</td><td>Item Description</td><td>Available?</td>
@@ -71,8 +71,8 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                                 } else {
                                     %>No<%
                                 }%></td>
-                                <td><a href="editItem?itemId=<%=u.getItemId()%>&action=edit">Edit</a></td>
-                                <td><a href="editItem?itemId=<%=u.getItemId()%>&action=delete">Delete</a></td></tr>
+                                <td><a href="editItem?itemID=<%=u.getItemID()%>&action=edit">Edit</a></td>
+                                <td><a href="editItem?itemID=<%=u.getItemID()%>&action=delete">Delete</a></td></tr>
                         <%
                         }
                         %>

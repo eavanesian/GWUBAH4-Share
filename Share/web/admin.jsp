@@ -15,15 +15,15 @@
 <%
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 if (loggedInUser.isAdmin()) {
-    if(request.getParameter("userId") != null){
-            int userId = Integer.parseInt(request.getParameter("userId"));
+    if(request.getParameter("userID") != null){
+            int userID = Integer.parseInt(request.getParameter("userID"));
             String userName = request.getParameter("userName");
             String admin = request.getParameter("admin");
             UserDetail _user = new UserDetail(); // user to be updated
             SessionFactory sf = new HibernateUtil().getSessionFactory();        
             Session hSession = sf.openSession();
             hSession.beginTransaction();
-            _user = (UserDetail) hSession.get(UserDetail.class, userId);
+            _user = (UserDetail) hSession.get(UserDetail.class, userID);
             
             _user.setUserName(userName);
             if("on".equals(admin)){
@@ -83,7 +83,7 @@ if (loggedInUser.isAdmin()) {
                                     %><%
                                 }%>></td>
                             <td><input type="submit" value="edit" class="submitButton"></td></tr>
-                            <input type="hidden" name="userId" value="<%=u.getUserId()%>">
+                            <input type="hidden" name="userID" value="<%=u.getUserID()%>">
                         </form>
                             <tr><td colspan="3"><hr></td></tr>
                         <%

@@ -16,7 +16,7 @@
 <% 
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
     session.removeAttribute("sUsrName");
     response.sendRedirect("./");
     return;
@@ -51,22 +51,22 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                         ItemDetail _item = new ItemDetail();
                         UserDetail _borrower = new UserDetail();
                         
-                        String hql = "FROM UserItems WHERE lenderId = :userId AND status = 0";
+                        String hql = "FROM UserItems WHERE lenderID = :userID AND status = 0";
                         Query query = hSession.createQuery(hql);
-                        query.setParameter("userId", loggedInUser.getUserId());
+                        query.setParameter("userID", loggedInUser.getUserID());
                         List<UserItems> requestedItems = (List<UserItems>) query.list();
                         //out.println("<div align='center'>");
                         for (UserItems u : requestedItems) {
                                 
-                            _item = (ItemDetail) hSession.get(ItemDetail.class, u.getItemId());
-                            _borrower = (UserDetail) hSession.get(UserDetail.class, u.getBorrowerId());
+                            _item = (ItemDetail) hSession.get(ItemDetail.class, u.getItemID());
+                            _borrower = (UserDetail) hSession.get(UserDetail.class, u.getBorrowerID());
                             out.println("<table align=\"center\"><tr><td colspan=\"2\"><hr></td></tr>"); 
                             out.println("<tr><td>Borrower:</td><td>"+_borrower.getUserName() +"</td></tr>");
                             out.println("<tr><td>Item Name:</td><td>"+ _item.getItemName() +"</td></tr>");
-                            out.println("<input type='hidden' name='itemId' value='"+u.getItemId()+"'>");
+                            out.println("<input type='hidden' name='itemID' value='"+u.getItemID()+"'>");
                             out.println("<tr><td>Date Requested:</td><td>"+u.getRequestedDate()+"</td></tr>");%>
-                            <tr><td><a href="lend?action=approve&transaction=<%=u.getUserItemsId()%>">Approve</a>
-                            </td><td><a href="lend?action=decline&transaction=<%=u.getUserItemsId()%>">Decline</a></td></tr><%
+                            <tr><td><a href="lend?action=approve&transaction=<%=u.getUserItemsID()%>">Approve</a>
+                            </td><td><a href="lend?action=decline&transaction=<%=u.getUserItemsID()%>">Decline</a></td></tr><%
                         }                             
                         %>
                             </table>

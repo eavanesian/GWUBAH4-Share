@@ -27,7 +27,7 @@ public class Category implements Serializable {
 
     @Id
     @GeneratedValue
-    private int categoryId;
+    private int categoryID;
     
     @Column (name="Name")
     private String name;
@@ -36,25 +36,25 @@ public class Category implements Serializable {
     private String description;
 
     
-    /** parentCategoryId should allow to make cat/sub-cat relationships
-     *  if parentCategoryId = null, then it is a cat, otherwise, it is a sub-cat 
-     *  and should have the categoryId of the parent cat in it.
+    /** parentCategoryID should allow to make cat/sub-cat relationships
+     *  if parentCategoryID = null, then it is a cat, otherwise, it is a sub-cat 
+     *  and should have the categoryID of the parent cat in it.
      */
-    @Column (name="ParentCategoryId")
-    private int parentCategoryId;
+    @Column (name="ParentCategoryID")
+    private int parentCategoryID;
 
     /**
-     * @return the categoryId
+     * @return the categoryID
      */
-    public int getCategoryId() {
-        return categoryId;
+    public int getCategoryID() {
+        return categoryID;
     }
 
     /**
-     * @param categoryId the categoryId to set
+     * @param categoryID the categoryID to set
      */
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
 
     /**
@@ -86,17 +86,17 @@ public class Category implements Serializable {
     }
 
     /**
-     * @return the parentCategoryId
+     * @return the parentCategoryID
      */
-    public int getParentCategoryId() {
-        return parentCategoryId;
+    public int getParentCategoryID() {
+        return parentCategoryID;
     }
 
     /**
-     * @param parentCategoryId the parentCategoryId to set
+     * @param parentCategoryID the parentCategoryID to set
      */
-    public void setParentCategoryId(int parentCategoryId) {
-        this.parentCategoryId = parentCategoryId;
+    public void setParentCategoryID(int parentCategoryID) {
+        this.parentCategoryID = parentCategoryID;
     }
     
  

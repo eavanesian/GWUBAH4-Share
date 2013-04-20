@@ -27,7 +27,7 @@ public class ReturnItemService {
             hSession.beginTransaction();
 
             UserItems _userItem = new UserItems(); // transaction to be read and updated
-            _userItem = (UserItems) hSession.get(UserItems.class, _transaction.getUserItemsId());
+            _userItem = (UserItems) hSession.get(UserItems.class, _transaction.getUserItemsID());
 
             _userItem.setStatus(2);
             _userItem.setBorrowerComments(_transaction.getBorrowerComments());
@@ -35,7 +35,7 @@ public class ReturnItemService {
             _userItem.setReturnedDate(new Date());
             
             ItemDetail _item = new ItemDetail(); // item being returned, to set available flag
-            _item = (ItemDetail) hSession.get(ItemDetail.class, _userItem.getItemId());
+            _item = (ItemDetail) hSession.get(ItemDetail.class, _userItem.getItemID());
             _item.setAvailable(true);
 
             hSession.getTransaction().commit();
@@ -59,7 +59,7 @@ public class ReturnItemService {
             hSession.beginTransaction();
 
             UserItems _userItem = new UserItems(); // transaction to be read and updated
-            _userItem = (UserItems) hSession.get(UserItems.class, _transaction.getUserItemsId());
+            _userItem = (UserItems) hSession.get(UserItems.class, _transaction.getUserItemsID());
 
             _userItem.setLenderComments(_transaction.getLenderComments());
             _userItem.setLenderRatingOfBorrower(_transaction.getLenderRatingOfBorrower());

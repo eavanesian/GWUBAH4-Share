@@ -16,7 +16,7 @@
 <% 
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
     session.removeAttribute("sUsrName");
     response.sendRedirect("./");
     return;
@@ -50,17 +50,17 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                         //ItemDetail _item = new ItemDetail();
                         //UserDetail _borrower = new UserDetail();
                         
-                        String hql = "FROM UserItems WHERE lenderId = :userId AND status = 2 AND lenderComments = null";
+                        String hql = "FROM UserItems WHERE lenderID = :userID AND status = 2 AND lenderComments = null";
                         Query query = hSession.createQuery(hql);
-                        query.setParameter("userId", loggedInUser.getUserId());
+                        query.setParameter("userID", loggedInUser.getUserID());
                         List<UserItems> returnedItems = (List<UserItems>) query.list();
                        
                         for (UserItems u : returnedItems) {
                             
                             ItemDetail _itemDetail = new ItemDetail();
-                            _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, u.getItemId()); 
+                            _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, u.getItemID()); 
                             UserDetail _borrower = new UserDetail();
-                            _borrower = (UserDetail) hSession.get(UserDetail.class, _itemDetail.getUserId());
+                            _borrower = (UserDetail) hSession.get(UserDetail.class, _itemDetail.getUserID());
                             %>
                             
                             
@@ -81,7 +81,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                                     <option value="5">5</option></select>
                                         </td></tr>
                                 </table>
-                            <input type="hidden" name="userItem" value="<%=u.getUserItemsId()%>">  
+                            <input type="hidden" name="userItem" value="<%=u.getUserItemsID()%>">  
                             <input type="hidden" name="doFeedback" value="true">
                             <input type="submit" id="submitButton" class="submitButton" value="leave feedback">
                             </form>

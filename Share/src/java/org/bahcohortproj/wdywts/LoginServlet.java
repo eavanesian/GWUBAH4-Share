@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
         
         //if (result) {
            UserDetail user = loginService.getUserInfo(_un);
-          if(user.getUserId() != 0) {
+          if(user.getUserID() != 0) {
             
             // if using the dispatcher, you could set the variable into the request instead of the session variable
             //request.setAttribute("user", user);

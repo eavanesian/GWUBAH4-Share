@@ -24,7 +24,7 @@
 <% 
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
     session.removeAttribute("sUsrName");
     response.sendRedirect("./");
     return;
@@ -64,7 +64,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                     hSession.beginTransaction();
                     
                     Criteria c = hSession.createCriteria(Category.class);
-                    c.add(Restrictions.eq("parentCategoryId", new Integer(0)));
+                    c.add(Restrictions.eq("parentCategoryID", new Integer(0)));
                     c.addOrder(Order.asc("name"));
                     List<Category> categories = (List<Category>) c.list();
                     
@@ -73,16 +73,16 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                         <option disabled="disabled" value=""><%=cat.getName()%></option>
                         <%
                         Criteria sc = hSession.createCriteria(Category.class);
-                        sc.add(Restrictions.eq("parentCategoryId", new Integer(cat.getCategoryId())));
+                        sc.add(Restrictions.eq("parentCategoryID", new Integer(cat.getCategoryID())));
                         sc.addOrder(Order.asc("name"));
                         List<Category> subcategories = (List<Category>) sc.list();
                         for (Category subcat : subcategories) {
                         %>
-                        <option value="<%=subcat.getCategoryId()%>">--<%=subcat.getName()%></option>
+                        <option value="<%=subcat.getCategoryID()%>">--<%=subcat.getName()%></option>
                         <% } %>
                     <% } %>
                 </select><br><br>
-                <input type="hidden" name ="userId" value="<%=loggedInUser.getUserId()%>"> 
+                <input type="hidden" name ="userID" value="<%=loggedInUser.getUserID()%>"> 
             <input type="submit" value="list item" class="submitButton">
             <input type="button" value="cancel" class="submitButton" onclick="window.location.href='./';">
             <input type="hidden" name="lendFunction" value=1>
@@ -102,7 +102,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
                      <%                    
                     for (Category cat : categories) { 
                         %>
-                        <option value="<%=cat.getCategoryId()%>"><%=cat.getName()%></option>
+                        <option value="<%=cat.getCategoryID()%>"><%=cat.getName()%></option>
                     <% } %>
                 </select>
                   <input type="text" name="subCategoryName">

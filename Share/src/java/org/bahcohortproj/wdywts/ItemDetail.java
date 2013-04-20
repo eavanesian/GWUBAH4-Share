@@ -33,11 +33,11 @@ import org.hibernate.annotations.FetchMode;
 public class ItemDetail implements Serializable {
     
     
-    private int itemId;
+    private int itemID;
     private String itemName;
     private String itemDescription;
-    private int categoryId;
-    private int userId;
+    private int categoryID;
+    private int userID;
     private boolean available;
     
     //private Collection<UserItems> userItems = new ArrayList<UserItems>();
@@ -47,27 +47,27 @@ public class ItemDetail implements Serializable {
         
     }
     
-    public ItemDetail(String itemName, String itemDescription, int categoryId){
+    public ItemDetail(String itemName, String itemDescription, int categoryID){
         this.itemName = itemName;
         this.itemDescription = itemDescription;
-        this.categoryId = categoryId;
+        this.categoryID = categoryID;
     }
     
-    /*public ItemDetail(String itemName, String itemDescription, int categoryId, Collection<UserItems> userItems){
+    /*public ItemDetail(String itemName, String itemDescription, int categoryID, Collection<UserItems> userItems){
         this.itemName = itemName;
         this.itemDescription = itemDescription;
-        this.categoryId = categoryId;
+        this.categoryID = categoryID;
         this.userItems = userItems;
     }*/
     
     @Id
     @GeneratedValue
-    public int getItemId() {
-        return itemId;
+    public int getItemID() {
+        return itemID;
     }
 
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
     }
 
     /**
@@ -99,24 +99,24 @@ public class ItemDetail implements Serializable {
     }
 
     /**
-     * @return the categoryId
+     * @return the categoryID
      */
-    public int getCategoryId() {
-        return categoryId;
+    public int getCategoryID() {
+        return categoryID;
     }
 
     /**
-     * @param categoryId the categoryId to set
+     * @param categoryID the categoryID to set
      */
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
 
     
     /**
      * @return the userItems
      * /
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsId.itemDetail", cascade=CascadeType.ALL)
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsID.itemDetail", cascade=CascadeType.ALL)
     //@Fetch(FetchMode.JOIN)
     public Collection<UserItems> getUserItems() {
         return userItems;
@@ -130,17 +130,17 @@ public class ItemDetail implements Serializable {
     } */
 
     /**
-     * @return the userId
+     * @return the userID
      */
-    public int getUserId() {
-        return userId;
+    public int getUserID() {
+        return userID;
     }
 
     /**
-     * @param userId the userId to set
+     * @param userID the userID to set
      */
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     /**

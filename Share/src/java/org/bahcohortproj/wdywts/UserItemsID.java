@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
  * @author ed
  */
 @Embeddable
-public class UserItemsId implements Serializable {
+public class UserItemsID implements Serializable {
     
     private UserDetail userDetail;
     private ItemDetail itemDetail;
@@ -58,7 +58,7 @@ public class UserItemsId implements Serializable {
             return false;
         }
         
-        UserItemsId that = (UserItemsId) o;
+        UserItemsID that = (UserItemsID) o;
         
         if (userDetail != null ? !userDetail.equals(that.userDetail) : that.userDetail != null) {
             return false;

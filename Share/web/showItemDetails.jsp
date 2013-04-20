@@ -26,7 +26,7 @@
 <%
     UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 
-    if ((loggedInUser == null) || (loggedInUser.getUserId() == 0)) {
+    if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
         session.removeAttribute("sUsrName");
         response.sendRedirect("./");
         return;
@@ -53,18 +53,18 @@
                         hSession.beginTransaction();
                                           
                        
-                        /*Query itemQuery = hSession.createQuery("from ItemDetail where itemId =" +request.getParameter("itemId"));
+                        /*Query itemQuery = hSession.createQuery("from ItemDetail where itemID =" +request.getParameter("itemId"));
                         List<ItemDetail> detailList = (List<ItemDetail>) itemQuery.list();
                                               
                        out.println("<div align='center'>");
-                       for (ItemDetail id : detailList){
+                       for (ItemDetail ID : detailList){
                            
-                           out.println("<input type='hidden' name='itemId' value='"+id.getItemId()+"'>");
-                           out.println("<table><tr><td>Item ID:</td><td>"+id.getItemId()+"</td></tr>");
-                           //out.println("<tr><td>User:</td><td>"+id.getUserName()+"</td></tr>");
-                           out.println("<tr><td>User:</td><td>"+id.getUserId()+"</td></tr>");
-                           out.println("<tr><td>Item:</td><td>"+id.getItemName()+"</td></tr>");
-                           out.println("<tr><td>Description:</td><td>"+id.getItemDescription()+"</td></tr></table>");
+                           out.println("<input type='hidden' name='itemID' value='"+ID.getItemID()+"'>");
+                           out.println("<table><tr><td>Item ID:</td><td>"+ID.getItemID()+"</td></tr>");
+                           //out.println("<tr><td>User:</td><td>"+ID.getUserName()+"</td></tr>");
+                           out.println("<tr><td>User:</td><td>"+ID.getUserID()+"</td></tr>");
+                           out.println("<tr><td>Item:</td><td>"+ID.getItemName()+"</td></tr>");
+                           out.println("<tr><td>Description:</td><td>"+ID.getItemDescription()+"</td></tr></table>");
                            
                         }  
                        out.println("</div>");
@@ -72,19 +72,19 @@
         
 
                                                              
-                       //Short-hand to pull item by itemId primary key
+                       //Short-hand to pull item by itemID primary key
                         ItemDetail _itemDetail = new ItemDetail();
                         _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, Integer.parseInt(request.getParameter("itemId")));
                         
-                        String hql = "SELECT userName FROM UserDetail U WHERE U.userId = :userId";
+                        String hql = "SELECT userName FROM UserDetail U WHERE U.userID = :userID";
                         Query query = hSession.createQuery(hql);
-                        query.setParameter("userId", _itemDetail.getUserId());
+                        query.setParameter("userID", _itemDetail.getUserID());
                         List itemOwner = query.list();
                        
                         out.println("<div align='center'>");
-                        out.println("<input type='hidden' name='itemId' value='"+_itemDetail.getItemId()+"'>");
-                        out.println("<table><tr><td>Item ID:</td><td>"+_itemDetail.getItemId()+"</td></tr>");
-                        //out.println("<tr><td>User:</td><td>"+id.getUserName()+"</td></tr>");
+                        out.println("<input type='hidden' name='itemID' value='"+_itemDetail.getItemID()+"'>");
+                        out.println("<table><tr><td>Item ID:</td><td>"+_itemDetail.getItemID()+"</td></tr>");
+                        //out.println("<tr><td>User:</td><td>"+ID.getUserName()+"</td></tr>");
                         out.println("<tr><td>User:</td><td>"+itemOwner+"</td></tr>");
                         out.println("<tr><td>Item:</td><td>"+_itemDetail.getItemName()+"</td></tr>");
                         out.println("<tr><td>Description:</td><td>"+_itemDetail.getItemDescription()+"</td></tr></table>");

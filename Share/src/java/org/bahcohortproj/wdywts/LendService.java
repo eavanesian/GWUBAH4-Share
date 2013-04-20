@@ -54,19 +54,19 @@ public class LendService {
         }
     }
      
-    public boolean approveRequest (int _transactionId) {
+    public boolean approveRequest (int _transactionID) {
         try{
             ItemDetail _itemDetail = new ItemDetail();
             UserItems _transaction = new UserItems();
-            int _itemId;
+            int _itemID;
             
             SessionFactory sf = new HibernateUtil().getSessionFactory();
             Session hSession = sf.openSession();
             hSession.beginTransaction();
                        
-            _transaction = (UserItems) hSession.get(UserItems.class, _transactionId);
-            _itemId = _transaction.getItemId();
-            _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, _itemId);
+            _transaction = (UserItems) hSession.get(UserItems.class, _transactionID);
+            _itemID = _transaction.getItemID();
+            _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, _itemID);
             _itemDetail.setAvailable(false);
             _transaction.setBorrowedDate(new Date());
             _transaction.setStatus(1);
@@ -81,19 +81,19 @@ public class LendService {
         }
     }
     
-    public boolean declineRequest (int _transactionId) {
+    public boolean declineRequest (int _transactionID) {
         try{
             ItemDetail _itemDetail = new ItemDetail();
             UserItems _transaction = new UserItems();
-            int _itemId;
+            int _itemID;
             
             SessionFactory sf = new HibernateUtil().getSessionFactory();
             Session hSession = sf.openSession();
             hSession.beginTransaction();
                        
-            _transaction = (UserItems) hSession.get(UserItems.class, _transactionId);
-            _itemId = _transaction.getItemId();
-            _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, _itemId);
+            _transaction = (UserItems) hSession.get(UserItems.class, _transactionID);
+            _itemID = _transaction.getItemID();
+            _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, _itemID);
             _itemDetail.setAvailable(true);
             
             hSession.update(_itemDetail);

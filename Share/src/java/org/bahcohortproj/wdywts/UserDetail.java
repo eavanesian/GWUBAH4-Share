@@ -36,7 +36,7 @@ import org.hibernate.annotations.FetchMode;
 public class UserDetail implements Serializable {
     
     
-    private int userId;
+    private int userID;
     private String fName;
     private String lName;
     private String userName;
@@ -69,19 +69,19 @@ public class UserDetail implements Serializable {
     
     
      /**
-     * @return the userId
+     * @return the userID
      */
     @Id
     @GeneratedValue
-    public int getUserId() {
-        return this.userId;
+    public int getUserID() {
+        return this.userID;
     }
 
     /**
-     * @param userId the userId to set
+     * @param userID the userID to set
      */
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     
@@ -149,7 +149,7 @@ public class UserDetail implements Serializable {
     /**
      * @return the userItems
      * /
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsId.userDetail", cascade=CascadeType.ALL)
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="userItemsID.userDetail", cascade=CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     public Collection<UserItems> getUserItems() {
         return this.userItems;
@@ -171,13 +171,13 @@ public class UserDetail implements Serializable {
 
     
 
-    public String getUserNameFromUserId (int _userId){
+    public String getUserNameFromUserID (int _userID){
         SessionFactory sf = new HibernateUtil().getSessionFactory();        
         Session hSession = sf.openSession();
         hSession.beginTransaction();
         
         UserDetail user = new UserDetail();
-        user = (UserDetail) hSession.get(UserDetail.class, _userId);
+        user = (UserDetail) hSession.get(UserDetail.class, _userID);
         return user.getUserName();
     }
     
