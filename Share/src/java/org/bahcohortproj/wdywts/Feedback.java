@@ -9,8 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.bahcohortproj.wdywts.HibernateUtil;
+import org.hibernate.Query;
 
 /**
  *
@@ -130,6 +136,27 @@ public class Feedback implements Serializable{
      */
     public void setFeedbackDate(Date feedbackDate) {
         this.feedbackDate = feedbackDate;
+    }
+    
+    
+    public Double getAvgRating (Integer userID) {
+              
+        SessionFactory sf = new HibernateUtil().getSessionFactory();
+        Session hSession = sf.openSession();
+        hSession.beginTransaction();
+        
+        String hql2 = "SELECT AVG(rating) FROM Feedback F WHERE F.receiverID = :userID";
+        Query query2 = hSession.createQuery(hql2);
+        query2.setParameter("userID", userID);
+        Double lenderRating = (Double)query2.uniqueResult();
+        
+        if (lenderRating == null) {
+            return 0.0;
+        }
+        else{
+            return lenderRating;
+        }
+                
     }
     
     
