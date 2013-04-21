@@ -22,6 +22,7 @@
 <%@page import="org.bahcohortproj.wdywts.UserDetail" %>
 <%@page import="org.bahcohortproj.wdywts.ItemDetail" %>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil" %>
+<%@page import="org.bahcohortproj.wdywts.Feedback" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
@@ -68,9 +69,13 @@
                                   Query query = hSession.createQuery(hql);
                                   query.setParameter("userID", u.getUserID());
                                   List itemOwner = query.list();
+                                  
+                                  Integer lenderDetail = u.getUserID();                                  
+                                  Double lenderRating = new Feedback().getAvgRating(lenderDetail);                                 
+                                 
                                     
                                     if (u.isAvailable()){ %>
-                                        <a href="showItemDetails.jsp?itemID=<%=u.getItemID()%>"> <%=itemOwner%> - <%=u.getItemName()%></a>
+                                        <a href="showItemDetails.jsp?itemID=<%=u.getItemID()%>"> <%=itemOwner%> (Rating: <%=lenderRating%>) - <%=u.getItemName()%></a>
                                  <% } else { %>
                                  <span style="font-size:12px;color:red;">not available</span> <%=itemOwner%> - <%=u.getItemName()%>
                                  <% } %><br>
@@ -91,9 +96,21 @@
                                   Query query = hSession.createQuery(hql);
                                   query.setParameter("userID", u.getUserID());
                                   List itemOwner = query.list();
-                                 
-                                  if (u.isAvailable()){ %>
-                                        <a href="showItemDetails.jsp?itemID=<%=u.getItemID()%>"> <%=itemOwner%> - <%=u.getItemName()%></a>
+                                  
+                                 /*
+                                  String hql2 = "SELECT AVG(rating) FROM Feedback F WHERE F.receiverID = :userID";
+                                  Query query2 = hSession.createQuery(hql2);
+                                  query2.setParameter("userID", u.getUserID());
+                                  Double lenderRating = (Double)query2.uniqueResult(); 
+                                  
+                            */
+
+                                  Integer lenderDetail = u.getUserID();                                  
+                                  Double lenderRating = new Feedback().getAvgRating(lenderDetail);
+                                                                                                    
+                                  if (u.isAvailable()){ %>   
+                                                                  
+                                        <a href="showItemDetails.jsp?itemID=<%=u.getItemID()%>"> <%=itemOwner%> (Rating: <%=lenderRating%>) - <%=u.getItemName()%></a>
                                  <% } else { %>
                                  <span style="font-size:12px;color:red;">not available</span> <%=itemOwner%> - <%=u.getItemName()%>
                                  <% } %><br>
