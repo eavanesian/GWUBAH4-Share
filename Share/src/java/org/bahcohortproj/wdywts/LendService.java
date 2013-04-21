@@ -57,19 +57,20 @@ public class LendService {
     public boolean approveRequest (int _transactionID) {
         try{
             ItemDetail _itemDetail = new ItemDetail();
-            UserItems _transaction = new UserItems();
+            Transaction _transaction = new Transaction();
             int _itemID;
             
             SessionFactory sf = new HibernateUtil().getSessionFactory();
             Session hSession = sf.openSession();
             hSession.beginTransaction();
                        
-            _transaction = (UserItems) hSession.get(UserItems.class, _transactionID);
+            _transaction = (Transaction) hSession.get(Transaction.class, _transactionID);
             _itemID = _transaction.getItemID();
             _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, _itemID);
             _itemDetail.setAvailable(false);
-            _transaction.setBorrowedDate(new Date());
-            _transaction.setStatus(1);
+            _transaction.setTransactionDate(new Date());
+            _transaction.setTransactionTypeID(2);
+            
             hSession.update(_itemDetail);
             hSession.update(_transaction);
             hSession.getTransaction().commit();
@@ -84,14 +85,14 @@ public class LendService {
     public boolean declineRequest (int _transactionID) {
         try{
             ItemDetail _itemDetail = new ItemDetail();
-            UserItems _transaction = new UserItems();
+            Transaction _transaction = new Transaction();
             int _itemID;
             
             SessionFactory sf = new HibernateUtil().getSessionFactory();
             Session hSession = sf.openSession();
             hSession.beginTransaction();
                        
-            _transaction = (UserItems) hSession.get(UserItems.class, _transactionID);
+            _transaction = (Transaction) hSession.get(Transaction.class, _transactionID);
             _itemID = _transaction.getItemID();
             _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, _itemID);
             _itemDetail.setAvailable(true);

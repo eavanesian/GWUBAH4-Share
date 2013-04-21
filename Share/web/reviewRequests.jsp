@@ -4,6 +4,7 @@
     Author     : jay
 --%>
 
+<%@page import="org.bahcohortproj.wdywts.Transaction"%>
 <%@page import="org.bahcohortproj.wdywts.ItemDetail"%>
 <%@page import="java.util.List"%>
 <%@page import="org.hibernate.Query"%>
@@ -51,12 +52,15 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                         ItemDetail _item = new ItemDetail();
                         UserDetail _borrower = new UserDetail();
                         
-                        String hql = "FROM UserItems WHERE lenderID = :userID AND status = 0";
+                        //String hql = "FROM UserItems WHERE lenderID = :userID AND status = 0";
+                        String hql = "FROM Transaction WHERE lenderID = :userID AND transactionTypeID = 1";
                         Query query = hSession.createQuery(hql);
                         query.setParameter("userID", loggedInUser.getUserID());
-                        List<UserItems> requestedItems = (List<UserItems>) query.list();
+                        //List<UserItems> requestedItems = (List<UserItems>) query.list();
+                        List<Transaction> requestedItems = (List<Transaction>) query.list();
                         //out.println("<div align='center'>");
-                        for (UserItems u : requestedItems) {
+                        //for (UserItems u : requestedItems) {
+                        for (Transaction u : requestedItems) {
                                 
                             _item = (ItemDetail) hSession.get(ItemDetail.class, u.getItemID());
                             _borrower = (UserDetail) hSession.get(UserDetail.class, u.getBorrowerID());
@@ -64,9 +68,14 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                             out.println("<tr><td>Borrower:</td><td>"+_borrower.getUserName() +"</td></tr>");
                             out.println("<tr><td>Item Name:</td><td>"+ _item.getItemName() +"</td></tr>");
                             out.println("<input type='hidden' name='itemID' value='"+u.getItemID()+"'>");
-                            out.println("<tr><td>Date Requested:</td><td>"+u.getRequestedDate()+"</td></tr>");%>
-                            <tr><td><a href="lend?action=approve&transaction=<%=u.getUserItemsID()%>">Approve</a>
-                            </td><td><a href="lend?action=decline&transaction=<%=u.getUserItemsID()%>">Decline</a></td></tr><%
+                            //out.println("<tr><td>Date Requested:</td><td>"+u.getRequestedDate()+"</td></tr>");% >
+                            //<tr><td><a href="lend?action=approve&transaction=<%=u.getUserItemsID()% >">Approve</a>
+                            //</td><td><a href="lend?action=decline&transaction=<%=u.getUserItemsID()% >">Decline</a></td></tr>< %
+                            
+                            out.println("<tr><td>Date Requested:</td><td>"+u.getTransactionDate()+"</td></tr>");%>
+                            <tr><td><a href="lend?action=approve&transaction=<%=u.getTransactionID()%>">Approve</a>
+                            </td><td><a href="lend?action=decline&transaction=<%=u.getTransactionID()%>">Decline</a></td></tr><%
+                            
                         }                             
                         %>
                             </table>

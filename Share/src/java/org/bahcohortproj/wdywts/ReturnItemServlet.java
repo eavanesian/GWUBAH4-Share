@@ -82,37 +82,62 @@ public class ReturnItemServlet extends HttpServlet {
                     UserItems _transaction = new UserItems();
                     int _transactionID; //ID of the transaction from UserItems table
 
-                    _transactionID = Integer.parseInt(request.getParameter("userItem"));
+                    _transactionID = Integer.parseInt(request.getParameter("transactionID"));
 
                     String _lenderComments = request.getParameter("lenderComments");
                     int _lenderRating = Integer.parseInt(request.getParameter("lenderRatingOfBorrower"));
 
                     ReturnItemService edit = new ReturnItemService();
+                    
+                    int _giverID = Integer.parseInt(request.getParameter("giverID"));
+                    int _receiverID = Integer.parseInt(request.getParameter("receiverID"));
 
-                    _transaction.setLenderComments(_lenderComments);
-                    _transaction.setLenderRatingOfBorrower(_lenderRating);
-                    _transaction.setUserItemsID(_transactionID);
+                    String _borrowerComments = request.getParameter("borrowerComments");
+                    int _borrowerRating = Integer.parseInt(request.getParameter("borrowerRatingOfLender"));
+                    
+                    Feedback _feedback = new Feedback();
+                    _feedback.setComments(_borrowerComments);
+                    _feedback.setRating(_borrowerRating);
+                    _feedback.setTransactionID(_transactionID);
+                    _feedback.setGiverID(_giverID);
+                    _feedback.setReceiverID(_receiverID);
 
-                    if(edit.leaveFeedback(_transaction)){
+                    //_transaction.setLenderComments(_lenderComments);
+                    //_transaction.setLenderRatingOfBorrower(_lenderRating);
+                    //_transaction.setUserItemsID(_transactionID);
+
+                    if(edit.leaveFeedback(_feedback)){
                         response.sendRedirect("./feedbackSuccess.jsp");
                     }
                 }
                 if("true".equals(request.getParameter("returnItem"))){
-                    UserItems _transaction = new UserItems();
+                    
                     int _transactionID; //ID of the transaction from UserItems table
-
-                    _transactionID = Integer.parseInt(request.getParameter("userItem"));
+                    _transactionID = Integer.parseInt(request.getParameter("transactionID"));
+                    
+                    Transaction _transaction = new Transaction();
+                    _transaction.setTransactionID(_transactionID);
+                    
+                    int _giverID = Integer.parseInt(request.getParameter("giverID"));
+                    int _receiverID = Integer.parseInt(request.getParameter("receiverID"));
 
                     String _borrowerComments = request.getParameter("borrowerComments");
                     int _borrowerRating = Integer.parseInt(request.getParameter("borrowerRatingOfLender"));
 
+                    Feedback _feedback = new Feedback();
+                    _feedback.setComments(_borrowerComments);
+                    _feedback.setRating(_borrowerRating);
+                    _feedback.setTransactionID(_transactionID);
+                    _feedback.setGiverID(_giverID);
+                    _feedback.setReceiverID(_receiverID);
+                    
+                    //_transaction.setBorrowerComments(_borrowerComments);
+                    //_transaction.setBorrowerRatingOfLender(_borrowerRating);
+                    //_transaction.setUserItemsID(_transactionID);
+
                     ReturnItemService edit = new ReturnItemService();
 
-                    _transaction.setBorrowerComments(_borrowerComments);
-                    _transaction.setBorrowerRatingOfLender(_borrowerRating);
-                    _transaction.setUserItemsID(_transactionID);
-
-                    if(edit.returnItem(_transaction)){
+                    if(edit.returnItem(_transaction) && edit.leaveFeedback(_feedback)){
                         response.sendRedirect("./returnSuccess.jsp");
                     }
                 }

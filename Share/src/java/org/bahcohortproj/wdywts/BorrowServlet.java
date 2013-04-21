@@ -85,7 +85,8 @@ public class BorrowServlet extends HttpServlet {
         int _itemID = Integer.parseInt(request.getParameter("itemID"));
         
         BorrowService borrowService = new BorrowService();
-        UserItems successfulBorrow = borrowService.borrowItem(_userDetail, _itemID);
+        //UserItems successfulBorrow = borrowService.borrowItem(_userDetail, _itemID);
+        Transaction successfulBorrow = borrowService.borrowItem(_userDetail, _itemID);
                 
         if (successfulBorrow != null) {
             request.getSession().setAttribute("requestedItem", successfulBorrow);

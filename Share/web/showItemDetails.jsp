@@ -74,7 +74,7 @@
                                                              
                        //Short-hand to pull item by itemID primary key
                         ItemDetail _itemDetail = new ItemDetail();
-                        _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, Integer.parseInt(request.getParameter("itemId")));
+                        _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, Integer.parseInt(request.getParameter("itemID")));
                         
                         String hql = "SELECT userName FROM UserDetail U WHERE U.userID = :userID";
                         Query query = hSession.createQuery(hql);
@@ -85,7 +85,7 @@
                         out.println("<input type='hidden' name='itemID' value='"+_itemDetail.getItemID()+"'>");
                         out.println("<table><tr><td>Item ID:</td><td>"+_itemDetail.getItemID()+"</td></tr>");
                         //out.println("<tr><td>User:</td><td>"+ID.getUserName()+"</td></tr>");
-                        out.println("<tr><td>User:</td><td>"+itemOwner+"</td></tr>");
+                        out.println("<tr><td>User:</td><td>"+itemOwner+" <span style='color:red;'>INSERT USER RATING HERE</span></td></tr>");
                         out.println("<tr><td>Item:</td><td>"+_itemDetail.getItemName()+"</td></tr>");
                         out.println("<tr><td>Description:</td><td>"+_itemDetail.getItemDescription()+"</td></tr></table>");
                            

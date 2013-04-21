@@ -4,6 +4,7 @@
     Author     : jay
 --%>
 
+<%@page import="org.bahcohortproj.wdywts.Transaction"%>
 <%@page import="org.bahcohortproj.wdywts.UserItems"%>
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.criterion.Projections"%>
@@ -57,21 +58,23 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
 
                         hSession.beginTransaction();
 
-                        Criteria c = hSession.createCriteria(UserItems.class);
+                        Criteria c = hSession.createCriteria(Transaction.class);
                         //c.add(Restrictions.eq("userName", loggedInUser.getUserName()));
                         c.add(Restrictions.eq("borrowerID", loggedInUser.getUserID()));
-                        c.add(Restrictions.eq("status", 0));
+                        c.add(Restrictions.eq("transactionTypeID", 1));
 
-                        List<UserItems> items = (List<UserItems>) c.list();
+                        //List<UserItems> items = (List<UserItems>) c.list();
+                        List<Transaction> items = (List<Transaction>) c.list();
                         // TODO: = format the following output as a table
-                        for (UserItems u : items) {
+                        //for (UserItems u : items) {
+                        for (Transaction u : items) {
                             
                             ItemDetail _itemDetail = new ItemDetail();
                             _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, u.getItemID()); %>
                             
                             Name: <%= _itemDetail.getItemName() %><br>
                             Description: <%= _itemDetail.getItemDescription() %><br>
-                            Requested Date: <%=u.getRequestedDate() %>
+                            Requested Date: <%=u.getTransactionDate() %>
                             
                             <hr>
                         <% }

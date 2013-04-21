@@ -1,9 +1,10 @@
-<%-- 
+<%--
     Document   : borrowConfirmation
     Created on : Dec 9, 2012, 1:01:15 AM
     Author     : ed
 --%>
 
+<%@page import="org.bahcohortproj.wdywts.Transaction"%>
 <%@page import="org.bahcohortproj.wdywts.ItemDetail"%>
 <%@page import="org.bahcohortproj.wdywts.UserItems"%>
 <%@page import="org.bahcohortproj.wdywts.Category"%>
@@ -47,7 +48,8 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
             <div class="content">
                 <H1>BORROW</h1><div style="font-size:18px;">Request Borrow Confirmation</div><br>
                 <%
-                    UserItems userItems = (UserItems) request.getSession().getAttribute("requestedItem");
+                    //UserItems userItems = (UserItems) request.getSession().getAttribute("requestedItem");
+                    Transaction transactions = (Transaction)request.getSession().getAttribute("requestedItem");
                     //session.removeAttribute("requestedItem");
                 
                 SessionFactory sf = new HibernateUtil().getSessionFactory();
@@ -56,7 +58,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                 hSession.beginTransaction();
         
                 ItemDetail _itemDetail = new ItemDetail();
-                _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, userItems.getItemID());
+                _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, transactions.getItemID());
                 
                 UserDetail _lender = new UserDetail();
                 _lender = (UserDetail) hSession.get(UserDetail.class, _itemDetail.getUserID());

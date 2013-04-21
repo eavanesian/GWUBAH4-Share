@@ -17,8 +17,8 @@ import org.hibernate.criterion.Restrictions;
  */
 public class BorrowService {
     
-    
-    public UserItems borrowItem(UserDetail _userDetail, int _itemID){
+    //public UserItems borrowItem(UserDetail _userDetail, int _itemID){
+    public Transaction borrowItem(UserDetail _userDetail, int _itemID){
 
         SessionFactory sf = new HibernateUtil().getSessionFactory();
         Session hSession = sf.openSession();
@@ -36,25 +36,40 @@ public class BorrowService {
         //UserDetail _internalUser = new UserDetail();
         //_internalUser = (UserDetail) hSession.get(UserDetail.class, _userDetail.getUserID());
         
-         UserItems _userItems = new UserItems();
-                
+        
+        Transaction _transaction = new Transaction();
+        
+        
+         //UserItems _userItems = new UserItems();
         //_userItems.setBorrower(_userDetail);
         //_userItems.setLender(_lender);
         //_userItems.setItem(_itemDetail);        
         
-        _userItems.setBorrowerID(_userDetail.getUserID());
-        _userItems.setLenderID(_lender.getUserID());
-        _userItems.setItemID(_itemDetail.getItemID());
-        _userItems.setRequestedDate(new Date());
+         _transaction.setLenderID(_lender.getUserID());
+         _transaction.setBorrowerID(_userDetail.getUserID());
+         _transaction.setItemID(_itemDetail.getItemID());
+         _transaction.setTransactionTypeID(1);
+         _transaction.setTransactionDate(new Date());
+         
+         
+         
+         
+        //_userItems.setBorrowerID(_userDetail.getUserID());
+        //_userItems.setLenderID(_lender.getUserID());
+        //_userItems.setItemID(_itemDetail.getItemID());
+        //_userItems.setRequestedDate(new Date());
                         
-        hSession.saveOrUpdate(_userItems);
+        //hSession.saveOrUpdate(_userItems);
+        
+        hSession.saveOrUpdate(_transaction);
         
         hSession.getTransaction().commit();
         
         hSession.close();
         
         //TODO: need to put in check for success vs fail in saving to return true vs false
-        return _userItems;
+        //return _userItems;
+        return _transaction;
     }
     
     
