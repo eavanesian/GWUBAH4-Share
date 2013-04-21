@@ -35,6 +35,9 @@
         <mapping class="org.bahcohortproj.wdywts.ItemDetail"/>
         <mapping class="org.bahcohortproj.wdywts.Category"/>
         <mapping class="org.bahcohortproj.wdywts.UserItems"/>
+        <mapping class="org.bahcohortproj.wdywts.Transactions"/>
+        <mapping class="org.bahcohortproj.wdywts.TransactionType"/>
+        <mapping class="org.bahcohortproj.wdywts.Feedback"/>
         <!--mapping class="org.bahcohortproj.wdywts.UserItemsId"/-->
     
   </session-factory>
