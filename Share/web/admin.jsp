@@ -55,7 +55,7 @@ if (loggedInUser.isAdmin()) {
             <div class="mainContentContainer">
                 <div class="leftMenuContainer">
         [<a href="admin.jsp">Edit Users</a>] <BR><BR>
-        [Edit Categories]<BR><BR> 
+        [<a href="editCategories.jsp">Edit Categories</a>]<BR><BR> 
             </div>
             <div class="content">        
                                 
