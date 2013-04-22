@@ -126,7 +126,7 @@ public class Feedback implements Serializable{
     /**
      * @return the feedbackDate
      */
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getFeedbackDate() {
         return feedbackDate;
     }

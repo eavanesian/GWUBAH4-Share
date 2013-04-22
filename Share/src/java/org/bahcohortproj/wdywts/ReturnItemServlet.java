@@ -79,7 +79,7 @@ public class ReturnItemServlet extends HttpServlet {
         //processRequest(request, response);
         try {
                 if("true".equals(request.getParameter("doFeedback"))){
-                    UserItems _transaction = new UserItems();
+                    Transaction _transaction = new Transaction();
                     int _transactionID; //ID of the transaction from UserItems table
 
                     _transactionID = Integer.parseInt(request.getParameter("transactionID"));

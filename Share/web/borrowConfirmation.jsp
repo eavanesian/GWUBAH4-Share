@@ -6,7 +6,6 @@
 
 <%@page import="org.bahcohortproj.wdywts.Transaction"%>
 <%@page import="org.bahcohortproj.wdywts.ItemDetail"%>
-<%@page import="org.bahcohortproj.wdywts.UserItems"%>
 <%@page import="org.bahcohortproj.wdywts.Category"%>
 <%@page import="org.hibernate.criterion.Order"%>
 <%@page import="org.hibernate.criterion.Projections"%>
