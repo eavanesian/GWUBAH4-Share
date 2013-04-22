@@ -62,7 +62,8 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                     <H1 style="margin-left:-180px;display:inline;">BORROW<br><span style="font-size:16px;margin-left:-180px;">Pick a category:</span></h1>
                 <script type="text/javascript">
                     catSubcat = new Array();
-                    catSubcat = {<%
+                    catSubcat = {
+                    <%
                 SessionFactory sf = new HibernateUtil().getSessionFactory();
                 Session hSession = sf.openSession();
 
@@ -90,10 +91,9 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                 int runningCounter = 0;
 
                 //for (String u : users) {
-                for (Category cat : categories) { %>
-                    
-                    <%=cat.getName()%>: [<%
-                    //out.println("[" + cat.getName() +"]<br>");
+                for (Category cat : categories) {                    
+                    out.print("'" + cat.getName() +"'");
+                    out.print(":[");
                     
                     Criteria sc = hSession.createCriteria(Category.class);
                     sc.add(Restrictions.eq("parentCategoryID", new Integer(cat.getCategoryID())));
@@ -119,7 +119,9 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                     
                 }
                 hSession.close();
-                %>};
+                %>
+                    }; // Ignore this warning - result of breaking out of java into javascript
+                         
                         
                         document.write("<div id='accordion' style='width:300px;margin-left:auto;margin-right:auto;text-align:left;'>");
                     
