@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -37,6 +38,12 @@ public class BorrowService {
         //_internalUser = (UserDetail) hSession.get(UserDetail.class, _userDetail.getUserID());
         
         
+        Criteria criteria = hSession
+             .createCriteria(Transaction.class)
+             .setProjection(Projections.max("transactionSetID"));
+        Integer maxSetID = (Integer)criteria.uniqueResult();
+        
+        
         Transaction _transaction = new Transaction();
         
         
@@ -50,7 +57,7 @@ public class BorrowService {
          _transaction.setItemID(_itemDetail.getItemID());
          _transaction.setTransactionTypeID(1);
          _transaction.setTransactionDate(new Date());
-         
+         _transaction.setTransactionSetID(maxSetID+1);
          
          
          
