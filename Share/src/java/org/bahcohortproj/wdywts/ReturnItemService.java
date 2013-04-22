@@ -52,6 +52,7 @@ public class ReturnItemService {
             _item = (ItemDetail) hSession.get(ItemDetail.class, _t.getItemID());
             _item.setAvailable(true);
 
+            hSession.saveOrUpdate(_t2);
             hSession.getTransaction().commit();
 
             hSession.close();
@@ -84,6 +85,7 @@ public class ReturnItemService {
             //_userItem.setLenderComments(_transaction.getLenderComments());
             //_userItem.setLenderRatingOfBorrower(_transaction.getLenderRatingOfBorrower());
 
+            hSession.saveOrUpdate(_f);
             hSession.getTransaction().commit();
 
             hSession.close();
