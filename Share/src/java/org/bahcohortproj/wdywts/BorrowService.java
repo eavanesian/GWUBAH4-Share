@@ -43,6 +43,7 @@ public class BorrowService {
              .setProjection(Projections.max("transactionSetID"));
         Integer maxSetID = (Integer)criteria.uniqueResult();
         
+        if(maxSetID == null) { maxSetID = 0; }
         
         Transaction _transaction = new Transaction();
         

@@ -83,7 +83,11 @@ public class ReturnItemServlet extends HttpServlet {
                     int _transactionID; //ID of the transaction from UserItems table
 
                     _transactionID = Integer.parseInt(request.getParameter("transactionID"));
+                    _transaction.setTransactionID(_transactionID);
 
+                    int _transactionSetID; //ID of the transaction from UserItems table
+                    _transactionSetID = Integer.parseInt(request.getParameter("transactionSetID"));
+                    
                     String _lenderComments = request.getParameter("lenderComments");
                     int _lenderRating = Integer.parseInt(request.getParameter("lenderRatingOfBorrower"));
 
@@ -92,21 +96,20 @@ public class ReturnItemServlet extends HttpServlet {
                     int _giverID = Integer.parseInt(request.getParameter("giverID"));
                     int _receiverID = Integer.parseInt(request.getParameter("receiverID"));
 
-                    String _borrowerComments = request.getParameter("borrowerComments");
-                    int _borrowerRating = Integer.parseInt(request.getParameter("borrowerRatingOfLender"));
                     
                     Feedback _feedback = new Feedback();
-                    _feedback.setComments(_borrowerComments);
-                    _feedback.setRating(_borrowerRating);
-                    _feedback.setTransactionID(_transactionID);
+                    _feedback.setComments(_lenderComments);
+                    _feedback.setRating(_lenderRating);
+                    _feedback.setTransactionSetID(_transactionSetID);
                     _feedback.setGiverID(_giverID);
                     _feedback.setReceiverID(_receiverID);
+                    _feedback.setTransactionTypeID(4);
 
                     //_transaction.setLenderComments(_lenderComments);
                     //_transaction.setLenderRatingOfBorrower(_lenderRating);
                     //_transaction.setUserItemsID(_transactionID);
 
-                    if(edit.leaveFeedback(_feedback)){
+                    if(edit.acknowledgeReturn(_transaction) && edit.leaveFeedback(_feedback)){
                         response.sendRedirect("./feedbackSuccess.jsp");
                     }
                 }
@@ -114,6 +117,9 @@ public class ReturnItemServlet extends HttpServlet {
                     
                     int _transactionID; //ID of the transaction from UserItems table
                     _transactionID = Integer.parseInt(request.getParameter("transactionID"));
+                    
+                    int _transactionSetID; //ID of the transaction from UserItems table
+                    _transactionSetID = Integer.parseInt(request.getParameter("transactionSetID"));
                     
                     Transaction _transaction = new Transaction();
                     _transaction.setTransactionID(_transactionID);
@@ -127,9 +133,10 @@ public class ReturnItemServlet extends HttpServlet {
                     Feedback _feedback = new Feedback();
                     _feedback.setComments(_borrowerComments);
                     _feedback.setRating(_borrowerRating);
-                    _feedback.setTransactionID(_transactionID);
+                    _feedback.setTransactionSetID(_transactionSetID);
                     _feedback.setGiverID(_giverID);
                     _feedback.setReceiverID(_receiverID);
+                    _feedback.setTransactionTypeID(3);
                     
                     //_transaction.setBorrowerComments(_borrowerComments);
                     //_transaction.setBorrowerRatingOfLender(_borrowerRating);

@@ -32,7 +32,8 @@ public class Feedback implements Serializable{
     private int feedbackID;
     private int giverID;
     private int receiverID;
-    private int transactionID;
+    private int transactionSetID;
+    private int transactionTypeID;
     private int rating;
     private String comments;
     private Date feedbackDate;
@@ -79,20 +80,6 @@ public class Feedback implements Serializable{
      */
     public void setReceiverID(int receiverID) {
         this.receiverID = receiverID;
-    }
-
-    /**
-     * @return the transactionID
-     */
-    public int getTransactionID() {
-        return transactionID;
-    }
-
-    /**
-     * @param transactionID the transactionID to set
-     */
-    public void setTransactionID(int transactionID) {
-        this.transactionID = transactionID;
     }
 
     /**
@@ -157,6 +144,34 @@ public class Feedback implements Serializable{
             return lenderRating;
         }
                 
+    }
+
+    /**
+     * @return the transactionSetID
+     */
+    public int getTransactionSetID() {
+        return transactionSetID;
+    }
+
+    /**
+     * @param transactionSetID the transactionSetID to set
+     */
+    public void setTransactionSetID(int transactionSetID) {
+        this.transactionSetID = transactionSetID;
+    }
+
+    /**
+     * @return the transactionTypeID
+     */
+    public int getTransactionTypeID() {
+        return transactionTypeID;
+    }
+
+    /**
+     * @param transactionTypeID the transactionTypeID to set
+     */
+    public void setTransactionTypeID(int transactionTypeID) {
+        this.transactionTypeID = transactionTypeID;
     }
     
     

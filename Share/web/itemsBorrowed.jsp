@@ -58,13 +58,16 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
 
                         hSession.beginTransaction();
 
-                        Criteria c = hSession.createCriteria(Transaction.class);
-                        //c.add(Restrictions.eq("userName", loggedInUser.getUserName()));
-                        c.add(Restrictions.eq("borrowerID", loggedInUser.getUserID()));
-                        c.add(Restrictions.eq("transactionTypeID", 2));
-
-                        //List<UserItems> items = (List<UserItems>) c.list();
-                        List<Transaction> items = (List<Transaction>) c.list();
+                        //Criteria c = hSession.createCriteria(Transaction.class);
+                        ////c.add(Restrictions.eq("userName", loggedInUser.getUserName()));
+                        //c.add(Restrictions.eq("borrowerID", loggedInUser.getUserID()));
+                        //c.add(Restrictions.eq("transactionTypeID", 2));
+                        
+                        String hql = "FROM Transaction WHERE borrowerID = :userID GROUP BY transactionSetID HAVING max(transactionTypeID) = 2";
+                        Query query = hSession.createQuery(hql);
+                        query.setParameter("userID", loggedInUser.getUserID());
+                        List<Transaction> items = (List<Transaction>) query.list();
+                        
                         // TODO: = format the following output as a table
                         for (Transaction u : items) {
                             
@@ -89,10 +92,11 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
-                                    <option value="5">5</option></select> &nbsp; &nbsp; <span style="font-size:11px">[1-low, 5-high]</span>
+                                    <option value="5" selected>5</option></select> &nbsp; &nbsp; <span style="font-size:11px">[1-low, 5-high]</span>
                                         </td></tr>
                                 </table>
-                            <input type="hidden" name="transactionID" value="<%=u.getTransactionID() %>">  
+                            <input type="hidden" name="transactionID" value="<%=u.getTransactionID() %>">
+                            <input type="hidden" name="transactionSetID" value="<%=u.getTransactionSetID() %>">
                             <input type="hidden" name="giverID" value="<%=loggedInUser.getUserID() %>">
                             <input type="hidden" name="receiverID" value="<%=_itemDetail.getUserID() %>">
                             <input type="hidden" name="returnItem" value="true">

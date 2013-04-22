@@ -7,7 +7,7 @@
 <%@page import="org.bahcohortproj.wdywts.ItemDetail"%>
 <%@page import="java.util.List"%>
 <%@page import="org.hibernate.Query"%>
-<%@page import="org.bahcohortproj.wdywts.UserItems"%>
+<%@page import="org.bahcohortproj.wdywts.Transaction"%>
 <%@page import="org.hibernate.Session"%>
 <%@page import="org.hibernate.SessionFactory"%>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil"%>
@@ -50,12 +50,12 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                         //ItemDetail _item = new ItemDetail();
                         //UserDetail _borrower = new UserDetail();
                         
-                        String hql = "FROM UserItems WHERE lenderID = :userID AND status = 2 AND lenderComments = null";
+                        String hql = "FROM Transaction WHERE lenderID = :userID GROUP BY transactionSetID HAVING max(transactionTypeID) = 3";
                         Query query = hSession.createQuery(hql);
                         query.setParameter("userID", loggedInUser.getUserID());
-                        List<UserItems> returnedItems = (List<UserItems>) query.list();
+                        List<Transaction> returnedItems = (List<Transaction>) query.list();
                        
-                        for (UserItems u : returnedItems) {
+                        for (Transaction u : returnedItems) {
                             
                             ItemDetail _itemDetail = new ItemDetail();
                             _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, u.getItemID()); 
@@ -66,7 +66,7 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                             
                             Name: <%= _itemDetail.getItemName() %><br>
                             Description: <%= _itemDetail.getItemDescription() %><br>
-                            Returned Date: <%=u.getReturnedDate() %>
+                            Returned Date: <%=u.getTransactionDate() %>
                             Borrower: <%=_borrower.getUserName()%>
                             <br>
                             <br>
@@ -78,10 +78,13 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
-                                    <option value="5">5</option></select>
+                                    <option value="5" selected>5</option></select>
                                         </td></tr>
                                 </table>
-                            <input type="hidden" name="userItem" value="<%=u.getUserItemsID()%>">  
+                            <input type="hidden" name="transactionID" value="<%=u.getTransactionID() %>"> 
+                            <input type="hidden" name="transactionSetID" value="<%=u.getTransactionSetID() %>"> 
+                            <input type="hidden" name="giverID" value="<%=loggedInUser.getUserID() %>">
+                            <input type="hidden" name="receiverID" value="<%=u.getBorrowerID() %>">
                             <input type="hidden" name="doFeedback" value="true">
                             <input type="submit" id="submitButton" class="submitButton" value="leave feedback">
                             </form>
