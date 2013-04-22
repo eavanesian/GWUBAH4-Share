@@ -22,6 +22,7 @@
 <%@page import="org.bahcohortproj.wdywts.UserDetail" %>
 <%@page import="org.bahcohortproj.wdywts.ItemDetail" %>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil" %>
+<%@page import="org.bahcohortproj.wdywts.Feedback" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
@@ -80,12 +81,15 @@
                         Query query = hSession.createQuery(hql);
                         query.setParameter("userID", _itemDetail.getUserID());
                         List itemOwner = query.list();
+                        
+                        Integer lenderDetail = _itemDetail.getUserID();                                  
+                        Double lenderRating = new Feedback().getAvgRating(lenderDetail);
                        
                         out.println("<div align='center'>");
                         out.println("<input type='hidden' name='itemID' value='"+_itemDetail.getItemID()+"'>");
                         out.println("<table><tr><td>Item ID:</td><td>"+_itemDetail.getItemID()+"</td></tr>");
                         //out.println("<tr><td>User:</td><td>"+ID.getUserName()+"</td></tr>");
-                        out.println("<tr><td>User:</td><td>"+itemOwner+" <span style='color:red;'>INSERT USER RATING HERE</span></td></tr>");
+                        out.println("<tr><td>User:</td><td>"+itemOwner+" (Rating: "+lenderRating+")</span></td></tr>");
                         out.println("<tr><td>Item:</td><td>"+_itemDetail.getItemName()+"</td></tr>");
                         out.println("<tr><td>Description:</td><td>"+_itemDetail.getItemDescription()+"</td></tr></table>");
                            
