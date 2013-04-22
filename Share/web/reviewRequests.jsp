@@ -13,6 +13,7 @@
 <%@page import="org.hibernate.SessionFactory"%>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil"%>
 <%@page import="org.bahcohortproj.wdywts.UserDetail"%>
+<%@page import="org.bahcohortproj.wdywts.Feedback" %> 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% 
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
@@ -64,8 +65,12 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                                 
                             _item = (ItemDetail) hSession.get(ItemDetail.class, u.getItemID());
                             _borrower = (UserDetail) hSession.get(UserDetail.class, u.getBorrowerID());
+                            
+                            Integer borrowerID = _borrower.getUserID();                                  
+                            Double borrowerRating = new Feedback().getAvgRating(borrowerID);
+                            
                             out.println("<table align=\"center\"><tr><td colspan=\"2\"><hr></td></tr>"); 
-                            out.println("<tr><td>Borrower:</td><td>"+_borrower.getUserName() +"</td></tr>");
+                            out.println("<tr><td>Borrower:</td><td>"+_borrower.getUserName() +" (Rating: "+borrowerRating+")</td></tr>");
                             out.println("<tr><td>Item Name:</td><td>"+ _item.getItemName() +"</td></tr>");
                             out.println("<input type='hidden' name='itemID' value='"+u.getItemID()+"'>");
                             //out.println("<tr><td>Date Requested:</td><td>"+u.getRequestedDate()+"</td></tr>");% >
