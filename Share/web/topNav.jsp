@@ -1,5 +1,6 @@
 <%@page import="org.bahcohortproj.wdywts.UserDetail" %>
 <%@page import="org.bahcohortproj.wdywts.HibernateUtil" %>
+<%@page import="org.bahcohortproj.wdywts.Feedback" %> 
 <%    
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName"); 
 %>
@@ -19,5 +20,11 @@ UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
                 <% if (loggedInUser.isAdmin()) { %>
                 [<a href="./admin.jsp">Admin</a>]
                 <% } %> 
-            </div> <% } %>
+                <br>
+                <%
+                Integer currentUserID = loggedInUser.getUserID();
+                Double userRating = new Feedback().getAvgRating(currentUserID);                
+                %>
+                Your Current Rating: <%=userRating%>
+            </div> <% } %>            
             <br></div>
