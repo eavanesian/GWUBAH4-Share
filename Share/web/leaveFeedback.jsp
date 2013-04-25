@@ -60,13 +60,13 @@ if ((loggedInUser == null) || (loggedInUser.getUserID() == 0)) {
                             ItemDetail _itemDetail = new ItemDetail();
                             _itemDetail = (ItemDetail) hSession.get(ItemDetail.class, u.getItemID()); 
                             UserDetail _borrower = new UserDetail();
-                            _borrower = (UserDetail) hSession.get(UserDetail.class, _itemDetail.getUserID());
+                            _borrower = (UserDetail) hSession.get(UserDetail.class, u.getBorrowerID());
                             %>
                             
                             
                             Name: <%= _itemDetail.getItemName() %><br>
                             Description: <%= _itemDetail.getItemDescription() %><br>
-                            Returned Date: <%=u.getTransactionDate() %>
+                            Returned Date: <%=u.getTransactionDate() %><br>
                             Borrower: <%=_borrower.getUserName()%>
                             <br>
                             <br>
