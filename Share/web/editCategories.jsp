@@ -16,10 +16,28 @@
 <%
 UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
 if (loggedInUser.isAdmin()) {
+    if((request.getParameter("action") != null) && (request.getParameter("cID") != null) ){
+            SessionFactory sf = new HibernateUtil().getSessionFactory();
+            Session hSession = sf.openSession();
+            hSession.beginTransaction();
+            
+            int _cID = Integer.parseInt(request.getParameter("cID"));
+            Category _cDelete = new Category();
+            _cDelete = (Category) hSession.get(Category.class, _cID);
+                         
+            hSession.delete(_cDelete);
+            
+            
+            hSession.getTransaction().commit();
+            hSession.close();
+            response.sendRedirect("editCategories.jsp");
+    }
     if(request.getParameter("categoryID") != null){
             int categoryID = Integer.parseInt(request.getParameter("categoryID"));
             String categoryName = request.getParameter("categoryName");
             int parentCategory = Integer.parseInt(request.getParameter("parentCategory"));
+            
+           
             
             Category _category = new Category(); // category to be updated
             SessionFactory sf = new HibernateUtil().getSessionFactory();        
@@ -57,7 +75,7 @@ if (loggedInUser.isAdmin()) {
             </div>
             <div class="content">        
                                 
-                <div class="itemForm"><div class="itemBox"><B>Edit Categories</B><BR>
+                <div class="itemForm"><div class="itemBox" style="width: 500"><B>Edit Categories</B><BR>
                         <div style="color: red">WARNING - Don't edit ID or Parent ID unless you know what you are doing!</div>
                         <% //Read users from the db and list
                     Category category = new Category();
@@ -70,7 +88,7 @@ if (loggedInUser.isAdmin()) {
                     List<Category> categories = (List<Category>) query.list();
                     %>
                     <table class="normal"><tr style="font-weight: bold"><td>Category Name</td>
-                            <td>ID</td><td>Parent</td><td style="width: 75">Edit Category</td></tr>
+                            <td>ID</td><td>Parent</td><td style="width: 75">Edit Category</td><td style="width: 75">Delete</td></tr>
                         <%
                         for(Category c : categories){ %>
                         <form name="editCategories" action="editCategories.jsp" method="post">
@@ -78,10 +96,11 @@ if (loggedInUser.isAdmin()) {
                                 <td><input type="text" style ="width: 75" name ="categoryID" value="<%=c.getCategoryID()%>"></td>
                                 <td><input type ="text" style ="width: 75" name="parentCategory" value="<%=c.getParentCategoryID()%>"></td>
                             
-                            <td align="right"><input type="submit" value="edit" class="submitButton"></td></tr>
+                            <td align="right"><input type="submit" name="editCat" value="edit" class="submitButton"></td>
+                            <td align="right"><input type="button" name="deleteCat" value="delete" class="submitButton" onclick="document.location.href='editCategories.jsp?action=d&cID=<%=c.getCategoryID()%>'"></td></tr>
                             <input type="hidden" name="userID" value="<%=c.getCategoryID()%>">
                         </form>
-                            <tr><td colspan="4"><hr></td></tr>
+                            <tr><td colspan="5"><hr></td></tr>
                         <%
                         }
 
