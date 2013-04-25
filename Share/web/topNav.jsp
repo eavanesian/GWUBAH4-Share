@@ -17,7 +17,9 @@ UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
                    <li id="menu_borrow"><a href='borrow.jsp'><span>borrow</span></a></li>
                    <li id="menu_lend"><a href='lend.jsp'><span>lend</span></a></li>
                 </ul>
-                    <% SessionFactory sf = new HibernateUtil().getSessionFactory();
+                    <%
+            if (!(loggedInUser == null)) {
+            SessionFactory sf = new HibernateUtil().getSessionFactory();
             Session hSession = sf.openSession();
             hSession.beginTransaction();
             String hql = "FROM Transaction WHERE lenderID = :userID GROUP BY transactionSetID HAVING max(transactionTypeID) = 1";
@@ -27,7 +29,8 @@ UserDetail loggedInUser = (UserDetail) session.getAttribute("sUsrName");
             
             if (!returnedItems.isEmpty()){ %>
                 <a href="/Share/reviewRequests.jsp" style="font-size:12px;color:orange;font-weight:bold;">[<%=returnedItems.size()%>] lend request<% if (returnedItems.size()>1){%>s<%}%></a>
-            <% } %>
+            <% } 
+            }%>
                 
                 <script type="text/javascript">activateMenu();</script>
                 <% if (loggedInUser != null) { %>
